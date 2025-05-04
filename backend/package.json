@@ -1,0 +1,31 @@
+{
+  "name": "healthsetu",
+  "version": "1.0.0",
+  "description": "A Connection full stack app between patients and doctors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.1",
+    "nodemon": "^3.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aerospace-prog/HealthSetu.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Aerospace-prog/HealthSetu/issues"
+  },
+  "homepage": "https://github.com/Aerospace-prog/HealthSetu#readme"
+}
