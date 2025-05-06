@@ -1,0 +1,43 @@
+.home-container {
+  @apply min-h-screen bg-gradient-to-b from-blue-50 to-white;
+}
+
+.home-content {
+  @apply container mx-auto px-4 py-16;
+}
+
+.hero-section {
+  @apply text-center space-y-8;
+}
+
+.hero-title {
+  @apply text-5xl font-bold text-gray-800 mb-4;
+}
+
+.hero-title span {
+  @apply text-blue-600;
+}
+
+.hero-description {
+  @apply text-xl text-gray-600 max-w-2xl mx-auto;
+}
+
+.cta-buttons {
+  @apply flex justify-center gap-6 mt-12;
+}
+
+.primary-button {
+  @apply px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transform hover:scale-105 transition duration-300 shadow-lg;
+}
+
+.secondary-button {
+  @apply px-8 py-3 bg-white text-blue-600 rounded-full hover:bg-blue-50 transform hover:scale-105 transition duration-300 shadow-lg border-2 border-blue-600;
+}
+
+.features-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 mt-16;
+}
+
+.feature-card {
+  @apply p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300;
+}

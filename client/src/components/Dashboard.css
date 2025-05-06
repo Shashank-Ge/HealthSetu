@@ -1,0 +1,79 @@
+.dashboard-container {
+  @apply min-h-screen bg-gray-50;
+}
+
+.dashboard-nav {
+  @apply bg-white shadow-lg;
+}
+
+.nav-content {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.nav-wrapper {
+  @apply flex justify-between h-16;
+}
+
+.nav-brand {
+  @apply flex items-center;
+}
+
+.nav-brand-text {
+  @apply text-2xl font-bold text-blue-600;
+}
+
+.nav-actions {
+  @apply flex items-center;
+}
+
+.nav-button {
+  @apply ml-4 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md;
+}
+
+.dashboard-main {
+  @apply max-w-7xl mx-auto py-6 sm:px-6 lg:px-8;
+}
+
+.dashboard-content {
+  @apply px-4 py-6 sm:px-0;
+}
+
+.content-card {
+  @apply bg-white overflow-hidden shadow-xl rounded-lg;
+}
+
+.content-wrapper {
+  @apply p-6;
+}
+
+.welcome-text {
+  @apply text-2xl font-semibold text-gray-800;
+}
+
+.stats-grid {
+  @apply mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.stat-card {
+  @apply bg-blue-50 overflow-hidden shadow rounded-lg;
+}
+
+.stat-content {
+  @apply p-5;
+}
+
+.stat-icon-wrapper {
+  @apply flex-shrink-0 rounded-md p-3;
+}
+
+.stat-text-wrapper {
+  @apply ml-5 w-0 flex-1;
+}
+
+.stat-label {
+  @apply text-sm font-medium text-gray-500 truncate;
+}
+
+.stat-value {
+  @apply text-lg font-semibold text-gray-900;
+}
