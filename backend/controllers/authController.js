@@ -8,16 +8,13 @@ const signup = async (req, res) => {
     const { name, email, password, role } = req.body;
     const Model = role === "doctor" ? Doctor : Patient;
 
-    // Check if user exists
     const existingUser = await Model.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 11);
 
-    // Create user
     const user = await Model.create({
       name,
       email,
@@ -25,7 +22,6 @@ const signup = async (req, res) => {
       role,
     });
 
-    // Generate token
     const token = jwt.sign(
       { userId: user._id, role: user.role },
       process.env.JWT_SECRET,
@@ -39,9 +35,7 @@ const signup = async (req, res) => {
     });
   } catch (error) {
     console.error("Signup error:", error);
-    res
-      .status(500)
-      .json({ message: "Error creating user", error: error.message });
+    res.status(500).json({ message: "Error creating user", error: error.message });
   }
 };
 
@@ -50,19 +44,16 @@ const login = async (req, res) => {
     const { email, password, role } = req.body;
     const Model = role === "doctor" ? Doctor : Patient;
 
-    // Check if user exists
     const user = await Model.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
 
-    // Verify password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // Generate token
     const token = jwt.sign(
       { userId: user._id, role: user.role },
       process.env.JWT_SECRET,
@@ -80,7 +71,17 @@ const login = async (req, res) => {
   }
 };
 
+const getProfile = async (req, res) => {
+  try {
+    res.status(200).json({ user: req.user });
+  } catch (error) {
+    console.log("Error: ", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   signup,
-  login
+  login,
+  getProfile
 };
