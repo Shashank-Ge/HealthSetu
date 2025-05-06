@@ -3,7 +3,7 @@ const router = express.Router();
 const protect = require("../middleware/authMiddleware");
 const authorizeRole = require("../middleware/roleMiddleware");
 
-router.get("/dashboard", protect, authorizeRole("doctor"), (req, res) => {
+router.get("/doctor-dashboard", protect, authorizeRole("doctor"), (req, res) => {
   res.send("Welcome Doctor!");
 });
 

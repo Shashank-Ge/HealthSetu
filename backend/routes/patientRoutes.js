@@ -3,8 +3,12 @@ const router = express.Router();
 const protect = require("../middleware/authMiddleware");
 const authorizeRole = require("../middleware/roleMiddleware");
 
-router.get("/dashboard", protect, authorizeRole("patient"), (req, res) => {
-  res.send("Welcome Patient!");
-});
+try {
+    router.get("/patient-dashboard", protect, authorizeRole("patient"), (req, res) => {
+        res.send("Welcome Patient!");
+      });
+} catch (error) {
+    console.error(error)
+}
 
 module.exports = router;
