@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import API from '../api';
+import './Signup.css';
+import './Login.css'; // Import Login styles as well since we're sharing some
 
 function Signup() {
   const navigate = useNavigate();
@@ -38,29 +40,29 @@ function Signup() {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Name" value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          required
-        />
-        <input type="email" placeholder="Email" value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          required
-        />
-        <input type="password" placeholder="Password" value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          required
-        />
-        <select value={formData.role}
-          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-        >
-          <option value="patient">Patient</option>
-          <option value="doctor">Doctor</option>
-        </select>
-        <button type="submit">Sign Up</button>
-      </form>
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h1 className="auth-title">Sign Up</h1>
+          <h2 className="auth-subtitle">Create Account</h2>
+          <p className="auth-subtitle">Join HealthSetu today</p>
+        </div>
+
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <input className="form-input" type="text" placeholder="Name" />
+          <input className="form-input" type="email" placeholder="Email" />
+          <input className="form-input" type="password" placeholder="Password" />
+          <select className="form-select">
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+          <button className="signup-button">Create Account</button>
+        </form>
+
+        <div className="auth-footer">
+          Already have an account? <Link className="auth-link" to="/login">Sign in</Link>
+        </div>
+      </div>
     </div>
   );
 }

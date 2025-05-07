@@ -1,43 +1,111 @@
 .home-container {
-  @apply min-h-screen bg-gradient-to-b from-blue-50 to-white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #EBF4FF 0%, #FFFFFF 50%, #EBF4FF 100%);
 }
 
-.home-content {
-  @apply container mx-auto px-4 py-16;
+.nav-bar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #2563EB;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.login-btn {
+  color: #4B5563;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.login-btn:hover {
+  color: #2563EB;
+}
+
+.signup-btn {
+  background-color: #2563EB;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.signup-btn:hover {
+  background-color: #1D4ED8;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .hero-section {
-  @apply text-center space-y-8;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+}
+
+.hero-content {
+  max-width: 80rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .hero-title {
-  @apply text-5xl font-bold text-gray-800 mb-4;
+  font-size: 3.75rem;
+  font-weight: bold;
+  color: #111827;
+  line-height: 1.2;
 }
 
-.hero-title span {
-  @apply text-blue-600;
-}
-
-.hero-description {
-  @apply text-xl text-gray-600 max-w-2xl mx-auto;
-}
-
-.cta-buttons {
-  @apply flex justify-center gap-6 mt-12;
-}
-
-.primary-button {
-  @apply px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transform hover:scale-105 transition duration-300 shadow-lg;
-}
-
-.secondary-button {
-  @apply px-8 py-3 bg-white text-blue-600 rounded-full hover:bg-blue-50 transform hover:scale-105 transition duration-300 shadow-lg border-2 border-blue-600;
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #4B5563;
+  max-width: 48rem;
+  margin: 1.5rem auto;
 }
 
 .features-grid {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-8 mt-16;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
 }
 
 .feature-card {
-  @apply p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
