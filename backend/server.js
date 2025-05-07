@@ -4,6 +4,8 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
 const doctorRoutes = require("./routes/doctorRoutes");
 const patientRoutes = require("./routes/patientRoutes");
+const helmet = require("helmet")
+const morgan = require("morgan")
 require("dotenv").config();
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(cors());
 
 // Middleware
 app.use(express.json());
+app.use(helmet())
+app.use(morgan("dev"))
 
 // Routes
 app.use("/api/auth", authRoutes);
