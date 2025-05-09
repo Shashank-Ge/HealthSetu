@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
 const doctorRoutes = require("./routes/doctorRoutes");
 const patientRoutes = require("./routes/patientRoutes");
+const adminRoutes = require("./routes/adminRoutes")
 const helmet = require("helmet")
 const morgan = require("morgan")
 require("dotenv").config();
@@ -25,6 +26,7 @@ app.use(morgan("dev"))
 app.use("/api/auth", authRoutes);
 app.use("/api/auth",doctorRoutes);
 app.use("/api/auth",patientRoutes);
+app.use('/api/auth', adminRoutes);
 
 // Start server
 app.get('/', (req, res) => {
@@ -36,3 +38,8 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
+
+
