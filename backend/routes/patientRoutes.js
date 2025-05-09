@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const protect = require("../middleware/authMiddleware");
-const authorizeRole = require("../middleware/roleMiddleware");
+const patientProtect = require("../middleware/patientProtect")
+const {loginPatient,registerPatient} = require("../controllers/authControllers/patientAuthController")
 
 try {
-    router.get("/patient-dashboard", protect, authorizeRole("patient"), (req, res) => {
-        res.send("Welcome Patient!");
-      });
+router.post("/loginPatient",loginPatient);
+router.post("/signupPatient",registerPatient);
+router.get("/patient-dashboard", patientProtect, (req, res) => {
+    res.json({ message: `welcome Patient ${req.patient.userId}` });
+    });
+
 } catch (error) {
     console.error(error)
 }

@@ -1,7 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Admin = require('../models/Admin');
-
+const Admin = require('../../models/Admin');
+const dotenv = require('dotenv')
+const path = require('path')
+dotenv.config({path : path.resolve(__dirname,'.../.env')})
+//login Admin
 const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
 
