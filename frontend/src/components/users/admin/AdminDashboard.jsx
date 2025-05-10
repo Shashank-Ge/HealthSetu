@@ -135,12 +135,12 @@ function AdminDashboard() {
                           {doctor.status === 'approved' && (
                             <button 
                               className="suspend-btn"
-                              onClick={() => handleStatusChange(doctor._id, 'suspended')}
+                              onClick={() => handleStatusChange(doctor._id, 'blocked')}
                             >
-                              Suspend
+                              Block
                             </button>
                           )}
-                          {(doctor.status === 'rejected' || doctor.status === 'suspended') && (
+                          {(doctor.status === 'rejected' || doctor.status === 'blocked') && (
                             <button 
                               className="approve-btn"
                               onClick={() => handleStatusChange(doctor._id, 'approved')}
