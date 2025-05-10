@@ -41,30 +41,7 @@ function Home() {
         <section className="features-section" id="find-doctors">
           <h2>Find Doctors</h2>
           <div className="doctor-slider">
-            <div className="doctor-card">
-              <div className="doctor-image">
-                <img src="https://media.istockphoto.com/id/479378798/photo/portrait-of-female-doctor.jpg?s=612x612&w=0&k=20&c=P-W8KSJBYhYj2RSx1Zhff6FCGvtRDC3AAzox8deMmew=" alt="Dr. Sarah Johnson" />
-              </div>
-              <h3>Dr. Sarah Johnson</h3>
-              <p className="specialization">Cardiologist</p>
-              <p className="experience">15+ years experience</p>
-            </div>
-            <div className="doctor-card">
-              <div className="doctor-image">
-                <img src="https://png.pngtree.com/png-clipart/20240323/original/pngtree-professional-doctor-with-order-png-image_14666249.png" alt="Dr. Michael Chen" />
-              </div>
-              <h3>Dr. Michael Chen</h3>
-              <p className="specialization">Neurologist</p>
-              <p className="experience">12+ years experience</p>
-            </div>
-            <div className="doctor-card">
-              <div className="doctor-image">
-                <img src="https://t4.ftcdn.net/jpg/03/20/74/45/360_F_320744517_TaGkT7aRlqqWdfGUuzRKDABtFEoN5CiO.jpg" alt="Dr. Emily Patel" />
-              </div>
-              <h3>Dr. Emily Patel</h3>
-              <p className="specialization">Pediatrician</p>
-              <p className="experience">10+ years experience</p>
-            </div>
+            
             <div className="doctor-card">
               <div className="doctor-image">
                 <img src="https://img.freepik.com/free-photo/portrait-male-doctor_23-2148480369.jpg?semt=ais_hybrid&w=740" alt="Dr. Robert Wilson" />
@@ -96,6 +73,31 @@ function Home() {
               <h3>Dr. Maanvi Sharma</h3>
               <p className="specialization">Endocrinologist</p>
               <p className="experience">13+ years experience</p>
+            </div>
+
+            <div className="doctor-card">
+              <div className="doctor-image">
+                <img src="https://media.istockphoto.com/id/479378798/photo/portrait-of-female-doctor.jpg?s=612x612&w=0&k=20&c=P-W8KSJBYhYj2RSx1Zhff6FCGvtRDC3AAzox8deMmew=" alt="Dr. Sarah Johnson" />
+              </div>
+              <h3>Dr. Sarah Johnson</h3>
+              <p className="specialization">Cardiologist</p>
+              <p className="experience">7+ years experience</p>
+            </div>
+            <div className="doctor-card">
+              <div className="doctor-image">
+                <img src="https://png.pngtree.com/png-clipart/20240323/original/pngtree-professional-doctor-with-order-png-image_14666249.png" alt="Dr. Michael Chen" />
+              </div>
+              <h3>Dr. Michael Chen</h3>
+              <p className="specialization">Neurologist</p>
+              <p className="experience">9+ years experience</p>
+            </div>
+            <div className="doctor-card">
+              <div className="doctor-image">
+                <img src="https://t4.ftcdn.net/jpg/03/20/74/45/360_F_320744517_TaGkT7aRlqqWdfGUuzRKDABtFEoN5CiO.jpg" alt="Dr. Emily Patel" />
+              </div>
+              <h3>Dr. Emily Patel</h3>
+              <p className="specialization">Pediatrician</p>
+              <p className="experience">5+ years experience</p>
             </div>
           </div>
         </section>
