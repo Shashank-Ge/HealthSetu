@@ -163,6 +163,66 @@ function Home() {
             </div>
           </div>
         </section>
+
+        <section className="feedback-section" id="feedback">
+          <h2>What Our Users Say</h2>
+          <div className="reviews-container">
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Mitchell" />
+                <div className="reviewer-info">
+                  <h4>Sarah Mitchell</h4>
+                  <div className="star-rating">★★★★★</div>
+                </div>
+              </div>
+              <p className="review-text">"HealthSetu made it so easy to find the right doctor and book appointments. The health tips section is a bonus that helps me maintain a healthy lifestyle!"</p>
+            </div>
+
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Anderson" />
+                <div className="reviewer-info">
+                  <h4>John Anderson</h4>
+                  <div className="star-rating">★★★★★</div>
+                </div>
+              </div>
+              <p className="review-text">"Great platform! I was able to quickly find a specialist and get an appointment. The interface is user-friendly and the process is seamless."</p>
+            </div>
+
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria Garcia" />
+                <div className="reviewer-info">
+                  <h4>Maria Garcia</h4>
+                  <div className="star-rating">★★★★½</div>
+                </div>
+              </div>
+              <p className="review-text">"The health tips are really helpful and practical. I appreciate how the platform focuses on overall wellness, not just medical appointments."</p>
+            </div>
+
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/men/92.jpg" alt="David Chen" />
+                <div className="reviewer-info">
+                  <h4>David Chen</h4>
+                  <div className="star-rating">★★★★★</div>
+                </div>
+              </div>
+              <p className="review-text">"Being able to see doctor profiles and their experience before booking an appointment gives me confidence in choosing the right healthcare provider."</p>
+            </div>
+
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/women/89.jpg" alt="Kenelly Kruce" />
+                <div className="reviewer-info">
+                  <h4>Kenelly Kruce</h4>
+                  <div className="star-rating">★★★★★</div>
+                </div>
+              </div>
+              <p className="review-text">"The appointment reminders and easy rescheduling options have made managing my healthcare so much more convenient. Highly recommended!"</p>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="dashboard-footer">
