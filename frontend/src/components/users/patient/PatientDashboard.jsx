@@ -1,12 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from 'react';
-import API from '../api';
-import './PatientDashboard.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function PatientDashboard() {
   const navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
-  const name = localStorage.getItem('name');
+  const name = localStorage.getItem("name");
 
   useEffect(() => {
     fetchDoctors();
@@ -14,16 +13,21 @@ function PatientDashboard() {
 
   const fetchDoctors = async () => {
     try {
-      const { data } = await API.get('/doctors');
-      setDoctors(data);
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:8080/api/auth/doctors', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setDoctors(response.data);
     } catch (error) {
-      console.error('Error fetching doctors:', error);
+      console.error("Error fetching doctors:", error);
     }
   };
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/login');
+    navigate("/loginPatient");
   };
 
   return (
@@ -31,9 +35,11 @@ function PatientDashboard() {
       <header className="dashboard-header">
         <div className="logo">HealthSetu</div>
         <nav className="nav-menu">
-          <button onClick={() => navigate('/health-tips')}>Health Tips</button>
-          <button onClick={() => navigate('/book-appointment')}>Book Appointment</button>
-          <button onClick={() => navigate('/profile')}>Profile</button>
+          <button onClick={() => navigate("/health-tips")}>Health Tips</button>
+          <button onClick={() => navigate("/book-appointment")}>
+            Book Appointment
+          </button>
+          <button onClick={() => navigate("/profile")}>Profile</button>
           <button onClick={handleLogout}>Logout</button>
         </nav>
       </header>
@@ -47,16 +53,25 @@ function PatientDashboard() {
         <section className="doctors-section">
           <h2>Available Doctors</h2>
           <div className="doctors-grid">
-            {doctors.map((doctor) => (
-              <div key={doctor._id} className="doctor-card">
-                <img src={doctor.image || '/default-doctor.png'} alt={doctor.name} />
-                <h3>{doctor.name}</h3>
-                <p>{doctor.specialization}</p>
-                <button onClick={() => navigate(`/book-appointment/${doctor._id}`)}>
-                  Book Appointment
-                </button>
-              </div>
-            ))}
+            {doctors.length > 0 ? (
+              doctors.map((doctor) => (
+                <div key={doctor._id} className="doctor-card">
+                  <img
+                    src={doctor.image || "/default-doctor.png"}
+                    alt={doctor.name}
+                  />
+                  <h3>{doctor.name}</h3>
+                  <p>{doctor.specialization}</p>
+                  <button
+                    onClick={() => navigate(`/book-appointment/${doctor._id}`)}
+                  >
+                    Book Appointment
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p>No doctors available at the moment.</p>
+            )}
           </div>
         </section>
       </main>
@@ -71,9 +86,15 @@ function PatientDashboard() {
           <div className="footer-section">
             <h3>Quick Links</h3>
             <ul>
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/services">Services</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
+              <li>
+                <a href="/about">About Us</a>
+              </li>
+              <li>
+                <a href="/services">Services</a>
+              </li>
+              <li>
+                <a href="/privacy">Privacy Policy</a>
+              </li>
             </ul>
           </div>
           <div className="footer-section">

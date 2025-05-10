@@ -1,26 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./DoctorDashboard.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function DoctorDashboard() {
   const navigate = useNavigate();
-  // Initialize state with value from localStorage
-  const [doctorName] = useState(localStorage.getItem("name") || "");
+  const [doctorName] = useState(localStorage.getItem('name') || '');
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    // Check authentication only once on component mount
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
+    // Check authentication
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+    const status = localStorage.getItem('status');
     
-    if (!token || role !== "doctor") {
-      navigate('/login');
+    if (!token || role !== 'doctor') {
+      navigate('/loginDoctor');
       return;
     }
-  }, []); // Empty dependency array for mount-only effect
+    
+    if (status !== 'approved') {
+      navigate('/loginDoctor');
+      return;
+    }
+    
+    // Fetch appointments (placeholder for future functionality)
+    fetchAppointments();
+  }, [navigate]);
+
+  const fetchAppointments = async () => {
+    try {
+      // This is a placeholder for future functionality
+      // const token = localStorage.getItem('token');
+      // const response = await axios.get('http://localhost:8080/api/auth/doctor/appointments', {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`
+      //   }
+      // });
+      // setAppointments(response.data);
+      
+      // For now, just set some dummy data
+      setAppointments([
+        { id: 1, patientName: 'Patient 1', date: '2023-06-15', time: '10:00 AM' },
+        { id: 2, patientName: 'Patient 2', date: '2023-06-16', time: '11:30 AM' }
+      ]);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/login');
+    navigate('/loginDoctor');
   };
 
   return (
@@ -44,12 +73,19 @@ function DoctorDashboard() {
         <section className="appointments-section">
           <h2>Your Appointments</h2>
           <div className="appointments-grid">
-            <div className="appointment-card">
-              <p>Appointment with Patient XYZ</p>
-              <button className="action-button">Reschedule</button>
-              <button className="action-button">Approve</button>
-            </div>
-            {/* Add more appointments here */}
+            {appointments.length > 0 ? (
+              appointments.map((appointment) => (
+                <div key={appointment.id} className="appointment-card">
+                  <p>Appointment with {appointment.patientName}</p>
+                  <p>Date: {appointment.date}</p>
+                  <p>Time: {appointment.time}</p>
+                  <button className="action-button">Reschedule</button>
+                  <button className="action-button">Cancel</button>
+                </div>
+              ))
+            ) : (
+              <p>No appointments scheduled.</p>
+            )}
           </div>
         </section>
       </main>
