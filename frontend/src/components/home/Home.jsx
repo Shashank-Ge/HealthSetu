@@ -18,6 +18,7 @@ function Home() {
           <div className="nav-menu">
             <a href="#find-doctors" className="nav-link">Doctors</a>
             <a href="#health-tips" className="nav-link">Health Tips</a>
+            <a href="#feedback" className="nav-link">Feedback</a>
             {/* <button className="admin-link" onClick={() => navigate('/loginAdmin')}>
               Admin Login
             </button> */}
