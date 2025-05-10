@@ -101,16 +101,6 @@ function Home() {
             </div>
           </div>
         </section>
-        <div className="features-grid">
-          <div className="feature-card">
-            <h3>Book Appointments</h3>
-            <p>Schedule appointments with ease</p>
-          </div>
-          <div className="feature-card">
-            <h3>Health Records</h3>
-            <p>Access your medical history</p>
-          </div>
-        </div>
 
         <section className="health-tips-section" id="health-tips">
           <h2>Health Tips for Better Living</h2>

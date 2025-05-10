@@ -75,27 +75,29 @@
 }
 
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
 }
 
 .feature-card {
-  background: white;
-  padding: 2rem;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  width: 45%;
 }
 
 .feature-card h3 {
-  color: #10B981;
-  margin-bottom: 1rem;
+  color: #2ecc71;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .feature-card p {
-  color: #4B5563;
-  line-height: 1.5;
+  color: #555;
+  font-size: 1rem;
 }
 
 .hero-section {
