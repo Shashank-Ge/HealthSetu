@@ -1,0 +1,494 @@
+.home-container {
+  min-height: 100vh;
+  background-color: #edf9ec;
+}
+
+.main-header {
+  background-color: #ffffff;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #10B981; /* Changed from white to the green color used in hover state */
+  margin: 0;
+}
+
+.logo-tagline {
+  font-size: 1.2rem;
+  color: #4B5563; /* Changed from white to a dark gray for better visibility */
+  text-align: center;
+  white-space: nowrap;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: #10B981;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #059669;
+  transform: translateY(-2px);
+}
+
+/* Adjust the main content to account for fixed header */
+.home-content {
+  padding-top: 100px; /* Adjust this value based on your header height */
+}
+
+
+.features-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.features-grid {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  width: 45%;
+}
+
+.feature-card h3 {
+  color: #2ecc71;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+  color: #555;
+  font-size: 1rem;
+}
+
+.hero-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero-title {
+  color: #0c0d0d;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  color: #4B5563;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.cta-button {
+  background-color: #10B981;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+}
+
+.cta-button:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(16, 185, 129, 0.3);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.hero-section p {
+  color: #4B5563;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.doctor-slider {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 2rem 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.doctor-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.doctor-slider::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.doctor-slider::-webkit-scrollbar-thumb {
+  background: #10B981;
+  border-radius: 4px;
+}
+
+.doctor-card {
+  flex: 0 0 300px;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+}
+
+.doctor-image {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.doctor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doctor-card h3 {
+  color: #10B981;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.doctor-card .specialization {
+  color: #4B5563;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.doctor-card .experience {
+  color: #6B7280;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.health-tips-section {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 2rem;
+  scroll-margin-top: 100px; /* Add this line to ensure proper spacing when scrolling */
+}
+
+.health-tips-section h2 {
+  text-align: center;
+  color: #10B981;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.tips-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.tips-category h3 {
+  color: #10B981;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tips-list li {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tips-list h4 {
+  color: #10B981;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.tips-list p {
+  color: #4B5563;
+  line-height: 1.6;
+}
+
+.specific-tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.tip-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tip-card h4 {
+  color: #10B981;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.tip-card ul {
+  list-style: none;
+  padding: 0;
+  color: #4B5563;
+}
+
+.tip-card ul li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.tip-card ul li:before {
+  content: "•";
+  color: #10B981;
+  position: absolute;
+  left: 0;
+}
+
+.feedback-section {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.feedback-section h2 {
+  color: #10B981;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.feedback-slider {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 2rem 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.feedback-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.feedback-slider::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.feedback-slider::-webkit-scrollbar-thumb {
+  background: #10B981;
+  border-radius: 4px;
+}
+
+.feedback-card {
+  flex: 0 0 300px;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feedback-card:hover {
+  transform: translateY(-5px);
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feedback-card h3 {
+  color: #10B981;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.feedback-card .stars {
+  color: #FFD700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.feedback-card p {
+  color: #4B5563;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .specific-tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .health-tips-section {
+    padding: 1rem;
+  }
+  
+  .health-tips-section h2 {
+    font-size: 2rem;
+  }
+}
+.hero-tagline {
+  color: #4B5563;
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.feedback-section {
+  padding: 4rem 2rem;
+  background-color: #f8f9fa;
+}
+
+.reviews-container {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 2rem 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.review-card {
+  min-width: 300px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviewer-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reviewer-profile img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  object-fit: cover;
+}
+
+.reviewer-info h4 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.star-rating {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+}
+
+.review-text {
+  color: #666;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Add smooth scrolling for the reviews container */
+.reviews-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.reviews-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.reviews-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.reviews-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
