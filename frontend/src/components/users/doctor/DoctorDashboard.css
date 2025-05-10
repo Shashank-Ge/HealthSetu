@@ -1,0 +1,39 @@
+.doctor-dashboard {
+  padding: 20px;
+}
+
+.doctor-dashboard-header {
+  margin-bottom: 20px;
+}
+
+.doctor-dashboard-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.dashboard-card {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.dashboard-card h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.patient-list {
+  list-style: none;
+  padding: 0;
+}
+
+.patient-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.patient-list li:last-child {
+  border-bottom: none;
+} 
