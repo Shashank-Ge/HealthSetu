@@ -26,6 +26,7 @@ const loginAdmin = async (req, res) => {
     res.status(200).json({
       token,
       admin: {
+        name: admin.name,
         id: admin._id,
         email: admin.email,
       },

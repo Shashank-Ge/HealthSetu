@@ -29,7 +29,7 @@ function AdminLogin() {
       
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', 'admin');
-      localStorage.setItem('name', response.data.name || 'Admin');
+      localStorage.setItem('name', response.data.admin.name || 'Admin');
       
       navigate('/admin-dashboard');
     } catch (error) {
