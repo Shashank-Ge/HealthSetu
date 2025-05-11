@@ -1,3 +1,13 @@
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.logo-link:hover {
+  opacity: 0.9;
+}
+
 .dashboard-container {
     min-height: 100vh;
     display: flex;

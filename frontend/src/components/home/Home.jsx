@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-scroll';
 import './Home.css';
 
 function Home() {
@@ -16,12 +17,9 @@ function Home() {
             <span className="logo-tagline">Your Health, Our Priority</span>
           </div>
           <div className="nav-menu">
-            <a href="#find-doctors" className="nav-link">Doctors</a>
-            <a href="#health-tips" className="nav-link">Health Tips</a>
-            <a href="#feedback" className="nav-link">Feedback</a>
-            {/* <button className="admin-link" onClick={() => navigate('/loginAdmin')}>
-              Admin Login
-            </button> */}
+            <Link to="find-doctors" smooth={true} offset={-100} duration={500} className="nav-link">Doctors</Link>
+            <Link to="health-tips" smooth={true} offset={-100} duration={500} className="nav-link">Health Tips</Link>
+            <Link to="feedback" smooth={true} offset={-100} duration={500} className="nav-link">Feedback</Link>
           </div>
         </div>
       </header>

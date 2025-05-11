@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link } from 'react-router-dom';
 import axios from 'axios';
 
 function PatientDashboard() {
@@ -33,7 +33,9 @@ function PatientDashboard() {
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <div className="logo">HealthSetu</div>
+        <Link to="/" className="logo-link">
+          <div className="logo">HealthSetu</div>
+        </Link>
         <nav className="nav-menu">
           <button onClick={() => navigate("/health-tips")}>Health Tips</button>
           <button onClick={() => navigate("/book-appointment")}>
