@@ -14,7 +14,7 @@ function PatientDashboard() {
   const fetchDoctors = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/api/auth/doctors', {
+      const response = await axios.get('http://localhost:8080/api/auth/patient-dashboard/doctors', {
         headers: {
           Authorization: `Bearer ${token}`
         }
