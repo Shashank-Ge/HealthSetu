@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link} from 'react-router-dom';
 
 function DoctorDashboard() {
   const navigate = useNavigate();
@@ -56,7 +56,9 @@ function DoctorDashboard() {
     <div className="dashboard-container">
       {/* Header */}
       <header className="dashboard-header">
-        <div className="logo">HealthSetu</div>
+        <Link to="/" className="logo-link">
+          <div className="logo">HealthSetu</div>
+        </Link>
         <nav className="nav-menu">
           <button onClick={() => navigate('/profile')}>Profile</button>
           <button onClick={handleLogout}>Logout</button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link } from 'react-router-dom';
 import axios from 'axios';
 import './AdminDashboard.css';
 
@@ -73,8 +73,9 @@ function AdminDashboard() {
     <div className="dashboard-container">
       {/* Header */}
       <header className="dashboard-header">
-        <div className="logo">HealthSetu</div>
-        <nav className="nav-menu">
+        <Link to="/" className="logo-link">
+          <div className="logo">HealthSetu</div>
+        </Link>        <nav className="nav-menu">
           <button onClick={handleLogout}>Logout</button>
         </nav>
       </header>

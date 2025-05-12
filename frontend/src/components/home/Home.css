@@ -1,3 +1,13 @@
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.logo-link:hover {
+  opacity: 0.9;
+}
+
 .home-container {
   min-height: 100vh;
   background-color: #edf9ec;
