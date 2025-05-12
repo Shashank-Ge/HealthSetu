@@ -1,15 +1,21 @@
-const Doctor = require('../../models/Doctor')
+const Appointment = require('../../models/Appointment');
 
-// Get only approved doctors
-const getApprovedDoctors = async (req, res) => {
-    try {
-      const approvedDoctors = await Doctor.find({ status: 'approved' }).populate('approvedBy', 'name email');
-      res.status(200).json(approvedDoctors);
-    } catch (error) {
-      console.error('Error fetching approved doctors:', error);
-      res.status(500).json({ message: 'Server error' });
-    }
-  };
+const getDoctorAppointments = async (req, res) => {
+  const doctorId = req.doctor._id; // assuming doctor is authenticated and ID is in req.doctor
 
-module.exports = {getApprovedDoctors};
-  
+  try {
+    const appointments = await Appointment.find({ doctor: doctorId })
+      .populate('patient', 'name email') // populate patient name/email only
+      .sort({ createdAt: -1 }); // latest first
+
+    res.status(200).json({
+      message: "Appointments fetched successfully.",
+      appointments,
+    });
+  } catch (error) {
+    console.error("Error fetching appointments for doctor:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = {getDoctorAppointments};

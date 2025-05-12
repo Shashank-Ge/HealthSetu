@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const patientProtect = require("../middleware/patientProtect")
 const {loginPatient,registerPatient} = require("../controllers/authControllers/patientAuthController");
-const { getApprovedDoctors } = require('../controllers/personalizeContorllers/doctorControllers');
+const { getApprovedDoctors } = require('../controllers/personalizeContorllers/patientControllers');
 const { bookAppointment } = require("../controllers/personalizeContorllers/patientControllers");
 
 try {

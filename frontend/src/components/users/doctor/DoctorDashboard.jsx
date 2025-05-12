@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate , Link} from 'react-router-dom';
-
+import axios from 'axios';
 function DoctorDashboard() {
   const navigate = useNavigate();
   const [doctorName] = useState(localStorage.getItem('name') || '');
@@ -28,20 +28,13 @@ function DoctorDashboard() {
 
   const fetchAppointments = async () => {
     try {
-      // This is a placeholder for future functionality
-      // const token = localStorage.getItem('token');
-      // const response = await axios.get('http://localhost:8080/api/auth/doctor/appointments', {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // });
-      // setAppointments(response.data);
-      
-      // For now, just set some dummy data
-      setAppointments([
-        { id: 1, patientName: 'Patient 1', date: '2023-06-15', time: '10:00 AM' },
-        { id: 2, patientName: 'Patient 2', date: '2023-06-16', time: '11:30 AM' }
-      ]);
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:8080/api/auth/doctor-dashboard/appointments', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setAppointments(response.data.appointments);
     } catch (error) {
       console.error('Error fetching appointments:', error);
     }
@@ -78,9 +71,8 @@ function DoctorDashboard() {
             {appointments.length > 0 ? (
               appointments.map((appointment) => (
                 <div key={appointment.id} className="appointment-card">
-                  <p>Appointment with {appointment.patientName}</p>
-                  <p>Date: {appointment.date}</p>
-                  <p>Time: {appointment.time}</p>
+                  <p>Appointment with {appointment.patient.name}</p>
+                  <p>reason: {appointment.reason}</p>
                   <button className="action-button">Reschedule</button>
                   <button className="action-button">Cancel</button>
                 </div>
