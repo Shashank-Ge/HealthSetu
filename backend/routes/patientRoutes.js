@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const patientProtect = require("../middleware/patientProtect")
 const {loginPatient,registerPatient} = require("../controllers/authControllers/patientAuthController");
-const { getAllDoctors } = require("../controllers/personalizeContorllers/adminControllers");
+const { getApprovedDoctors } = require('../controllers/personalizeContorllers/doctorControllers');
 
 try {
 router.post("/loginPatient",loginPatient);
@@ -10,7 +10,7 @@ router.post("/signupPatient",registerPatient);
 router.get("/patient-dashboard", patientProtect, (req, res) => {
     res.json({ message: `welcome Patient ${req.patient.userId}` });
     });
-router.get("/patient-dashboard/doctors",patientProtect,getAllDoctors)
+router.get("/patient-dashboard/doctors",patientProtect,getApprovedDoctors)
 } catch (error) {
     console.error(error)
 }
