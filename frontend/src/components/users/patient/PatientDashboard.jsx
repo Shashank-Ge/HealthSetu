@@ -37,10 +37,6 @@ function PatientDashboard() {
           <div className="logo">HealthSetu</div>
         </Link>
         <nav className="nav-menu">
-          <button onClick={() => navigate("/health-tips")}>Health Tips</button>
-          <button onClick={() => navigate("/book-appointment")}>
-            Book Appointment
-          </button>
           <button onClick={() => navigate("/profile")}>Profile</button>
           <button onClick={handleLogout}>Logout</button>
         </nav>
@@ -58,10 +54,6 @@ function PatientDashboard() {
             {doctors.length > 0 ? (
               doctors.map((doctor) => (
                 <div key={doctor._id} className="doctor-card">
-                  <img
-                    src={doctor.image || "/default-doctor.png"}
-                    alt={doctor.name}
-                  />
                   <h3>{doctor.name}</h3>
                   <p>{doctor.specialization}</p>
                   <button
