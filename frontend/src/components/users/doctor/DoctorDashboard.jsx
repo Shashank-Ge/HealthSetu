@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate , Link} from 'react-router-dom';
 import axios from 'axios';
+import './DoctorDashboard.css';
+
 function DoctorDashboard() {
   const navigate = useNavigate();
   const [doctorName] = useState(localStorage.getItem('name') || '');

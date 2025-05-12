@@ -47,3 +47,51 @@
 .patient-list li:last-child {
   border-bottom: none;
 } 
+.appointments-section {
+  margin-top: 40px;
+}
+
+.appointments-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.appointments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.appointment-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.appointment-card:hover {
+  transform: translateY(-4px);
+}
+
+.appointment-card p {
+  margin: 8px 0;
+  color: #444;
+}
+
+.action-button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  background-color: #52aa74;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
