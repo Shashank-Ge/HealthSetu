@@ -65,7 +65,7 @@ function PatientDashboard() {
                   <h3>{doctor.name}</h3>
                   <p>{doctor.specialization}</p>
                   <button
-                    onClick={() => navigate(`/book-appointment/${doctor._id}`)}
+                    onClick={() => navigate(`/patient-dashboard/bookAppointment/${doctor._id}`)}
                   >
                     Book Appointment
                   </button>

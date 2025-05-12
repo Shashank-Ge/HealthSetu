@@ -9,6 +9,7 @@ import PatientDashboard from './components/users/patient/PatientDashboard';
 import AdminLogin from './components/users/admin/AdminLogin';
 import AdminDashboard from './components/users/admin/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import BookAppointment from './components/users/patient/BookAppointment';
 
 function App() {
   return (
@@ -27,6 +28,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+        
+        {/* Correct the dynamic doctorId route */}
+        <Route path="/patient-dashboard/bookAppointment/:doctorId"
+        element={
+           <ProtectedRoute requiredRole="patient">
+             <BookAppointment />
+           </ProtectedRoute>
+        }
+        />
+
         
         {/* Doctor Routes */}
         <Route path="/loginDoctor" element={<DoctorLogin />} />
