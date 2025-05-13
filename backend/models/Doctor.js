@@ -40,6 +40,11 @@ const doctorSchema = new mongoose.Schema({
     required: true
   },
 
+  profileImage: {
+    type: String,
+    default: null
+  },
+
   collegeName: {
     type: String,
     required: true
