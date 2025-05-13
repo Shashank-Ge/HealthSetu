@@ -82,12 +82,8 @@ function App() {
             </ProtectedRoute>
           }
         />
-      </Routes>
-      {/*not found routes*/}
-      <Routes>
-      <Route path='*' 
-      element={<NotFound404/>}
-      />
+        
+        <Route path='*' element={<NotFound404/>} />
       </Routes>
     </Router>
   );
