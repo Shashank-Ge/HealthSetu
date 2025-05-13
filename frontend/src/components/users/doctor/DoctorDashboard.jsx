@@ -56,6 +56,27 @@ function DoctorDashboard() {
     }
   };
 
+  const handleCancel = async (appointmentId) => {
+    const reason = prompt('Please enter the reason for cancellation:');
+    if (!reason) return;
+  
+    const token = localStorage.getItem('token');
+  
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/api/auth/doctor-dashboard/cancelAppointment',
+        { appointmentId, reason },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert(response.data.message);
+      fetchAppointments();
+    } catch (error) {
+      console.error('Error cancelling appointment:', error);
+      alert('Failed to cancel appointment.');
+    }
+  };
+  
+
   const handleLogout = () => {
     localStorage.clear();
     navigate('/loginDoctor');
@@ -122,7 +143,12 @@ function DoctorDashboard() {
                 >
                   Schedule
                 </button>
-                <button className="action-button">Cancel</button>
+                <button className="action-button" onClick={() => handleCancel(
+                  appointment._id
+                  )}
+                >
+                  Cancel
+                </button>
               </div>
             ))}
           </div>
