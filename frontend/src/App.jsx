@@ -10,6 +10,8 @@ import AdminLogin from './components/users/admin/AdminLogin';
 import AdminDashboard from './components/users/admin/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import BookAppointment from './components/users/patient/BookAppointment';
+import PatientProfile from './components/users/patient/PatientProfile';
+import DoctorProfile from './components/users/doctor/DoctorProfile';
 
 function App() {
   return (
@@ -25,6 +27,15 @@ function App() {
           element={
             <ProtectedRoute requiredRole="patient">
               <PatientDashboard />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route 
+          path="/patient-dashboard/patient-profile" 
+          element={
+            <ProtectedRoute requiredRole="patient">
+              <PatientProfile />
             </ProtectedRoute>
           }
         />
@@ -47,6 +58,15 @@ function App() {
           element={
             <ProtectedRoute requiredRole="doctor">
               <DoctorDashboard />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/doctor-dashboard/doctor-profile"
+          element={
+            <ProtectedRoute requiredRole="doctor">
+              <DoctorProfile />
             </ProtectedRoute>
           }
         />

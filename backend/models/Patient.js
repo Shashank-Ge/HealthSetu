@@ -11,6 +11,10 @@ const patientSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    profileImage: {
+      type: String,
+      default: null
+    },
     password: {
       type: String,
       required: true,

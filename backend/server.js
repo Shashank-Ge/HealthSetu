@@ -6,6 +6,7 @@ const patientRoutes = require("./routes/patientRoutes");
 const adminRoutes = require("./routes/adminRoutes")
 const helmet = require("helmet")
 const morgan = require("morgan")
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -20,6 +21,8 @@ app.use(cors());
 app.use(express.json());
 app.use(helmet())
 app.use(morgan("dev"))
+// Serve static files from the uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use("/api/auth",doctorRoutes);
