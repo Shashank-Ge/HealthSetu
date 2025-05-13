@@ -4,6 +4,7 @@ const patientProtect = require("../middleware/patientProtect")
 const {loginPatient,registerPatient} = require("../controllers/authControllers/patientAuthController");
 const { getApprovedDoctors } = require('../controllers/personalizeContorllers/patientControllers');
 const { bookAppointment } = require("../controllers/personalizeContorllers/patientControllers");
+const { getDoctorAppointments } = require("../controllers/personalizeContorllers/doctorControllers");
 
 try {
 router.post("/loginPatient",loginPatient);
@@ -16,5 +17,6 @@ router.get("/patient-dashboard/doctors",patientProtect,getApprovedDoctors)
     console.error(error)
 }
 router.post("/patient-dashboard/bookAppointment",patientProtect,bookAppointment)
+router.get('/patient-dashboard/booked-meeting',patientProtect,getDoctorAppointments)
 
 module.exports = router;
