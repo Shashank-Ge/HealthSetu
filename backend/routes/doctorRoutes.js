@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const doctorAuthWithApproval = require('../middleware/doctorProtect');
 const { registerDoctor, loginDoctor } = require('../controllers/authControllers/doctorAuthController');
-const { getDoctorAppointments, scheduleAppointment } = require('../controllers/personalizeContorllers/doctorControllers');
+const { getDoctorAppointments, scheduleAppointment, cancelAppointment } = require('../controllers/personalizeContorllers/doctorControllers');
 
 const { getDoctorProfile, updateDoctorProfile } = require('../controllers/profileController/doctorProfileController');
 const multer = require('multer');
@@ -45,6 +45,7 @@ router.get('/doctor-dashboard', doctorAuthWithApproval, (req, res) => {
 });
 router.get('/doctor-dashboard/appointments', doctorAuthWithApproval, getDoctorAppointments);
 router.post('/doctor-dashboard/scheduleAppointments', doctorAuthWithApproval, scheduleAppointment);
+router.post('/doctor-dashboard/cancelAppointment',doctorAuthWithApproval,cancelAppointment)
 
 router.get('/doctor-profile', doctorAuthWithApproval, getDoctorProfile);
 router.put('/doctor-profile', doctorAuthWithApproval, upload.single('profileImage'), updateDoctorProfile);
