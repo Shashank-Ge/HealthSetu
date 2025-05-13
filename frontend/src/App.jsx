@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import BookAppointment from './components/users/patient/BookAppointment';
 import PatientProfile from './components/users/patient/PatientProfile';
 import DoctorProfile from './components/users/doctor/DoctorProfile';
+import NotFound404 from './components/NotFound404'
 
 function App() {
   return (
@@ -81,6 +82,12 @@ function App() {
             </ProtectedRoute>
           }
         />
+      </Routes>
+      {/*not found routes*/}
+      <Routes>
+      <Route path='*' 
+      element={<NotFound404/>}
+      />
       </Routes>
     </Router>
   );
