@@ -1,220 +1,626 @@
 .not-found-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  position: relative;
-}
-
-.not-found-content {
-  text-align: center;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-  max-width: 600px;
-  width: 90%;
-  animation: fadeIn 0.8s ease-out forwards;
-  overflow: hidden;
-}
-
-.error-code {
-  font-size: 10rem;
-  font-weight: 700;
-  color: #3498db;
-  margin: 0;
-  line-height: 1;
-  position: relative;
-  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  animation: float 6s ease-in-out infinite;
-}
-
-.error-title {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin: 1rem 0;
-  animation: slideUp 0.6s ease-out 0.3s forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.error-message {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  margin-bottom: 2rem;
-  animation: slideUp 0.6s ease-out 0.5s forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.home-button {
-  display: inline-block;
-  padding: 12px 30px;
-  background-color: #3498db;
-  color: white;
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  animation: slideUp 0.6s ease-out 0.7s forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.home-button:hover {
-  background-color: #2980b9;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.home-button:active {
-  transform: translateY(-1px);
-}
-
-.pulse-circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: rgba(52, 152, 219, 0.1);
-  z-index: -1;
-  animation: pulse 2s infinite;
-}
-
-.medical-icons {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.icon {
-  font-size: 2rem;
-  animation: bounce 2s infinite;
-}
-
-.heartbeat {
-  animation: heartbeat 1.5s infinite;
-}
-
-.pill {
-  animation: bounce 2s infinite 0.3s;
-}
-
-.stethoscope {
-  animation: bounce 2s infinite 0.6s;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4f9e8 100%);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    position: relative;
   }
-  to {
-    opacity: 1;
+  
+  .not-found-container::before {
+    content: "🩺";
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 3rem;
+    opacity: 0.2;
+    animation: floatElement 15s ease-in-out infinite;
   }
-}
-
-@keyframes slideUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .not-found-container::after {
+    content: "💊";
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+    font-size: 3rem;
+    opacity: 0.2;
+    animation: floatElement 18s ease-in-out infinite reverse;
   }
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
+  
+  .not-found-container::before,
+  .not-found-container::after {
+    text-shadow: 0 0 15px rgba(52, 219, 116, 0.5);
   }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(0.8);
+  
+  .dna-helix {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(52, 219, 116, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(119, 200, 131, 0.05) 0%, transparent 50%);
     opacity: 0.7;
+    z-index: 0;
+    animation: rotate-background 30s linear infinite;
   }
-  50% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.3;
+  
+  .not-found-content {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    width: 90%;
+    animation: fadeIn 0.8s ease-out forwards;
+    overflow: hidden;
+    border-top: 5px solid #4CAF50;
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.9);
   }
-  100% {
-    transform: translate(-50%, -50%) scale(0.8);
+  
+  /* Glass morphism effect */
+  .not-found-content {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.1),
+      inset 0 0 1px 1px rgba(255, 255, 255, 0.7);
+  }
+  
+  /* Add HealthSetu branding */
+  .not-found-content::before {
+    content: "HealthSetu";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.9rem;
+    color: #4CAF50;
+    font-weight: bold;
     opacity: 0.7;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes heartbeat {
-  0% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.3);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.3);
-  }
-  70% {
-    transform: scale(1);
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
+  
   .error-code {
-    font-size: 8rem;
+    font-size: 10rem;
+    font-weight: 700;
+    color: #77c883;
+    margin: 0;
+    line-height: 1;
+    position: relative;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+    animation: float 6s ease-in-out infinite;
+    background: linear-gradient(45deg, #77c883, #4CAF50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.1));
+  }
+  
+  .error-code {
+    text-shadow: 
+      1px 1px 1px rgba(0, 0, 0, 0.05),
+      2px 2px 1px rgba(0, 0, 0, 0.05),
+      3px 3px 1px rgba(0, 0, 0, 0.05),
+      4px 4px 1px rgba(0, 0, 0, 0.05),
+      5px 5px 10px rgba(0, 0, 0, 0.2);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .error-code::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, #77c883 1px, transparent 1px),
+      radial-gradient(circle at 70% 20%, #4CAF50 1px, transparent 1px),
+      radial-gradient(circle at 40% 70%, #8BC34A 1px, transparent 1px),
+      radial-gradient(circle at 90% 60%, #77c883 1px, transparent 1px);
+    background-size: 100px 100px;
+    opacity: 0.3;
+    animation: particle-float 10s linear infinite;
+    pointer-events: none;
   }
   
   .error-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin: 1rem 0;
+    animation: slideUp 0.6s ease-out 0.3s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    position: relative;
+  }
+  
+  .error-title::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    transform: translateX(-50%);
+    animation: expand-line 1.5s ease-out 1s forwards;
   }
   
   .error-message {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .error-code {
-    font-size: 6rem;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    animation: slideUp 0.6s ease-out 0.5s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    line-height: 1.6;
   }
   
-  .error-title {
+  .home-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    animation: slideUp 0.6s ease-out 0.7s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .home-button::after,
+  .doctor-button::after,
+  .patient-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out;
+    z-index: -1;
+  }
+  
+  .home-button:hover::after,
+  .doctor-button:hover::after,
+  .patient-button:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .doctor-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #27ae60;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    animation: slideUp 0.6s ease-out 0.8s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    margin-left: 10px;
+  }
+  
+  .doctor-button:hover {
+    background-color: #219653;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .patient-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #8BC34A;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    animation: slideUp 0.6s ease-out 0.9s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    margin-left: 10px;
+  }
+  
+  .patient-button:hover {
+    background-color: #7CB342;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-button:hover {
+    background-color: #388E3C;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-button:active {
+    transform: translateY(-1px);
+  }
+  
+  .pulse-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.1);
+    z-index: -1;
+    animation: pulse 2s infinite;
+  }
+  
+  .pulse-circle-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(139, 195, 74, 0.05);
+    z-index: -2;
+    animation: pulse 3s infinite 1s;
+  }
+  
+  .stethoscope-animation {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulse-subtle 2s infinite;
+  }
+  
+  .stethoscope-animation::after {
+    content: "🩺";
     font-size: 1.5rem;
+    animation: rotate 10s linear infinite;
   }
   
   .medical-icons {
-    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
   }
-}
+  
+  .icon {
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+    position: relative;
+  }
+  
+  .icon::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    filter: blur(10px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .icon:hover::after {
+    opacity: 0.5;
+  }
+  
+  .icon.heartbeat::after {
+    background-color: rgba(231, 76, 60, 0.5);
+  }
+  
+  .icon.pill::after {
+    background-color: rgba(76, 175, 80, 0.5);
+  }
+  
+  .icon.stethoscope::after {
+    background-color: rgba(39, 174, 96, 0.5);
+  }
+  
+  .icon.hospital::after {
+    background-color: rgba(139, 195, 74, 0.5);
+  }
+  
+  .icon.ambulance::after {
+    background-color: rgba(76, 175, 80, 0.5);
+  }
+  
+  .icon.hospital {
+    animation: bounce 2s infinite 0.9s;
+  }
+  
+  .icon.ambulance {
+    animation: bounce 2s infinite 1.2s;
+  }
+  
+  .heartbeat {
+    animation: heartbeat 1.5s infinite;
+  }
+  
+  .pill {
+    animation: bounce 2s infinite 0.3s;
+  }
+  
+  .stethoscope {
+    animation: bounce 2s infinite 0.6s;
+  }
+  
+  .health-tip {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: rgba(76, 175, 80, 0.1);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #2c3e50;
+    animation: fadeIn 1s ease-out 1.2s forwards;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .health-tip::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A, #CDDC39, #4CAF50) border-box;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: border-rotate 4s linear infinite;
+    background-size: 300% 100%;
+  }
+  
+  .health-tip-title {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes pulse-subtle {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.3);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    14% {
+      transform: scale(1.3);
+    }
+    28% {
+      transform: scale(1);
+    }
+    42% {
+      transform: scale(1.3);
+    }
+    70% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes floatElement {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+      transform: translate(15px, -15px) rotate(5deg);
+    }
+    66% {
+      transform: translate(-15px, 15px) rotate(-5deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+  
+  @keyframes pulse-line {
+    0% {
+      opacity: 0.3;
+      width: 0%;
+    }
+    50% {
+      opacity: 1;
+      width: 100%;
+    }
+    100% {
+      opacity: 0.3;
+      width: 0%;
+    }
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes expand-line {
+    from {
+      width: 0;
+    }
+    to {
+      width: 50%;
+    }
+  }
+  
+  @keyframes border-rotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes particle-float {
+    0% {
+      background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+    }
+    100% {
+      background-position: 100px 100px, -100px 100px, 100px -100px, -100px -100px;
+    }
+  }
+  
+  @keyframes rotate-background {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .error-code {
+      font-size: 8rem;
+    }
+    
+    .error-title {
+      font-size: 2rem;
+    }
+    
+    .error-message {
+      font-size: 1rem;
+    }
+    
+    .doctor-button, .patient-button {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .error-code {
+      font-size: 6rem;
+    }
+    
+    .error-title {
+      font-size: 1.5rem;
+    }
+    
+    .medical-icons {
+      gap: 1rem;
+    }
+    
+    .not-found-container::before,
+    .not-found-container::after {
+      font-size: 2rem;
+    }
+    
+    .stethoscope-animation {
+      display: none;
+    }
+  }
