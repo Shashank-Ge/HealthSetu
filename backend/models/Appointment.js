@@ -22,6 +22,8 @@ const appointmentSchema = new mongoose.Schema(
       enum: ["pending", "confirmed", "cancelled", "completed"],
       default: "pending",
     },
+    meetLink: String,
+    scheduledAt: Date,
   },
   { timestamps: true }
 );
