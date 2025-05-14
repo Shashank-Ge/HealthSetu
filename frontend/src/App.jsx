@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import BookAppointment from './components/users/patient/BookAppointment';
 import PatientProfile from './components/users/patient/PatientProfile';
 import DoctorProfile from './components/users/doctor/DoctorProfile';
+import DoctorMeetings from './components/users/doctor/DoctorMeetings';
 import NotFound404 from './components/NotFound404'
 
 function App() {
@@ -70,6 +71,15 @@ function App() {
               <DoctorProfile />
             </ProtectedRoute>
           }
+        />
+
+        <Route
+        path="/doctor-dashboard/doctor-Meetings"
+        element={
+          <ProtectedRoute requiredRole="doctor">
+            <DoctorMeetings/>
+          </ProtectedRoute>
+        }
         />
         
         {/* Admin Routes */}

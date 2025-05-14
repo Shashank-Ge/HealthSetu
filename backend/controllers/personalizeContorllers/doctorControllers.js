@@ -118,5 +118,41 @@ const cancelAppointment = async (req, res) => {
   }
 };
 
+const getUpcomingAndUpdateAppointments = async (req, res) => {
+  try {
+    const doctorId = req.doctor._id;
 
-module.exports = { getDoctorAppointments, scheduleAppointment ,cancelAppointment};
+    // Get confirmed and completed appointments for this doctor
+    let appointments = await Appointment.find({
+      doctor: doctorId,
+      status: { $in: ['confirmed', 'completed'] },
+    }).populate('patient', 'name email');
+
+    const now = new Date();
+
+    // Loop through and update statuses if scheduled time has passed
+    const updatePromises = appointments.map(async (appointment) => {
+      if (appointment.status === 'confirmed' && appointment.scheduledAt && appointment.scheduledAt < now) {
+        appointment.status = 'completed';
+        await appointment.save();
+      }
+      return appointment;
+    });
+
+    // Wait for all status updates to complete
+    appointments = await Promise.all(updatePromises);
+
+    // Sort appointments by scheduled date (ascending)
+    appointments.sort((a, b) => new Date(a.scheduledAt) - new Date(b.scheduledAt));
+
+    res.status(200).json({
+      message: 'Upcoming and completed appointments fetched successfully.',
+      appointments,
+    });
+  } catch (error) {
+    console.error('Error in getUpcomingAndUpdateAppointments:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = { getDoctorAppointments, scheduleAppointment ,cancelAppointment , getUpcomingAndUpdateAppointments};

@@ -91,6 +91,7 @@ function DoctorDashboard() {
       <header className="dashboard-header">
         <Link to="/" className="logo-link"><div className="logo">HealthSetu</div></Link>
         <nav className="nav-menu">
+          <button onClick={()=> navigate('/doctor-dashboard/doctor-Meetings')}>Meetings</button>
           <button onClick={() => navigate('/doctor-dashboard/doctor-profile')}>Profile</button>
           <button onClick={handleLogout}>Logout</button>
         </nav>
