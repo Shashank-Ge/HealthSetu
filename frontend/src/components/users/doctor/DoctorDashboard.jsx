@@ -24,11 +24,16 @@ function DoctorDashboard() {
       const token = localStorage.getItem('token');
       const response = await axios.get(
         'http://localhost:8080/api/auth/doctor-dashboard/appointments',
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
       );
-      setAppointments(
-        response.data.appointments.map(a => ({ ...a, scheduledDate: '', scheduledTime: '' }))
-      );
+      // Filter only pending appointments
+      const pendingAppointments = response.data.appointments
+        .filter((a) => a.status === 'pending')
+        .map((a) => ({ ...a, scheduledDate: '', scheduledTime: '' }));
+
+      setAppointments(pendingAppointments);
     } catch (error) {
       console.error('Error fetching appointments:', error);
     }
@@ -49,7 +54,7 @@ function DoctorDashboard() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert(response.data.message);
-      fetchAppointments();
+      fetchAppointments(); // Refresh after scheduling
     } catch (error) {
       console.error('Error scheduling appointment:', error);
       alert('Failed to schedule appointment.');
@@ -59,9 +64,9 @@ function DoctorDashboard() {
   const handleCancel = async (appointmentId) => {
     const reason = prompt('Please enter the reason for cancellation:');
     if (!reason) return;
-  
+
     const token = localStorage.getItem('token');
-  
+
     try {
       const response = await axios.post(
         'http://localhost:8080/api/auth/doctor-dashboard/cancelAppointment',
@@ -69,13 +74,12 @@ function DoctorDashboard() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert(response.data.message);
-      fetchAppointments();
+      fetchAppointments(); // Refresh after cancelling
     } catch (error) {
       console.error('Error cancelling appointment:', error);
       alert('Failed to cancel appointment.');
     }
   };
-  
 
   const handleLogout = () => {
     localStorage.clear();
@@ -99,64 +103,71 @@ function DoctorDashboard() {
         </section>
 
         <section className="appointments-section">
-          <h2>Your Appointments</h2>
-          <div className="appointments-grid">
-            {appointments.map((appointment, idx) => (
-              <div key={appointment._id} className="appointment-card">
-                <p>Appointment with {appointment.patient?.name}</p>
-                <p>Reason: {appointment.reason}</p>
+          <h2>Pending Appointments</h2>
+          {appointments.length === 0 ? (
+            <p>No pending appointments.</p>
+          ) : (
+            <div className="appointments-grid">
+              {appointments.map((appointment, idx) => (
+                <div key={appointment._id} className="appointment-card">
+                  <p>Appointment with {appointment.patient?.name}</p>
+                  <p>Reason: {appointment.reason}</p>
 
-                <label>
-                  Select Date:
-                  <input
-                    type="date"
-                    value={appointment.scheduledDate}
-                    onChange={e => {
-                      const copy = [...appointments];
-                      copy[idx].scheduledDate = e.target.value;
-                      setAppointments(copy);
-                    }}
-                  />
-                </label>
+                  <label>
+                    Select Date:
+                    <input
+                      type="date"
+                      value={appointment.scheduledDate}
+                      onChange={e => {
+                        const updated = [...appointments];
+                        updated[idx].scheduledDate = e.target.value;
+                        setAppointments(updated);
+                      }}
+                    />
+                  </label>
 
-                <label>
-                  Select Time:
-                  <input
-                    type="time"
-                    value={appointment.scheduledTime}
-                    onChange={e => {
-                      const copy = [...appointments];
-                      copy[idx].scheduledTime = e.target.value;
-                      setAppointments(copy);
-                    }}
-                  />
-                </label>
+                  <label>
+                    Select Time:
+                    <input
+                      type="time"
+                      value={appointment.scheduledTime}
+                      onChange={e => {
+                        const updated = [...appointments];
+                        updated[idx].scheduledTime = e.target.value;
+                        setAppointments(updated);
+                      }}
+                    />
+                  </label>
 
-                <button
-                  className="action-button"
-                  onClick={() => handleSchedule(
-                    appointment._id,
-                    appointment.patient._id,
-                    appointment.scheduledDate,
-                    appointment.scheduledTime
-                  )}
-                >
-                  Schedule
-                </button>
-                <button className="action-button" onClick={() => handleCancel(
-                  appointment._id
-                  )}
-                >
-                  Cancel
-                </button>
-              </div>
-            ))}
-          </div>
+                  <button
+                    className="action-button"
+                    onClick={() =>
+                      handleSchedule(
+                        appointment._id,
+                        appointment.patient._id,
+                        appointment.scheduledDate,
+                        appointment.scheduledTime
+                      )
+                    }
+                  >
+                    Schedule
+                  </button>
+
+                  <button
+                    className="action-button cancel"
+                    onClick={() => handleCancel(appointment._id)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       </main>
 
       <footer className="dashboard-footer">
-        {/* ... same footer ... */}
+        <p>© 2025 HealthSetu. All rights reserved.</p>
       </footer>
     </div>
   );
