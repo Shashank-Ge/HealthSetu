@@ -3,6 +3,7 @@ const scheduleGoogleMeet = require('../../googleMeetService');
 const sendEmail = require('../../sendEmail');
 const Patient = require('../../models/Patient');
 const Doctor = require('../../models/Doctor');
+const Feedback = require('../../models/Feedback');
 
 const getDoctorAppointments = async (req, res) => {
   const doctorId = req.doctor._id;
@@ -155,4 +156,30 @@ const getUpcomingAndUpdateAppointments = async (req, res) => {
   }
 };
 
-module.exports = { getDoctorAppointments, scheduleAppointment ,cancelAppointment , getUpcomingAndUpdateAppointments};
+const getDoctorFeedback = async (req, res) => {
+  const doctorId = req.doctor._id; // assuming middleware sets this
+
+  console.log("Doctor ID from token:", doctorId);
+
+  try {
+    const feedbacks = await Feedback.find({ doctor: doctorId })
+      .populate('patient', 'name email')
+      .populate('appointment', 'scheduledAt status');
+
+    console.log("Fetched Feedbacks:", feedbacks);
+
+    res.status(200).json({ feedbacks });
+  } catch (error) {
+    console.error('Error fetching feedback:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+module.exports = { 
+  getDoctorAppointments, 
+  scheduleAppointment ,
+  cancelAppointment ,
+  getUpcomingAndUpdateAppointments,
+  getDoctorFeedback
+};

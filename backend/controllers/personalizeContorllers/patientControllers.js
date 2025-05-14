@@ -1,6 +1,7 @@
 const Appointment = require('../../models/Appointment');
 const Doctor = require('../../models/Doctor');
 const Patient = require('../../models/Patient');
+const Feedback = require('../../models/Feedback');
 const sendEmail = require('../../sendEmail');
 
 const bookAppointment = async (req, res) => {
@@ -73,4 +74,47 @@ const getApprovedDoctors = async (req, res) => {
   }
 };
 
-module.exports = { bookAppointment, getApprovedDoctors };
+// Controller: Patient submits feedback
+const submitFeedback = async (req, res) => {
+  const { appointmentId, message } = req.body;
+  const patientId = req.patient.userId; // assuming authentication middleware sets this
+
+  if (!appointmentId || !message) {
+    return res.status(400).json({ message: 'Appointment ID and feedback message are required.' });
+  }
+
+  try {
+    const appointment = await Appointment.findById(appointmentId);
+
+    // Check appointment validity, ownership, and status
+    if (!appointment || appointment.patient.toString() !== patientId) {
+      return res.status(403).json({ message: 'Invalid appointment or not authorized.' });
+    }
+
+    if (appointment.status !== 'completed') {
+      return res.status(400).json({ message: 'Feedback can only be submitted after the appointment is completed.' });
+    }
+
+    // Check if feedback already exists
+    const existingFeedback = await Feedback.findOne({ appointment: appointmentId });
+    if (existingFeedback) {
+      return res.status(400).json({ message: 'Feedback already submitted for this appointment.' });
+    }
+
+    const feedback = new Feedback({
+      appointment: appointment._id,
+      patient: appointment.patient,
+      doctor: appointment.doctor,
+      message,
+    });
+
+    await feedback.save();
+
+    res.status(201).json({ message: 'Feedback submitted successfully.', feedback });
+  } catch (error) {
+    console.error('Error submitting feedback:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { bookAppointment, getApprovedDoctors, submitFeedback };
