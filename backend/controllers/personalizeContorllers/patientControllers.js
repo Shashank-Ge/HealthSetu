@@ -1,15 +1,24 @@
 const Appointment = require('../../models/Appointment');
-const Doctor = require('../../models/Doctor')
+const Doctor = require('../../models/Doctor');
+const Patient = require('../../models/Patient');
+const sendEmail = require('../../sendEmail');
 
 const bookAppointment = async (req, res) => {
   const { doctorId, reason } = req.body;
-  const patientId = req.patient.userId; // assuming patient is authenticated and ID is in req.patient
+  const patientId = req.patient.userId;
 
   if (!doctorId || !reason) {
     return res.status(400).json({ message: "Doctor ID and reason are required." });
   }
 
   try {
+    const doctor = await Doctor.findById(doctorId);
+    const patient = await Patient.findById(patientId);
+
+    if (!doctor || !patient) {
+      return res.status(404).json({ message: "Doctor or patient not found." });
+    }
+
     const appointment = new Appointment({
       patient: patientId,
       doctor: doctorId,
@@ -18,8 +27,33 @@ const bookAppointment = async (req, res) => {
 
     await appointment.save();
 
+    // Doctor email content
+    const doctorEmailHTML = `
+      <p>Dear Dr. ${doctor.name},</p>
+      <p>You have received a new appointment request.</p>
+      <p><strong>Patient:</strong> ${patient.name} (${patient.email})</p>
+      <p><strong>Reason:</strong> ${reason}</p>
+      <p>Please visit your dashboard to view and manage this appointment.</p>
+      <br/>
+      <p>Best regards,<br/>DocMeet Team</p>
+    `;
+
+    // Patient email content
+    const patientEmailHTML = `
+      <p>Dear ${patient.name},</p>
+      <p>Your appointment request with <strong>Dr. ${doctor.name}</strong> has been submitted successfully.</p>
+      <p><strong>Reason:</strong> ${reason}</p>
+      <p>You will be notified once the doctor responds.</p>
+      <br/>
+      <p>Best regards,<br/>DocMeet Team</p>
+    `;
+
+    // Send emails
+    await sendEmail(doctor.email, 'New Appointment Request', doctorEmailHTML);
+    await sendEmail(patient.email, 'Appointment Request Submitted', patientEmailHTML);
+
     res.status(201).json({
-      message: "Appointment booked successfully.",
+      message: "Appointment booked and confirmation emails sent.",
       appointment,
     });
   } catch (error) {

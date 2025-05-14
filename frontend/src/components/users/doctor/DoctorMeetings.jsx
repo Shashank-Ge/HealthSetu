@@ -34,7 +34,7 @@ const DoctorMeetings = () => {
     fetchAppointments();
   }, []);
 
-  // 🔴 Handle Cancel Appointment
+  // Handle Cancel Appointment
   const handleCancel = async (appointmentId) => {
     const reason = prompt('Please enter the reason for cancellation:');
     if (!reason) return;
@@ -101,7 +101,7 @@ const DoctorMeetings = () => {
                     {appt.scheduledAt ? new Date(appt.scheduledAt).toLocaleString() : 'Not scheduled'}
                   </p>
 
-                  {/* ✅ Show Meet Link only if NOT completed */}
+                  {/* Show Meet Link only if NOT completed */}
                   {appt.status !== 'completed' && appt.meetLink && (
                     <p>
                       <strong>Meet Link:</strong>{' '}
@@ -116,7 +116,7 @@ const DoctorMeetings = () => {
                     </p>
                   )}
 
-                  {/* ✅ Show Cancel Button only if status is confirmed */}
+                  {/* Show Cancel Button only if status is confirmed */}
                   {appt.status === 'confirmed' && (
                     <button
                       onClick={() => handleCancel(appt._id)}
