@@ -265,7 +265,7 @@ textarea::placeholder {
 
 .message.success-message,
 .message.error-message {
-  animation: fadeIn 0.5s ease, pulse 1.5s infinite ease-in-out;
+  animation: fadeIn 0.5s ease, bouncePulse 2s infinite;
 }
 
 @keyframes pulse {
@@ -300,4 +300,19 @@ html {
   justify-content: flex-start;
   align-items: center;
   margin-top: 10px;
+}
+
+@keyframes bouncePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.03);
+  }
+  50% {
+    transform: scale(0.97);
+  }
+  75% {
+    transform: scale(1.02);
+  }
 }
