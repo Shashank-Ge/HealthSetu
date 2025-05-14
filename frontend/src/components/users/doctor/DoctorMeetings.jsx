@@ -10,28 +10,50 @@ const DoctorMeetings = () => {
   const [doctorName] = useState(localStorage.getItem('name') || '');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get(
-          'http://localhost:8080/api/auth/doctor-dashboard/doctor-meetings',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setAppointments(response.data.appointments);
-        setLoading(false);
-      } catch (err) {
-        setError(err.response?.data?.message || 'Failed to fetch appointments');
-        setLoading(false);
-      }
-    };
+  // Function to fetch appointments
+  const fetchAppointments = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(
+        'http://localhost:8080/api/auth/doctor-dashboard/doctor-meetings',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setAppointments(response.data.appointments);
+      setLoading(false);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to fetch appointments');
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchAppointments();
   }, []);
+
+  // 🔴 Handle Cancel Appointment
+  const handleCancel = async (appointmentId) => {
+    const reason = prompt('Please enter the reason for cancellation:');
+    if (!reason) return;
+
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/api/auth/doctor-dashboard/cancelAppointment',
+        { appointmentId, reason },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert(response.data.message);
+      fetchAppointments(); // Refresh list
+    } catch (error) {
+      console.error('Error cancelling appointment:', error);
+      alert('Failed to cancel appointment.');
+    }
+  };
 
   const handleLogout = () => {
     localStorage.clear();
@@ -78,7 +100,9 @@ const DoctorMeetings = () => {
                     <strong>Scheduled At:</strong>{' '}
                     {appt.scheduledAt ? new Date(appt.scheduledAt).toLocaleString() : 'Not scheduled'}
                   </p>
-                  {appt.meetLink && (
+
+                  {/* ✅ Show Meet Link only if NOT completed */}
+                  {appt.status !== 'completed' && appt.meetLink && (
                     <p>
                       <strong>Meet Link:</strong>{' '}
                       <a
@@ -90,6 +114,16 @@ const DoctorMeetings = () => {
                         {appt.meetLink}
                       </a>
                     </p>
+                  )}
+
+                  {/* ✅ Show Cancel Button only if status is confirmed */}
+                  {appt.status === 'confirmed' && (
+                    <button
+                      onClick={() => handleCancel(appt._id)}
+                      className="action-button"
+                    >
+                      Cancel Appointment
+                    </button>
                   )}
                 </div>
               ))}
