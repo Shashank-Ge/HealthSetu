@@ -9,6 +9,7 @@ const BookAppointment = () => {
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isPageVisible, setIsPageVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Show and auto-dismiss short messages
   const showMessage = (text, success = false, autoHide = true) => {
@@ -36,6 +37,7 @@ const BookAppointment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const token = localStorage.getItem('token');
@@ -55,6 +57,8 @@ const BookAppointment = () => {
     } catch (error) {
       console.error(error);
       showMessage(error.response?.data?.message || 'Something went wrong', false, false); // Keep error visible
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,9 +90,20 @@ const BookAppointment = () => {
           </div>
 
           <div className="form-actions">
-            <button type="submit" className="submit-btn">Book Appointment</button>
+            <button 
+              type="submit" 
+              className="submit-btn" 
+              disabled={loading}
+            >
+              {loading ? 'Booking...' : 'Book Appointment'}
+            </button>
             {reason && (
-              <button type="button" className="discard-btn" onClick={handleDiscardDraft}>
+              <button 
+                type="button" 
+                className="discard-btn" 
+                onClick={handleDiscardDraft}
+                disabled={loading}
+              >
                 Discard Draft
               </button>
             )}

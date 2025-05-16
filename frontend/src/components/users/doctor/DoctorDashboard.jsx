@@ -7,6 +7,9 @@ function DoctorDashboard() {
   const navigate = useNavigate();
   const [doctorName] = useState(localStorage.getItem('name') || '');
   const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [scheduleLoading, setScheduleLoading] = useState({});
+  const [cancelLoading, setCancelLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -36,6 +39,8 @@ function DoctorDashboard() {
       setAppointments(pendingAppointments);
     } catch (error) {
       console.error('Error fetching appointments:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,6 +49,8 @@ function DoctorDashboard() {
       alert('Please select both date and time!');
       return;
     }
+    
+    setScheduleLoading(prev => ({ ...prev, [appointmentId]: true }));
     const token = localStorage.getItem('token');
     const scheduledDateTime = new Date(`${date}T${time}:00`).toISOString();
 
@@ -58,6 +65,8 @@ function DoctorDashboard() {
     } catch (error) {
       console.error('Error scheduling appointment:', error);
       alert('Failed to schedule appointment.');
+    } finally {
+      setScheduleLoading(prev => ({ ...prev, [appointmentId]: false }));
     }
   };
 
@@ -65,6 +74,7 @@ function DoctorDashboard() {
     const reason = prompt('Please enter the reason for cancellation:');
     if (!reason) return;
 
+    setCancelLoading(true);
     const token = localStorage.getItem('token');
 
     try {
@@ -78,6 +88,8 @@ function DoctorDashboard() {
     } catch (error) {
       console.error('Error cancelling appointment:', error);
       alert('Failed to cancel appointment.');
+    } finally {
+      setCancelLoading(false);
     }
   };
 
@@ -150,15 +162,17 @@ function DoctorDashboard() {
                         appointment.scheduledTime
                       )
                     }
+                    disabled={scheduleLoading[appointment._id]}
                   >
-                    Schedule
+                    {scheduleLoading[appointment._id] ? 'Scheduling...' : 'Schedule'}
                   </button>
 
                   <button
                     className="action-button cancel"
                     onClick={() => handleCancel(appointment._id)}
+                    disabled={cancelLoading}
                   >
-                    Cancel
+                    {cancelLoading ? 'Cancelling...' : 'Cancel'}
                   </button>
                 </div>
               ))}

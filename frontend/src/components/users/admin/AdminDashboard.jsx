@@ -8,6 +8,7 @@ function AdminDashboard() {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [actionLoading, setActionLoading] = useState({});
   const adminName = localStorage.getItem('name') || 'Admin';
 
   useEffect(() => {
@@ -43,6 +44,7 @@ function AdminDashboard() {
 
   const handleStatusChange = async (doctorId, newStatus) => {
     try {
+      setActionLoading(prev => ({ ...prev, [doctorId]: true }));
       const token = localStorage.getItem('token');
       await axios.patch(
         `http://localhost:8080/api/auth/admin-dashboard/doctor-status/${doctorId}`,
@@ -61,6 +63,8 @@ function AdminDashboard() {
     } catch (error) {
       console.error('Error updating doctor status:', error);
       setError('Failed to update doctor status. Please try again.');
+    } finally {
+      setActionLoading(prev => ({ ...prev, [doctorId]: false }));
     }
   };
 
@@ -122,14 +126,16 @@ function AdminDashboard() {
                               <button 
                                 className="approve-btn"
                                 onClick={() => handleStatusChange(doctor._id, 'approved')}
+                                disabled={actionLoading[doctor._id]}
                               >
-                                Approve
+                                {actionLoading[doctor._id] ? 'Processing...' : 'Approve'}
                               </button>
                               <button 
                                 className="reject-btn"
                                 onClick={() => handleStatusChange(doctor._id, 'rejected')}
+                                disabled={actionLoading[doctor._id]}
                               >
-                                Reject
+                                {actionLoading[doctor._id] ? 'Processing...' : 'Reject'}
                               </button>
                             </>
                           )}
@@ -137,16 +143,18 @@ function AdminDashboard() {
                             <button 
                               className="suspend-btn"
                               onClick={() => handleStatusChange(doctor._id, 'blocked')}
+                              disabled={actionLoading[doctor._id]}
                             >
-                              Block
+                              {actionLoading[doctor._id] ? 'Processing...' : 'Block'}
                             </button>
                           )}
                           {(doctor.status === 'rejected' || doctor.status === 'blocked') && (
                             <button 
                               className="approve-btn"
                               onClick={() => handleStatusChange(doctor._id, 'approved')}
+                              disabled={actionLoading[doctor._id]}
                             >
-                              Reactivate
+                              {actionLoading[doctor._id] ? 'Processing...' : 'Reactivate'}
                             </button>
                           )}
                         </td>

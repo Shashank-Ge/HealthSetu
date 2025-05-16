@@ -8,6 +8,8 @@ const PatientMeetings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [patientName] = useState(localStorage.getItem('name') || '');
+  const [cancelLoading, setCancelLoading] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState({});
   const navigate = useNavigate();
 
   // Function to fetch appointments
@@ -39,6 +41,7 @@ const PatientMeetings = () => {
     const reason = prompt('Please enter the reason for cancellation:');
     if (!reason) return;
 
+    setCancelLoading(true);
     const token = localStorage.getItem('token');
 
     try {
@@ -52,6 +55,8 @@ const PatientMeetings = () => {
     } catch (error) {
       console.error('Error cancelling appointment:', error);
       alert('Failed to cancel appointment.');
+    } finally {
+      setCancelLoading(false);
     }
   };
 
@@ -60,6 +65,7 @@ const PatientMeetings = () => {
     const message = prompt('Please provide your feedback about the consultation:');
     if (!message) return;
 
+    setFeedbackLoading(prev => ({ ...prev, [appointmentId]: true }));
     const token = localStorage.getItem('token');
 
     try {
@@ -73,6 +79,8 @@ const PatientMeetings = () => {
     } catch (error) {
       console.error('Error submitting feedback:', error);
       alert('Failed to submit feedback.');
+    } finally {
+      setFeedbackLoading(prev => ({ ...prev, [appointmentId]: false }));
     }
   };
 
@@ -142,8 +150,9 @@ const PatientMeetings = () => {
                     <button
                       onClick={() => handleCancel(appt._id)}
                       className="action-button"
+                      disabled={cancelLoading}
                     >
-                      Cancel Meeting
+                      {cancelLoading ? 'Cancelling...' : 'Cancel Meeting'}
                     </button>
                   )}
 
@@ -152,8 +161,9 @@ const PatientMeetings = () => {
                     <button
                       onClick={() => handleSubmitFeedback(appt._id)}
                       className="feedback-button"
+                      disabled={feedbackLoading[appt._id]}
                     >
-                      Submit Feedback
+                      {feedbackLoading[appt._id] ? 'Submitting...' : 'Submit Feedback'}
                     </button>
                   )}
 

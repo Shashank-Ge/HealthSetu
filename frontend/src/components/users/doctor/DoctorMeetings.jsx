@@ -9,6 +9,7 @@ const DoctorMeetings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [doctorName] = useState(localStorage.getItem('name') || '');
+  const [cancelLoading, setCancelLoading] = useState(false);
   const navigate = useNavigate();
 
   // Function to fetch appointments
@@ -56,6 +57,7 @@ const DoctorMeetings = () => {
     const reason = prompt('Please enter the reason for cancellation:');
     if (!reason) return;
 
+    setCancelLoading(true);
     const token = localStorage.getItem('token');
 
     try {
@@ -69,6 +71,8 @@ const DoctorMeetings = () => {
     } catch (error) {
       console.error('Error cancelling appointment:', error);
       alert('Failed to cancel appointment.');
+    } finally {
+      setCancelLoading(false);
     }
   };
 
@@ -140,8 +144,9 @@ const DoctorMeetings = () => {
                       <button
                         onClick={() => handleCancel(appt._id)}
                         className="action-button"
+                        disabled={cancelLoading}
                       >
-                        Cancel Meeting
+                        {cancelLoading ? 'Cancelling...' : 'Cancel Meeting'}
                       </button>
                     )}
 
