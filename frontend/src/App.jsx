@@ -51,6 +51,14 @@ function App() {
         }
         />
 
+        <Route
+          path="/patient-dashboard/specialization/:specialization"
+          element={
+            <ProtectedRoute requiredRole="patient">
+              <PatientDashboard />
+            </ProtectedRoute>
+          }
+        />
         
         {/* Doctor Routes */}
         <Route path="/loginDoctor" element={<DoctorLogin />} />

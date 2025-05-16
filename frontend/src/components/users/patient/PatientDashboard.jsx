@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate , Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import './PatientDashboard.css';
 
 function PatientDashboard() {
   const navigate = useNavigate();
+  const { specialization: specializationParam } = useParams();
   const [doctors, setDoctors] = useState([]);
+  const [selectedSpecialization, setSelectedSpecialization] = useState(specializationParam || null);
+  const [searchQuery, setSearchQuery] = useState('');
   const name = localStorage.getItem("name");
+
+  const specializations = [
+    'Cardiologist', 'Neurologist', 'Dermatologist', 'Pediatrician',
+    'Orthopedic Surgeon', 'Psychiatrist', 'Oncologist', 'Endocrinologist',
+    'Gynecologist', 'Gastroenterologist', 'Nephrologist', 'Pulmonologist',
+    'Ophthalmologist', 'ENT Specialist', 'Urologist', 'General Physician'
+  ];
 
   useEffect(() => {
     fetchDoctors();
   }, []);
+
+  useEffect(() => {
+    setSelectedSpecialization(specializationParam || null);
+  }, [specializationParam]);
 
   const fetchDoctors = async () => {
     try {
@@ -30,6 +45,22 @@ function PatientDashboard() {
     navigate("/loginPatient");
   };
 
+  const handleSpecializationClick = (specialization) => {
+    navigate(`/patient-dashboard/specialization/${encodeURIComponent(specialization)}`);
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredSpecializations = specializations.filter(spec =>
+    spec.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredDoctors = selectedSpecialization
+    ? doctors.filter(doctor => doctor.specialization === selectedSpecialization)
+    : [];
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
@@ -48,62 +79,67 @@ function PatientDashboard() {
           <p>Your journey to better health starts here</p>
         </section>
 
-        <section className="doctors-section">
-          <h2>Available Doctors</h2>
-          <div className="doctors-grid">
-            {doctors.length > 0 ? (
-              doctors.map((doctor) => (
-                <div key={doctor._id} className="doctor-card">
-                  <h3>{doctor.name}</h3>
-                  <p>{doctor.specialization}</p>
-                  <button
-                    onClick={() => navigate(`/patient-dashboard/bookAppointment/${doctor._id}`)}
-                  >
-                    Book Appointment
-                  </button>
-                </div>
-              ))
-            ) : (
-              <p>No doctors available at the moment.</p>
-            )}
-          </div>
+        <section className="search-section">
+          <input
+            type="text"
+            placeholder="Search specialization..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="search-input"
+          />
         </section>
-      </main>
 
-      <footer className="dashboard-footer">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h3>Contact Us</h3>
-            <p>Email: support@healthsetu.com</p>
-            <p>Phone: +91 1234567890</p>
-          </div>
-          <div className="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-              <li>
-                <a href="/about">About Us</a>
-              </li>
-              <li>
-                <a href="/services">Services</a>
-              </li>
-              <li>
-                <a href="/privacy">Privacy Policy</a>
-              </li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h3>Follow Us</h3>
-            <div className="social-links">
-              <a href="#facebook">Facebook</a>
-              <a href="#twitter">Twitter</a>
-              <a href="#linkedin">LinkedIn</a>
+        {!selectedSpecialization ? (
+          <section className="specializations-section">
+            <h2>Medical Specializations</h2>
+            <div className="specializations-grid">
+              {filteredSpecializations.map((specialization) => (
+                <div 
+                  key={specialization} 
+                  className="specialization-card"
+                  onClick={() => handleSpecializationClick(specialization)}
+                >
+                  <div className="specialization-content">
+                    <h3>{specialization}</h3>
+                    <p className="doctor-count">
+                      {doctors.filter(d => d.specialization === specialization).length} Doctors
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>&copy; 2025 HealthSetu. All rights reserved.</p>
-        </div>
-      </footer>
+          </section>
+        ) : (
+          <section className="doctors-section">
+            <div className="section-header">
+              <h2>{selectedSpecialization} Doctors</h2>
+              <button 
+                className="back-button"
+                onClick={() => navigate('/patient-dashboard')}
+              >
+                Back to Specializations
+              </button>
+            </div>
+            <div className="doctors-grid">
+              {filteredDoctors.length > 0 ? (
+                filteredDoctors.map((doctor) => (
+                  <div key={doctor._id} className="doctor-card">
+                    <h3>{doctor.name}</h3>
+                    <p>{doctor.specialization}</p>
+                    <button
+                      onClick={() => navigate(`/patient-dashboard/bookAppointment/${doctor._id}`)}
+                    >
+                      Book Appointment
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>No doctors available for this specialization.</p>
+              )}
+            </div>
+          </section>
+        )}
+      </main>
     </div>
   );
 }
