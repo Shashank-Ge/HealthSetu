@@ -38,10 +38,35 @@ async function scheduleGoogleMeet(doctorName, patientEmail, scheduledDateTime) {
     conferenceDataVersion: 1,
   });
 
-  return response.data.hangoutLink;
+  // Return both the meet link and event ID
+  return {
+    meetLink: response.data.hangoutLink,
+    eventId: response.data.id
+  };
 }
 
-module.exports = scheduleGoogleMeet;
+// Function to delete a Google Calendar event
+async function deleteGoogleCalendarEvent(eventId) {
+  if (!eventId) {
+    console.error('No event ID provided for deletion');
+    return false;
+  }
 
+  try {
+    await calendar.events.delete({
+      calendarId: 'primary',
+      eventId: eventId,
+    });
+    
+    console.log(`Successfully deleted Google Calendar event: ${eventId}`);
+    return true;
+  } catch (error) {
+    console.error('Error deleting Google Calendar event:', error);
+    return false;
+  }
+}
 
-module.exports = scheduleGoogleMeet;
+module.exports = {
+  scheduleGoogleMeet,
+  deleteGoogleCalendarEvent
+};

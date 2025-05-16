@@ -1,5 +1,5 @@
 const Appointment = require('../../models/Appointment');
-const scheduleGoogleMeet = require('../../googleMeetService');
+const { scheduleGoogleMeet, deleteGoogleCalendarEvent } = require('../../googleMeetService');
 const sendEmail = require('../../sendEmail');
 const Patient = require('../../models/Patient');
 const Doctor = require('../../models/Doctor');
@@ -37,8 +37,9 @@ const scheduleAppointment = async (req, res) => {
     const appointment = await Appointment.findById(appointmentId);
     if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
 
-    const meetLink = await scheduleGoogleMeet(doctorName, patient.email, scheduledDateTime);
+    const { meetLink, eventId } = await scheduleGoogleMeet(doctorName, patient.email, scheduledDateTime);
     appointment.meetLink = meetLink;
+    appointment.googleEventId = eventId;
     appointment.scheduledAt = date;
     appointment.status = 'confirmed';
     await appointment.save();
@@ -98,6 +99,11 @@ const cancelAppointment = async (req, res) => {
     const doctorName = doctor?.name || 'Doctor';
 
     console.log(`Doctor ${doctorId} cancelled appointment ${appointmentId}. Reason: ${reason}`);
+
+    // Delete the Google Calendar event if it exists
+    if (appointment.googleEventId) {
+      await deleteGoogleCalendarEvent(appointment.googleEventId);
+    }
 
     // Send cancellation email to patient
     await sendEmail(
@@ -171,9 +177,6 @@ const getDoctorFeedback = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
-
-
 
 module.exports = { 
   getDoctorAppointments, 

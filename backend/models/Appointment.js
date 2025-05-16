@@ -24,6 +24,7 @@ const appointmentSchema = new mongoose.Schema(
     },
     meetLink: String,
     scheduledAt: Date,
+    googleEventId: String,
   },
   { timestamps: true }
 );

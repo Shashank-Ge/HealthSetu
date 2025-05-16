@@ -3,6 +3,7 @@ const Doctor = require('../../models/Doctor');
 const Patient = require('../../models/Patient');
 const Feedback = require('../../models/Feedback');
 const sendEmail = require('../../sendEmail');
+const { deleteGoogleCalendarEvent } = require('../../googleMeetService');
 
 const bookAppointment = async (req, res) => {
   const { doctorId, reason } = req.body;
@@ -156,6 +157,11 @@ const cancelAppointment = async (req, res) => {
     const patientName = patient?.name || 'Patient';
 
     console.log(`Patient ${patientId} cancelled appointment ${appointmentId}. Reason: ${reason}`);
+
+    // Delete the Google Calendar event if it exists
+    if (appointment.googleEventId) {
+      await deleteGoogleCalendarEvent(appointment.googleEventId);
+    }
 
     // Send cancellation email to doctor
     await sendEmail(

@@ -141,7 +141,7 @@ const DoctorMeetings = () => {
                         onClick={() => handleCancel(appt._id)}
                         className="action-button"
                       >
-                        Cancel Appointment
+                        Cancel Meeting
                       </button>
                     )}
 
