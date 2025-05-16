@@ -68,6 +68,7 @@ function PatientDashboard() {
           <div className="logo">HealthSetu</div>
         </Link>
         <nav className="nav-menu">
+          <button onClick={() => navigate('/patient-dashboard/patient-meetings')}>My Meetings</button>
           <button onClick={() => navigate('/patient-dashboard/patient-profile')}>Profile</button>
           <button onClick={handleLogout}>Logout</button>
         </nav>

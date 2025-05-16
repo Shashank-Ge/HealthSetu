@@ -201,3 +201,92 @@
 .doctor-card button:hover {
   background-color: #0056b3;
 }
+
+/* Appointments Section Styles */
+.appointments-section {
+  padding: 2rem;
+}
+
+.appointments-section h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.appointments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.appointment-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.appointment-card p {
+  margin: 0.5rem 0;
+}
+
+.action-button, .feedback-button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+.feedback-button {
+  background-color: #28a745;
+}
+
+.feedback-button:hover {
+  background-color: #218838;
+}
+
+.feedback-section {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #28a745;
+}
+
+.feedback-message {
+  font-style: italic;
+  color: #495057;
+}
+
+.feedback-date {
+  color: #6c757d;
+}
+
+.feedback-given {
+  margin-top: 1rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.no-feedback-message {
+  margin-top: 1rem;
+  color: #6c757d;
+  font-style: italic;
+}

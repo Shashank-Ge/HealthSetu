@@ -5,6 +5,7 @@ import './DoctorDashboard.css';
 
 const DoctorMeetings = () => {
   const [appointments, setAppointments] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [doctorName] = useState(localStorage.getItem('name') || '');
@@ -24,6 +25,17 @@ const DoctorMeetings = () => {
       );
       setAppointments(response.data.appointments);
       setLoading(false);
+      
+      // Fetch feedbacks for all completed appointments
+      const feedbacksResponse = await axios.get(
+        'http://localhost:8080/api/auth/doctor-dashboard/patient-feedbacks',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFeedbacks(feedbacksResponse.data.feedbacks || []);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to fetch appointments');
       setLoading(false);
@@ -33,6 +45,11 @@ const DoctorMeetings = () => {
   useEffect(() => {
     fetchAppointments();
   }, []);
+
+  // Get feedback for a specific appointment
+  const getFeedbackForAppointment = (appointmentId) => {
+    return feedbacks.find(feedback => feedback.appointment._id === appointmentId);
+  };
 
   // Handle Cancel Appointment
   const handleCancel = async (appointmentId) => {
@@ -86,47 +103,66 @@ const DoctorMeetings = () => {
             <p>No appointments found.</p>
           ) : (
             <div className="appointments-grid">
-              {appointments.map((appt) => (
-                <div key={appt._id} className="appointment-card">
-                  <p><strong>Patient:</strong> {appt.patient?.name}</p>
-                  <p><strong>Email:</strong> {appt.patient?.email}</p>
-                  <p>
-                    <strong>Status:</strong>{' '}
-                    <span className={`font-semibold ${appt.status === 'completed' ? 'text-green-600' : 'text-yellow-600'}`}>
-                      {appt.status}
-                    </span>
-                  </p>
-                  <p>
-                    <strong>Scheduled At:</strong>{' '}
-                    {appt.scheduledAt ? new Date(appt.scheduledAt).toLocaleString() : 'Not scheduled'}
-                  </p>
-
-                  {/* Show Meet Link only if NOT completed */}
-                  {appt.status !== 'completed' && appt.meetLink && (
+              {appointments.map((appt) => {
+                const feedback = getFeedbackForAppointment(appt._id);
+                return (
+                  <div key={appt._id} className="appointment-card">
+                    <p><strong>Patient:</strong> {appt.patient?.name}</p>
+                    <p><strong>Email:</strong> {appt.patient?.email}</p>
                     <p>
-                      <strong>Meet Link:</strong>{' '}
-                      <a
-                        href={appt.meetLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 underline"
-                      >
-                        {appt.meetLink}
-                      </a>
+                      <strong>Status:</strong>{' '}
+                      <span className={`font-semibold ${appt.status === 'completed' ? 'text-green-600' : 'text-yellow-600'}`}>
+                        {appt.status}
+                      </span>
                     </p>
-                  )}
+                    <p>
+                      <strong>Scheduled At:</strong>{' '}
+                      {appt.scheduledAt ? new Date(appt.scheduledAt).toLocaleString() : 'Not scheduled'}
+                    </p>
 
-                  {/* Show Cancel Button only if status is confirmed */}
-                  {appt.status === 'confirmed' && (
-                    <button
-                      onClick={() => handleCancel(appt._id)}
-                      className="action-button"
-                    >
-                      Cancel Appointment
-                    </button>
-                  )}
-                </div>
-              ))}
+                    {/* Show Meet Link only if NOT completed */}
+                    {appt.status !== 'completed' && appt.meetLink && (
+                      <p>
+                        <strong>Meet Link:</strong>{' '}
+                        <a
+                          href={appt.meetLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 underline"
+                        >
+                          Join Meeting
+                        </a>
+                      </p>
+                    )}
+
+                    {/* Show Cancel Button only if status is confirmed */}
+                    {appt.status === 'confirmed' && (
+                      <button
+                        onClick={() => handleCancel(appt._id)}
+                        className="action-button"
+                      >
+                        Cancel Appointment
+                      </button>
+                    )}
+
+                    {/* Show Feedback if status is completed and feedback exists */}
+                    {appt.status === 'completed' && feedback && (
+                      <div className="feedback-section">
+                        <p><strong>Patient Feedback:</strong></p>
+                        <p className="feedback-message">{feedback.message}</p>
+                        <p className="feedback-date">
+                          <small>Received: {new Date(feedback.createdAt).toLocaleString()}</small>
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Show no feedback message if completed but no feedback */}
+                    {appt.status === 'completed' && !feedback && (
+                      <p className="no-feedback-message">No feedback received yet.</p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
         </section>

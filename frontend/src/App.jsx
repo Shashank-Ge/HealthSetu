@@ -13,6 +13,7 @@ import BookAppointment from './components/users/patient/BookAppointment';
 import PatientProfile from './components/users/patient/PatientProfile';
 import DoctorProfile from './components/users/doctor/DoctorProfile';
 import DoctorMeetings from './components/users/doctor/DoctorMeetings';
+import PatientMeetings from './components/users/patient/PatientMeetings';
 import NotFound404 from './components/NotFound404'
 
 function App() {
@@ -56,6 +57,15 @@ function App() {
           element={
             <ProtectedRoute requiredRole="patient">
               <PatientDashboard />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/patient-dashboard/patient-meetings"
+          element={
+            <ProtectedRoute requiredRole="patient">
+              <PatientMeetings />
             </ProtectedRoute>
           }
         />

@@ -52,6 +52,6 @@ router.get('/doctor-dashboard/doctor-meetings',doctorAuthWithApproval,getUpcomin
 router.get('/doctor-profile', doctorAuthWithApproval, getDoctorProfile);
 router.put('/doctor-profile', doctorAuthWithApproval, upload.single('profileImage'), updateDoctorProfile);
 
-router.get('/doctor-dashboard/doctor-feedbacks',doctorAuthWithApproval,getDoctorFeedback);
+router.get('/doctor-dashboard/patient-feedbacks',doctorAuthWithApproval,getDoctorFeedback);
 
 module.exports = router;

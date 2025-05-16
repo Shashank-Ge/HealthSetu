@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const patientProtect = require("../middleware/patientProtect")
 const {loginPatient,registerPatient} = require("../controllers/authControllers/patientAuthController");
-const { getApprovedDoctors, submitFeedback } = require('../controllers/personalizeContorllers/patientControllers');
+const { getApprovedDoctors, submitFeedback, getPatientAppointments, cancelAppointment, getUpcomingAndUpdateAppointments } = require('../controllers/personalizeContorllers/patientControllers');
 const { bookAppointment } = require("../controllers/personalizeContorllers/patientControllers");
 
 const { getPatientProfile, updatePatientProfile } = require('../controllers/profileController/patientProfileController');
@@ -49,6 +49,11 @@ router.get("/patient-dashboard/doctors",patientProtect,getApprovedDoctors)
     console.error(error)
 }
 router.post("/patient-dashboard/bookAppointment",patientProtect,bookAppointment)
+
+// New routes for patient appointments
+router.get("/patient-dashboard/appointments", patientProtect, getPatientAppointments);
+router.post("/patient-dashboard/cancelAppointment", patientProtect, cancelAppointment);
+router.get("/patient-dashboard/patient-meetings", patientProtect, getUpcomingAndUpdateAppointments);
 
 router.get("/patient-profile", patientProtect, getPatientProfile);
 router.put("/patient-profile", patientProtect, upload.single('profileImage'), updatePatientProfile);

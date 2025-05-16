@@ -1,3 +1,4 @@
+// models/Feedback.js
 const mongoose = require('mongoose');
 
 const feedbackSchema = new mongoose.Schema(
@@ -5,6 +6,11 @@ const feedbackSchema = new mongoose.Schema(
     appointment: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Appointment',
+      required: true,
+    },
+    doctor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Doctor',
       required: true,
     },
     message: {

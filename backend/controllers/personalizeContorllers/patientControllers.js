@@ -117,4 +117,120 @@ const submitFeedback = async (req, res) => {
   }
 };
 
-module.exports = { bookAppointment, getApprovedDoctors, submitFeedback };
+// Get all appointments for a patient
+const getPatientAppointments = async (req, res) => {
+  const patientId = req.patient.userId;
+  try {
+    const appointments = await Appointment.find({ patient: patientId })
+      .populate('doctor', 'name email specialization')
+      .sort({ createdAt: -1 });
+    res.status(200).json({ message: 'Appointments fetched successfully.', appointments });
+  } catch (error) {
+    console.error('Error fetching appointments:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Cancel an appointment (patient side)
+const cancelAppointment = async (req, res) => {
+  const { appointmentId, reason } = req.body;
+  const patientId = req.patient.userId;
+
+  if (!appointmentId || !reason) {
+    return res.status(400).json({ message: 'Appointment ID and reason are required' });
+  }
+
+  try {
+    // Find the appointment and populate doctor info
+    const appointment = await Appointment.findOne({ _id: appointmentId, patient: patientId })
+      .populate('doctor', 'name email');
+
+    if (!appointment) {
+      return res.status(404).json({ message: 'Appointment not found or unauthorized' });
+    }
+
+    // Extract doctor email and name
+    const doctorEmail = appointment.doctor.email;
+    const doctorName = appointment.doctor.name;
+    const patient = await Patient.findById(patientId);
+    const patientName = patient?.name || 'Patient';
+
+    console.log(`Patient ${patientId} cancelled appointment ${appointmentId}. Reason: ${reason}`);
+
+    // Send cancellation email to doctor
+    await sendEmail(
+      doctorEmail,
+      `Appointment with ${patientName} has been cancelled`,
+      `<p>Dear Dr. ${doctorName},</p>
+      <p>The appointment with ${patientName} has been <strong>cancelled</strong> by the patient.</p>
+      <p><strong>Reason:</strong> ${reason}</p>`
+    );
+
+    // Delete the appointment
+    await Appointment.findByIdAndDelete(appointmentId);
+
+    return res.status(200).json({ message: 'Appointment cancelled and doctor notified' });
+  } catch (error) {
+    console.error('Error cancelling appointment:', error);
+    return res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Get upcoming and completed appointments with status updates
+const getUpcomingAndUpdateAppointments = async (req, res) => {
+  try {
+    const patientId = req.patient.userId;
+
+    // Get confirmed and completed appointments for this patient
+    let appointments = await Appointment.find({
+      patient: patientId,
+      status: { $in: ['confirmed', 'completed'] },
+    }).populate('doctor', 'name email specialization');
+
+    const now = new Date();
+
+    // Loop through and update statuses if scheduled time has passed
+    const updatePromises = appointments.map(async (appointment) => {
+      if (appointment.status === 'confirmed' && appointment.scheduledAt && appointment.scheduledAt < now) {
+        appointment.status = 'completed';
+        await appointment.save();
+      }
+      return appointment;
+    });
+
+    // Wait for all status updates to complete
+    appointments = await Promise.all(updatePromises);
+
+    // Sort appointments by scheduled date (ascending)
+    appointments.sort((a, b) => new Date(a.scheduledAt) - new Date(b.scheduledAt));
+
+    // For each completed appointment, check if feedback exists
+    const appointmentsWithFeedbackStatus = await Promise.all(
+      appointments.map(async (appointment) => {
+        const apptObj = appointment.toObject();
+        if (appointment.status === 'completed') {
+          const feedback = await Feedback.findOne({ appointment: appointment._id });
+          apptObj.hasFeedback = !!feedback;
+        }
+        return apptObj;
+      })
+    );
+
+    res.status(200).json({
+      message: 'Upcoming and completed appointments fetched successfully.',
+      appointments: appointmentsWithFeedbackStatus,
+    });
+  } catch (error) {
+    console.error('Error in getUpcomingAndUpdateAppointments:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = { 
+  bookAppointment, 
+  getApprovedDoctors, 
+  submitFeedback,
+  getPatientAppointments,
+  cancelAppointment,
+  getUpcomingAndUpdateAppointments
+};

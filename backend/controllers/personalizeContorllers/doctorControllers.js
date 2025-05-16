@@ -157,16 +157,13 @@ const getUpcomingAndUpdateAppointments = async (req, res) => {
 };
 
 const getDoctorFeedback = async (req, res) => {
-  const doctorId = req.doctor._id; // assuming middleware sets this
-
-  console.log("Doctor ID from token:", doctorId);
+  const doctorId = req.doctor._id;
 
   try {
     const feedbacks = await Feedback.find({ doctor: doctorId })
-      .populate('patient', 'name email')
-      .populate('appointment', 'scheduledAt status');
-
-    console.log("Fetched Feedbacks:", feedbacks);
+      .populate('appointment', 'scheduledAt status')
+      .populate('doctor', 'name email')
+      .populate('appointment.patient', 'name email'); // optional
 
     res.status(200).json({ feedbacks });
   } catch (error) {
@@ -174,6 +171,8 @@ const getDoctorFeedback = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+
 
 
 module.exports = { 
