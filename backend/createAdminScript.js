@@ -17,10 +17,10 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 async function createAdmin() {
   try {
-    const hashedPassword = await bcrypt.hash('enter_admin_password_before_running_scripts', 10); //enter_admin_detail
+    const hashedPassword = await bcrypt.hash('admin1', 10); //enter_admin_detail
     const admin = new Admin({
-      name: 'enter_admin_name_before_running_scripts',              //enter_admin_detail
-      email: 'enter_admin_email_before_running_scripts',            //enter_admin_detail
+      name: 'admin1',              //enter_admin_detail
+      email: 'admin1@example.com',            //enter_admin_detail
       password: hashedPassword,              //hashed password stored
     });
 
