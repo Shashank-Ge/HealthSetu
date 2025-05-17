@@ -14,10 +14,15 @@ import PatientProfile from './components/users/patient/PatientProfile';
 import DoctorProfile from './components/users/doctor/DoctorProfile';
 import DoctorMeetings from './components/users/doctor/DoctorMeetings';
 import PatientMeetings from './components/users/patient/PatientMeetings';
-import NotFound404 from './components/NotFound404'
+import NotFound404 from './components/NotFound404';
+import { ThemeProvider } from './components/ThemeContext';
+import ToggleMode from './components/ToggleMode';
 
+ 
 function App() {
   return (
+    <ThemeProvider>
+      <div className="app-container">
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -114,6 +119,9 @@ function App() {
         <Route path='*' element={<NotFound404/>} />
       </Routes>
     </Router>
+    <ToggleMode/>
+    </div>
+    </ThemeProvider>
   );
 }
 
