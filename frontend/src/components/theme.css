@@ -423,3 +423,70 @@ body.dark-mode .logout-button:hover {
     background-color: #42c986;    /* Green background on hover */
     border-color: #42c986;        /* Green border on hover */
 }
+
+/* Add these styles for book appointment cards */
+.book-appointment-card,
+.appointment-details,
+.doctor-info,
+.time-slot-selector,
+.confirmation-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode styles for book appointment section */
+body.dark-mode .book-appointment-card,
+body.dark-mode .appointment-details,
+body.dark-mode .doctor-info,
+body.dark-mode .time-slot-selector,
+body.dark-mode .confirmation-section {
+    background-color: var(--card-bg-dark);
+    border-color: var(--border-color-dark);
+    color: var(--text-primary-dark);
+}
+
+/* Form elements in dark mode */
+body.dark-mode .book-appointment-card input,
+body.dark-mode .book-appointment-card select,
+body.dark-mode .book-appointment-card textarea {
+    background-color: var(--background-secondary-dark);
+    color: var(--text-primary-dark);
+    border-color: var(--border-color-dark);
+}
+
+/* Labels and text in dark mode */
+body.dark-mode .book-appointment-card label,
+body.dark-mode .book-appointment-card h2,
+body.dark-mode .book-appointment-card h3,
+body.dark-mode .book-appointment-card p {
+    color: var(--text-primary-dark);
+}
+
+/* Time slot buttons in dark mode */
+body.dark-mode .time-slot-button {
+    background-color: var(--background-secondary-dark);
+    color: var(--text-primary-dark);
+    border: 1px solid var(--border-color-dark);
+}
+
+body.dark-mode .time-slot-button:hover {
+    background-color: var(--hover-color-dark);
+    color: #ffffff;
+}
+
+body.dark-mode .time-slot-button.selected {
+    background-color: var(--hover-color-dark);
+    color: #ffffff;
+    border-color: var(--hover-color-dark);
+}
+
+/* Success messages in dark mode */
+body.dark-mode .success-message {
+    background-color: rgba(66, 201, 134, 0.2);
+    border-color: var(--hover-color-dark);
+    color: var(--text-primary-dark);
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from './ThemeContext';
+
 import './theme.css';
 
 const ToggleMode = () => {
