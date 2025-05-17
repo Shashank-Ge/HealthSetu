@@ -8,7 +8,6 @@ const DoctorMeetings = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [doctorName] = useState(localStorage.getItem('name') || '');
   const [cancelLoading, setCancelLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -26,7 +25,7 @@ const DoctorMeetings = () => {
       );
       setAppointments(response.data.appointments);
       setLoading(false);
-      
+
       // Fetch feedbacks for all completed appointments
       const feedbacksResponse = await axios.get(
         'http://localhost:8080/api/auth/doctor-dashboard/patient-feedbacks',

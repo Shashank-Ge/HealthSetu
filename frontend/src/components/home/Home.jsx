@@ -16,11 +16,14 @@ function Home() {
           <div className="tagline-container">
             <span className="logo-tagline">Your Health, Our Priority</span>
           </div>
-          <div className="nav-menu">
+          <nav className="nav-menu">
             <Link to="find-doctors" smooth={true} offset={-100} duration={500} className="nav-link">Doctors</Link>
             <Link to="health-tips" smooth={true} offset={-100} duration={500} className="nav-link">Health Tips</Link>
             <Link to="feedback" smooth={true} offset={-100} duration={500} className="nav-link">Feedback</Link>
-          </div>
+            <button className="login-button-mobile" onClick={() => navigate('/loginPatient')}>
+              Login/Signup
+            </button>
+          </nav>
         </div>
       </header>
 
@@ -29,8 +32,8 @@ function Home() {
           <h1 className="hero-title">Welcome to HealthSetu</h1>
           <p className="hero-subtitle">Your one-stop solution for healthcare needs</p>
           <p className="hero-tagline">Book & take appointments from the ease of your home!</p>
-          <button 
-            className="cta-button" 
+          <button
+            className="cta-button"
             onClick={() => navigate('/loginPatient')}
           >
             Login/Signup
@@ -40,7 +43,7 @@ function Home() {
         <section className="features-section" id="find-doctors">
           <h2>Find Doctors</h2>
           <div className="doctor-slider">
-            
+
             <div className="doctor-card">
               <div className="doctor-image">
                 <img src="https://img.freepik.com/free-photo/portrait-male-doctor_23-2148480369.jpg?semt=ais_hybrid&w=740" alt="Dr. Robert Wilson" />
@@ -103,7 +106,7 @@ function Home() {
 
         <section className="health-tips-section" id="health-tips">
           <h2>Health Tips for Better Living</h2>
-          
+
           <div className="tips-container">
             <div className="tips-category">
               <h3>General Wellness Tips</h3>
