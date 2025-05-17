@@ -1,0 +1,492 @@
+:root {
+    /* Light theme variables */
+    --primary-color: #1c3927;
+    --background-primary: #ffffff;
+    --background-secondary: #f8f9fa;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #eee;
+    --card-bg: #ffffff;
+    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --hover-color: #42c986;
+    --button-color: #1a73e8;
+
+    /* Dark theme variables - Updated with navy blue scheme */
+    --primary-color-dark: #1a73e8;          /* Blue for buttons */
+    --background-primary-dark: #156a0f;      /* Navy blue for body */
+    --background-secondary-dark: #000000;    /* Black for header/footer */
+    --text-primary-dark: #ffffff;            /* White text */
+    --text-secondary-dark: #fdfdfd;         /* Light grey text */
+    --border-color-dark: #1a1a3a;           /* Darker navy for borders */
+    --card-bg-dark: #0b0be3;                /* Lighter navy for cards */
+    --card-shadow-dark: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --hover-color-dark: #2196f3;            /* Lighter blue for hover */
+    --container-bg: #f5f8f6;              /* Light whitish-green */
+    --container-bg-dark: #156a0f;         /* Navy blue for dark mode */
+    --card-text-dark: #42c986;            /* Green text color for dark mode cards */
+}
+
+/* General styles */
+body {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    min-height: 100vh;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: var(--background-primary-dark);
+    color: var(--text-primary-dark);
+}
+
+/* Header and Footer styles with fixed z-index */
+header, footer {
+    background-color: var(--background-secondary);
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+    background-color: var(--background-secondary-dark);
+    color: var(--text-primary-dark);
+}
+
+/* Card styles */
+.dashboard-card, 
+.appointment-card {
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .dashboard-card,
+body.dark-mode .appointment-card {
+    background-color: var(--card-bg-dark);
+    box-shadow: var(--card-shadow-dark);
+    border: 1px solid var(--border-color-dark);
+}
+
+/* Theme toggle slider styles */
+.theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color-dark);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Login/Signup page dark mode */
+body.dark-mode .login-container,
+body.dark-mode .signup-container,
+body.dark-mode .auth-form {
+    background-color: var(--background-primary-dark);
+    color: var(--text-primary-dark);
+}
+
+/* Form elements dark mode */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: var(--background-secondary-dark);
+    color: var(--text-primary-dark);
+    border-color: var(--border-color-dark);
+}
+
+/* Button styles */
+.action-button {
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.dark-mode .action-button {
+    background-color: var(--primary-color-dark);
+}
+
+.action-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .action-button:hover {
+    background-color: var(--hover-color-dark);
+}
+
+/* Container backgrounds */
+.container,
+.dashboard-content,
+.doctor-dashboard,
+.patient-dashboard,
+.admin-dashboard,
+main,
+.section,
+.content-wrapper {
+    background-color: var(--container-bg);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .container,
+body.dark-mode .dashboard-content,
+body.dark-mode .doctor-dashboard,
+body.dark-mode .patient-dashboard,
+body.dark-mode .admin-dashboard,
+body.dark-mode main,
+body.dark-mode .section,
+body.dark-mode .content-wrapper {
+    background-color: var(--container-bg-dark);
+}
+
+/* Text styles */
+.logo-tagline {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .logo-tagline {
+    color: var(--text-primary-dark);
+}
+
+.hero-title, 
+.hero-subtitle, 
+.hero-tagline {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .hero-title,
+body.dark-mode .hero-subtitle,
+body.dark-mode .hero-tagline {
+    color: var(--text-primary-dark);
+}
+
+/* Card text in dark mode */
+body.dark-mode .dashboard-card h1,
+body.dark-mode .dashboard-card h2,
+body.dark-mode .dashboard-card h3,
+body.dark-mode .dashboard-card h4,
+body.dark-mode .dashboard-card h5,
+body.dark-mode .dashboard-card h6,
+body.dark-mode .dashboard-card p,
+body.dark-mode .dashboard-card span,
+body.dark-mode .dashboard-card label,
+body.dark-mode .appointment-card h1,
+body.dark-mode .appointment-card h2,
+body.dark-mode .appointment-card h3,
+body.dark-mode .appointment-card h4,
+body.dark-mode .appointment-card h5,
+body.dark-mode .appointment-card h6,
+body.dark-mode .appointment-card p,
+body.dark-mode .appointment-card span,
+body.dark-mode .appointment-card label {
+    color: var(--card-text-dark);
+}
+
+/* Add these additional styles at the end of your file */
+
+/* Navigation styles in dark mode */
+body.dark-mode .nav-menu .nav-link {
+    color: var(--text-primary-dark);
+}
+
+body.dark-mode .nav-menu .nav-link:hover {
+    color: var(--hover-color-dark);
+}
+
+/* Table styles in dark mode */
+body.dark-mode table {
+    background-color: var(--card-bg-dark);
+    color: var(--text-primary-dark);
+    border-color: var(--border-color-dark);
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border-color: var(--border-color-dark);
+}
+
+/* Scrollbar styling for dark mode */
+body.dark-mode::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: var(--background-secondary-dark);
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: var(--border-color-dark);
+    border-radius: 5px;
+}
+
+/* Modal styles in dark mode */
+body.dark-mode .modal-content {
+    background-color: var(--background-primary-dark);
+    color: var(--text-primary-dark);
+    border-color: var(--border-color-dark);
+}
+
+/* Placeholder text color in dark mode */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: var(--text-secondary-dark);
+}
+
+/* Focus styles for form elements in dark mode */
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    border-color: var(--hover-color-dark);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
+}
+
+/* Error messages in dark mode */
+body.dark-mode .error-message {
+    color: #ff6b6b;
+}
+
+/* Success messages in dark mode */
+body.dark-mode .success-message {
+    color: #51cf66;
+}
+
+/* Theme toggle container with label */
+.theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 80px; 
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-toggle-label {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+body.dark-mode .theme-toggle-label {
+    color: var(--text-primary-dark);
+}
+
+/* Login/Signup page styles */
+.login-container,
+.signup-container,
+.auth-form {
+    background-color: var(--container-bg) !important;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .login-container,
+body.dark-mode .signup-container,
+body.dark-mode .auth-form {
+    background-color: var(--container-bg-dark) !important;
+}
+
+/* Fix greyish text in dark mode */
+body.dark-mode .nav-menu .nav-link,
+body.dark-mode .header-content,
+body.dark-mode .footer-content,
+body.dark-mode .dashboard-header,
+body.dark-mode .profile-details,
+body.dark-mode .appointment-details,
+body.dark-mode .meeting-details,
+body.dark-mode .admin-panel {
+    color: #ffffff !important;  /* Force white text */
+}
+
+/* Ensure header elements are properly spaced */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Ensure logout button doesn't get overlapped */
+.logout-button {
+    margin-right: 100px;  /* Add space for theme toggle */
+}
+
+.theme-toggle-container {
+    position: static;  /* Change from fixed to static */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 15px;
+}
+
+
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: 10px;
+    }
+
+    .theme-toggle-container {
+        margin: 0 10px;
+    }
+
+    .header-content {
+        padding: 0 15px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+}
+
+* {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Dark mode styles for headers and dashboards */
+body.dark-mode .header button,
+body.dark-mode .nav-item,
+body.dark-mode .logout-button {
+    color: #ffffff !important;    
+    border-color: #ffffff;        
+}
+
+body.dark-mode .welcome-section h1,
+body.dark-mode .welcome-section p,
+body.dark-mode .dashboard-content h1,
+body.dark-mode .dashboard-content h2,
+body.dark-mode .dashboard-content p,
+body.dark-mode .appointments-section h2,
+body.dark-mode .profile-section h2 {
+    color: #ffffff !important;    /* Keep text white */
+}
+
+body.dark-mode .header button:hover,
+body.dark-mode .nav-item:hover,
+body.dark-mode .logout-button:hover {
+    color: #ffffff !important;
+    background-color: #42c986;    /* Green background on hover */
+    border-color: #42c986;        /* Green border on hover */
+}
+
+/* Add these styles for book appointment cards */
+.book-appointment-card,
+.appointment-details,
+.doctor-info,
+.time-slot-selector,
+.confirmation-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode styles for book appointment section */
+body.dark-mode .book-appointment-card,
+body.dark-mode .appointment-details,
+body.dark-mode .doctor-info,
+body.dark-mode .time-slot-selector,
+body.dark-mode .confirmation-section {
+    background-color: var(--card-bg-dark);
+    border-color: var(--border-color-dark);
+    color: var(--text-primary-dark);
+}
+
+/* Form elements in dark mode */
+body.dark-mode .book-appointment-card input,
+body.dark-mode .book-appointment-card select,
+body.dark-mode .book-appointment-card textarea {
+    background-color: var(--background-secondary-dark);
+    color: var(--text-primary-dark);
+    border-color: var(--border-color-dark);
+}
+
+/* Labels and text in dark mode */
+body.dark-mode .book-appointment-card label,
+body.dark-mode .book-appointment-card h2,
+body.dark-mode .book-appointment-card h3,
+body.dark-mode .book-appointment-card p {
+    color: var(--text-primary-dark);
+}
+
+/* Time slot buttons in dark mode */
+body.dark-mode .time-slot-button {
+    background-color: var(--background-secondary-dark);
+    color: var(--text-primary-dark);
+    border: 1px solid var(--border-color-dark);
+}
+
+body.dark-mode .time-slot-button:hover {
+    background-color: var(--hover-color-dark);
+    color: #ffffff;
+}
+
+body.dark-mode .time-slot-button.selected {
+    background-color: var(--hover-color-dark);
+    color: #ffffff;
+    border-color: var(--hover-color-dark);
+}
+
+/* Success messages in dark mode */
+body.dark-mode .success-message {
+    background-color: rgba(66, 201, 134, 0.2);
+    border-color: var(--hover-color-dark);
+    color: var(--text-primary-dark);
+}
