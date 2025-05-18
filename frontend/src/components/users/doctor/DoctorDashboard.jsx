@@ -7,7 +7,7 @@ function DoctorDashboard() {
   const navigate = useNavigate();
   const [doctorName] = useState(localStorage.getItem('name') || '');
   const [appointments, setAppointments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [Loading, setLoading] = useState(true);
   const [scheduleLoading, setScheduleLoading] = useState({});
   const [cancelLoading, setCancelLoading] = useState(false);
 

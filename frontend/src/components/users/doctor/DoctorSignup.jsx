@@ -64,15 +64,20 @@ function DoctorSignup() {
 
   return (
     <div className="auth-container">
+      {/* Responsive Header */}
+      <header className="auth-header">
+        <div className="logo" onClick={() => navigate('/')}>
+          HealthSetu
+        </div>
+        <nav className="auth-nav">
+          <button onClick={() => navigate('/loginDoctor')}>Login</button>
+          <button onClick={() => navigate('/signupPatient')}>Signup as Patient</button>
+        </nav>
+      </header>
+
+      {/* Signup Form */}
       <div className="auth-form-container">
         <h2>Doctor Registration</h2>
-        
-        <button 
-          className="switch-role-btn"
-          onClick={() => navigate('/signupPatient')}
-        >
-          Not a Doctor? Signup Patient here
-        </button>
         
         {error && <div className="error-message">{error}</div>}
         

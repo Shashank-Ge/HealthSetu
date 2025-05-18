@@ -14,7 +14,7 @@ function Home() {
             <h1 className="logo-text">HealthSetu</h1>
           </div>
           <div className="tagline-container">
-            <span className="logo-tagline">Your Health, Our Priority</span>
+            <span className="logo-tagline" >Your Health, Our Priority</span>
           </div>
           <div className="nav-menu">
             <Link to="find-doctors" smooth={true} offset={-100} duration={500} className="nav-link">Doctors</Link>
@@ -26,8 +26,8 @@ function Home() {
 
       <main className="home-content">
         <section className="hero-section">
-          <h1 className="hero-title">Welcome to HealthSetu</h1>
-          <p className="hero-subtitle">Your one-stop solution for healthcare needs</p>
+          <h1 className="hero-title" >Welcome to HealthSetu</h1>
+          <p className="hero-subtitle" >Your one-stop solution for healthcare needs</p>
           <p className="hero-tagline">Book & take appointments from the ease of your home!</p>
           <button 
             className="cta-button" 
