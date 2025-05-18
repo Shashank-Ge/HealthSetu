@@ -1,13 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-scroll';
+import ToggleMode from '../ToggleMode';
 import './Home.css';
 
 function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="home-container">
+    <div className="home-container" style={{padding:0}}>
       <header className="main-header">
         <div className="header-content">
           <div className="logo-container">
@@ -21,6 +22,9 @@ function Home() {
             <Link to="health-tips" smooth={true} offset={-100} duration={500} className="nav-link">Health Tips</Link>
             <Link to="feedback" smooth={true} offset={-100} duration={500} className="nav-link">Feedback</Link>
           </div>
+        </div>
+        <div className="theme-toggle-wrapper">
+          <ToggleMode />
         </div>
       </header>
 

@@ -7,15 +7,13 @@ const ToggleMode = () => {
   const { darkMode, toggleTheme } = useTheme();
 
   return (
-    <div className="theme-toggle-container">
-      <span className="theme-toggle-label">
-        {darkMode ? 'Light Mode' : 'Dark Mode'}
-      </span>
+    <div className="theme-toggle-container nav-toggle">
       <label className="switch">
         <input 
           type="checkbox" 
           checked={darkMode} 
           onChange={toggleTheme} 
+          aria-label="Toggle dark mode"
         />
         <span className="slider round"></span>
       </label>

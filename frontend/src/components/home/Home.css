@@ -28,9 +28,10 @@
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 2rem;
+  position: relative;
 }
 
 .logo-container {
@@ -43,6 +44,14 @@
   font-weight: bold;
   color: #10B981; /* Changed from white to the green color used in hover state */
   margin: 0;
+}
+
+body.dark-mode .tips-list li{
+  background: #1e1e1e;
+}
+
+body.dark-mode .feedback-section{
+  background: #1e1e1e;
 }
 
 .logo-tagline {
@@ -77,8 +86,12 @@
   padding-top: 100px; /* Adjust this value based on your header height */
 }
 
-
-.features-section {
+/* DARK MODE: Apply .home-content styles to .home-container */
+.dark-mode .home-container {
+    padding-top: 100px;
+  }
+  
+  .features-section {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
@@ -501,4 +514,123 @@
 
 .reviews-container::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.theme-toggle-wrapper {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  z-index: 1010;
+}
+
+/* Dark mode styles for headings in Home component */
+body.dark-mode .home-container h1,
+body.dark-mode .home-container h2,
+body.dark-mode .home-container h3,
+body.dark-mode .home-container h4,
+body.dark-mode .home-container h5,
+body.dark-mode .home-container h6 {
+  color: #4285f4; /* Google blue from theme variables */
+}
+
+body.dark-mode .doctor-card h3 {
+  color: #4285f4;
+}
+
+body.dark-mode .tips-list h4,
+body.dark-mode .tip-card h4,
+body.dark-mode .reviewer-info h4 {
+  color: #4285f4;
+}
+
+body.dark-mode .logo-text {
+  color: #4285f4;
+}
+
+body.dark-mode .nav-link {
+  color: #4285f4;
+}
+
+body.dark-mode .nav-link:hover {
+  color: #5c9eff;
+}
+
+body.dark-mode .hero-title {
+  color: #ffffff;
+}
+
+body.dark-mode .hero-subtitle,
+body.dark-mode .hero-tagline {
+  color: #b0b0b0;
+}
+
+/* Dark mode styles for Home component background and sections */
+body.dark-mode .home-container {
+  background-color: #121212;
+}
+
+body.dark-mode .main-header {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode styles for doctor cards */
+body.dark-mode .doctor-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333333;
+}
+
+body.dark-mode .doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .doctor-card .specialization {
+  color: #b0b0b0;
+}
+
+body.dark-mode .doctor-card .experience {
+  color: #888888;
+}
+
+/* Dark mode styles for testimonial cards */
+body.dark-mode .review-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333333;
+}
+
+body.dark-mode .review-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .review-text {
+  color: #b0b0b0;
+}
+
+/* Dark mode styles for health tips */
+body.dark-mode .tip-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333333;
+}
+
+body.dark-mode .tips-list li p {
+  color: #b0b0b0;
+}
+
+body.dark-mode .tip-card ul li {
+  color: #b0b0b0;
+}
+
+/* Dark mode style for CTA button */
+body.dark-mode .cta-button {
+  background-color: #4285f4;
+  box-shadow: 0 4px 6px rgba(66, 133, 244, 0.3);
+}
+
+body.dark-mode .cta-button:hover {
+  background-color: #5c9eff;
+  box-shadow: 0 6px 8px rgba(66, 133, 244, 0.4);
 }

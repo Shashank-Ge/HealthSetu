@@ -7,7 +7,7 @@
     padding: 1rem 2rem;
     background-color: var(--background-primary);
     border-bottom: 1px solid var(--border-color);
-    z-index: 100;
+    z-index: 1000;
 }
 
 .logo {
@@ -40,7 +40,8 @@
 .theme-toggle-wrapper {
     display: flex;
     align-items: center;
-    margin: 0 1rem;
+    margin-right: 1rem;
+    order: 1;
 }
 
 .logout-button {

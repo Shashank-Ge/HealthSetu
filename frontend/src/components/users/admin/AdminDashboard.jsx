@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate , Link } from 'react-router-dom';
 import axios from 'axios';
+import ToggleMode from '../../ToggleMode';
 import './AdminDashboard.css';
 
 function AdminDashboard() {
@@ -79,8 +80,10 @@ function AdminDashboard() {
       <header className="dashboard-header">
         <Link to="/" className="logo-link">
           <div className="logo">HealthSetu</div>
-        </Link>        <nav className="nav-menu">
+        </Link>        
+        <nav className="nav-menu">
           <button onClick={handleLogout}>Logout</button>
+          <ToggleMode />
         </nav>
       </header>
 

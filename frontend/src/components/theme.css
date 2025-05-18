@@ -11,19 +11,24 @@
     --hover-color: #42c986;
     --button-color: #1a73e8;
 
-    /* Dark theme variables - Updated with navy blue scheme */
-    --primary-color-dark: #1a73e8;          /* Blue for buttons */
-    --background-primary-dark: #156a0f;      /* Navy blue for body */
-    --background-secondary-dark: #000000;    /* Black for header/footer */
-    --text-primary-dark: #ffffff;            /* White text */
-    --text-secondary-dark: #fdfdfd;         /* Light grey text */
-    --border-color-dark: #1a1a3a;           /* Darker navy for borders */
-    --card-bg-dark: #0b0be3;                /* Lighter navy for cards */
+    /* Dark theme variables - Updated with a cohesive dark scheme */
+    --primary-color-dark: #4285f4;            /* Google blue for primary elements */
+    --background-primary-dark: #121212;        /* Dark grey almost black for body */
+    --background-secondary-dark: #1e1e1e;      /* Slightly lighter dark for header/footer */
+    --text-primary-dark: #ffffff;              /* White text */
+    --text-secondary-dark: #b0b0b0;            /* Light grey text */
+    --border-color-dark: #333333;              /* Dark grey for borders */
+    --card-bg-dark: #1e1e1e;                   /* Slightly lighter dark for cards */
     --card-shadow-dark: 0 4px 8px rgba(0, 0, 0, 0.4);
-    --hover-color-dark: #2196f3;            /* Lighter blue for hover */
-    --container-bg: #f5f8f6;              /* Light whitish-green */
-    --container-bg-dark: #156a0f;         /* Navy blue for dark mode */
-    --card-text-dark: #42c986;            /* Green text color for dark mode cards */
+    --hover-color-dark: #5c9eff;               /* Lighter blue for hover */
+    --container-bg: #f5f8f6;                   /* Light whitish-green */
+    --container-bg-dark: #121212;              /* Dark grey for containers */
+    --card-text-dark: #e0e0e0;                 /* Light grey text for dark mode cards */
+    
+    /* Accent colors for dark mode */
+    --accent-color-dark: #34a853;              /* Google green for accents */
+    --warning-color-dark: #fbbc05;             /* Google yellow for warnings */
+    --error-color-dark: #ea4335;               /* Google red for errors */
 }
 
 /* General styles */
@@ -32,6 +37,8 @@ body {
     color: var(--text-primary);
     transition: all 0.3s ease;
     min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
 }
 
 /* Dark mode styles */
@@ -69,21 +76,51 @@ body.dark-mode .appointment-card {
     background-color: var(--card-bg-dark);
     box-shadow: var(--card-shadow-dark);
     border: 1px solid var(--border-color-dark);
+    color: var(--card-text-dark);
+}
+
+body.dark-mode .dashboard-card:hover,
+body.dark-mode .appointment-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
 }
 
 /* Theme toggle slider styles */
 .theme-toggle-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 8px 12px;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    margin-left: 0;
+    margin-right: 10px;
+    z-index: 1000;
+}
+
+body.dark-mode .theme-toggle-container {
+    background-color: rgba(30, 30, 30, 0.8);
+}
+
+.theme-toggle-label {
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .theme-toggle-label {
+    color: var(--text-primary-dark);
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 52px;
+    height: 26px;
 }
 
 .switch input {
@@ -107,13 +144,16 @@ body.dark-mode .appointment-card {
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
     background-color: white;
     transition: .4s;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 input:checked + .slider {
@@ -122,6 +162,22 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(26px);
+    background-color: #fff;
+}
+
+/* Add sun and moon icons for light and dark mode */
+.slider:before {
+    content: "☀️";
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fbbc05;
+}
+
+input:checked + .slider:before {
+    content: "🌙";
+    color: #f1c40f;
 }
 
 /* Login/Signup page dark mode */
@@ -136,9 +192,25 @@ body.dark-mode .auth-form {
 body.dark-mode input,
 body.dark-mode textarea,
 body.dark-mode select {
-    background-color: var(--background-secondary-dark);
+    background-color: rgba(30, 30, 30, 0.8);
     color: var(--text-primary-dark);
-    border-color: var(--border-color-dark);
+    border: 1px solid var(--border-color-dark);
+    border-radius: 6px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+    outline: none;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: rgba(176, 176, 176, 0.6);
 }
 
 /* Button styles */
@@ -150,19 +222,24 @@ body.dark-mode select {
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 body.dark-mode .action-button {
     background-color: var(--primary-color-dark);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .action-button:hover {
     background-color: var(--hover-color);
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 body.dark-mode .action-button:hover {
     background-color: var(--hover-color-dark);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Container backgrounds */
@@ -171,11 +248,15 @@ body.dark-mode .action-button:hover {
 .doctor-dashboard,
 .patient-dashboard,
 .admin-dashboard,
+.home-content,
 main,
 .section,
 .content-wrapper {
     background-color: var(--container-bg);
     transition: all 0.3s ease;
+    padding: 20px;
+    border-radius: 0;
+    margin-bottom: 0;
 }
 
 body.dark-mode .container,
@@ -183,33 +264,48 @@ body.dark-mode .dashboard-content,
 body.dark-mode .doctor-dashboard,
 body.dark-mode .patient-dashboard,
 body.dark-mode .admin-dashboard,
+body.dark-mode .home-content,
 body.dark-mode main,
 body.dark-mode .section,
 body.dark-mode .content-wrapper {
     background-color: var(--container-bg-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Text styles */
-.logo-tagline {
+h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
+    margin-bottom: 16px;
+    line-height: 1.3;
     transition: color 0.3s ease;
 }
 
-body.dark-mode .logo-tagline {
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
     color: var(--text-primary-dark);
 }
 
-.hero-title, 
-.hero-subtitle, 
-.hero-tagline {
-    color: var(--text-primary);
+/* Link styles */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
-body.dark-mode .hero-title,
-body.dark-mode .hero-subtitle,
-body.dark-mode .hero-tagline {
-    color: var(--text-primary-dark);
+a:hover {
+    color: var(--hover-color);
+}
+
+body.dark-mode a {
+    color: var(--primary-color-dark);
+}
+
+body.dark-mode a:hover {
+    color: var(--hover-color-dark);
 }
 
 /* Card text in dark mode */
@@ -232,6 +328,52 @@ body.dark-mode .appointment-card p,
 body.dark-mode .appointment-card span,
 body.dark-mode .appointment-card label {
     color: var(--card-text-dark);
+}
+
+/* Enhanced styling for error-message in dark mode */
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 3px solid #e74c3c;
+}
+
+body.dark-mode .error-message {
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-left: 3px solid #ff6b6b;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.15);
+}
+
+/* Enhanced success message styling */
+.success-message {
+    color: #2ecc71;
+    font-size: 14px;
+    margin-top: 5px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: rgba(46, 204, 113, 0.1);
+    border-left: 3px solid #2ecc71;
+}
+
+body.dark-mode .success-message {
+    color: #5cff9d;
+    background-color: rgba(92, 255, 157, 0.1);
+    border-left: 3px solid #5cff9d;
+    box-shadow: 0 2px 8px rgba(92, 255, 157, 0.15);
+}
+
+.warning-message {
+    color: #f39c12;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+body.dark-mode .warning-message {
+    color: var(--warning-color-dark);
 }
 
 /* Add these additional styles at the end of your file */
@@ -259,16 +401,21 @@ body.dark-mode td {
 
 /* Scrollbar styling for dark mode */
 body.dark-mode::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
+    height: 8px;
 }
 
 body.dark-mode::-webkit-scrollbar-track {
-    background: var(--background-secondary-dark);
+    background: var(--background-primary-dark);
 }
 
 body.dark-mode::-webkit-scrollbar-thumb {
     background: var(--border-color-dark);
-    border-radius: 5px;
+    border-radius: 4px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color-dark);
 }
 
 /* Modal styles in dark mode */
@@ -278,56 +425,12 @@ body.dark-mode .modal-content {
     border-color: var(--border-color-dark);
 }
 
-/* Placeholder text color in dark mode */
-body.dark-mode input::placeholder,
-body.dark-mode textarea::placeholder {
-    color: var(--text-secondary-dark);
-}
-
-/* Focus styles for form elements in dark mode */
-body.dark-mode input:focus,
-body.dark-mode textarea:focus,
-body.dark-mode select:focus {
-    border-color: var(--hover-color-dark);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
-}
-
-/* Error messages in dark mode */
-body.dark-mode .error-message {
-    color: #ff6b6b;
-}
-
-/* Success messages in dark mode */
-body.dark-mode .success-message {
-    color: #51cf66;
-}
-
-/* Theme toggle container with label */
-.theme-toggle-container {
-    position: fixed;
-    top: 20px;
-    right: 80px; 
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.theme-toggle-label {
-    color: var(--text-primary);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-body.dark-mode .theme-toggle-label {
-    color: var(--text-primary-dark);
-}
-
 /* Login/Signup page styles */
 .login-container,
 .signup-container,
-.auth-form {
+.auth-form,
+#container,
+.auth-container {
     background-color: var(--container-bg) !important;
     min-height: 100vh;
     transition: all 0.3s ease;
@@ -335,8 +438,63 @@ body.dark-mode .theme-toggle-label {
 
 body.dark-mode .login-container,
 body.dark-mode .signup-container,
-body.dark-mode .auth-form {
+body.dark-mode .auth-form,
+body.dark-mode #container,
+body.dark-mode .auth-container {
     background-color: var(--container-bg-dark) !important;
+    color: var(--text-primary-dark) !important;
+}
+
+body.dark-mode #container h1,
+body.dark-mode #container h2,
+body.dark-mode #container h3,
+body.dark-mode #container p,
+body.dark-mode #container label,
+body.dark-mode #container span,
+body.dark-mode .auth-container h1,
+body.dark-mode .auth-container h2,
+body.dark-mode .auth-container h3,
+body.dark-mode .auth-container p,
+body.dark-mode .auth-container label,
+body.dark-mode .auth-container span {
+    color: var(--text-primary-dark) !important;
+}
+
+body.dark-mode #container input,
+body.dark-mode #container textarea,
+body.dark-mode #container select,
+body.dark-mode .auth-container input,
+body.dark-mode .auth-container textarea,
+body.dark-mode .auth-container select {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: var(--text-primary-dark);
+    border: 1px solid var(--border-color-dark);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #container input:focus,
+body.dark-mode #container textarea:focus,
+body.dark-mode #container select:focus,
+body.dark-mode .auth-container input:focus,
+body.dark-mode .auth-container textarea:focus,
+body.dark-mode .auth-container select:focus {
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+    outline: none;
+}
+
+body.dark-mode #container button,
+body.dark-mode .auth-container button {
+    background-color: var(--primary-color-dark);
+    color: white;
+    border-color: var(--border-color-dark);
+}
+
+body.dark-mode #container button:hover,
+body.dark-mode .auth-container button:hover {
+    background-color: var(--hover-color-dark);
+    border-color: var(--hover-color-dark);
 }
 
 /* Fix greyish text in dark mode */
@@ -365,13 +523,16 @@ body.dark-mode .admin-panel {
 }
 
 .theme-toggle-container {
-    position: static;  /* Change from fixed to static */
     display: flex;
     align-items: center;
     gap: 10px;
     margin: 0 15px;
 }
 
+/* Fix for headers */
+header .theme-toggle-container {
+    position: static;
+}
 
 @media (max-width: 768px) {
     .nav-menu {
@@ -379,7 +540,28 @@ body.dark-mode .admin-panel {
     }
 
     .theme-toggle-container {
-        margin: 0 10px;
+        top: 10px;
+        right: 10px;
+        padding: 6px 10px;
+    }
+
+    .theme-toggle-label {
+        font-size: 12px;
+    }
+    
+    .switch {
+        width: 44px;
+        height: 22px;
+    }
+    
+    .slider:before {
+        height: 16px;
+        width: 16px;
+        font-size: 12px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(22px);
     }
 
     .header-content {
@@ -388,6 +570,17 @@ body.dark-mode .admin-panel {
 
     .logo {
         font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle-container {
+        top: 8px;
+        right: 8px;
+    }
+    
+    .theme-toggle-label {
+        display: none; /* Hide the label on very small screens */
     }
 }
 
@@ -493,14 +686,14 @@ body.dark-mode .success-message {
 
 
 /* General Styles for Responsiveness */
-body, .home-container {
+body, .home-container, .home-content {
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Prevent horizontal scrolling */
-  }
-  
+}
+
 /* Responsive Header */
- @media (max-width: 768px) {
+@media (max-width: 768px) {
     .header-content {
       grid-template-columns: 1fr; /* Stack the header content */
       text-align: center;
@@ -527,10 +720,10 @@ body, .home-container {
     .mobile-menu-button {
       display: none; /* Hide the mobile menu button if not needed */
     }
-  }
-  
-  /* Hero Section Adjustments */
-  @media (max-width: 768px) {
+}
+
+/* Hero Section Adjustments */
+@media (max-width: 768px) {
     .hero-section {
       padding: 2rem 1rem;
     }
@@ -547,9 +740,9 @@ body, .home-container {
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .hero-title {
       font-size: 1.8rem;
     }
@@ -557,10 +750,10 @@ body, .home-container {
     .hero-subtitle {
       font-size: 0.9rem;
     }
-  }
-  
-  /* Doctor Slider Adjustments */
-  @media (max-width: 768px) {
+}
+
+/* Doctor Slider Adjustments */
+@media (max-width: 768px) {
     .doctor-slider {
       gap: 1rem;
       padding: 1rem 0;
@@ -582,10 +775,10 @@ body, .home-container {
     .doctor-card p {
       font-size: 0.8rem;
     }
-  }
-  
-  /* Health Tips Section */
-  @media (max-width: 768px) {
+}
+
+/* Health Tips Section */
+@media (max-width: 768px) {
     .health-tips-section {
       padding: 1rem;
     }
@@ -598,10 +791,10 @@ body, .home-container {
     .tips-list li {
       padding: 0.8rem;
     }
-  }
-  
-  /* Feedback Section */
-  @media (max-width: 768px) {
+}
+
+/* Feedback Section */
+@media (max-width: 768px) {
     .reviews-container {
       gap: 1rem;
       padding: 1rem 0;
@@ -623,10 +816,10 @@ body, .home-container {
     .review-text {
       font-size: 0.9rem;
     }
-  }
-  
-  /* Footer Adjustments */
-  @media (max-width: 768px) {
+}
+
+/* Footer Adjustments */
+@media (max-width: 768px) {
     .footer-content {
       grid-template-columns: 1fr;
       text-align: center;
@@ -639,4 +832,576 @@ body, .home-container {
     .social-links {
       justify-content: center;
     }
+}
+
+/* Improve responsiveness of cards in dark mode */
+@media (max-width: 768px) {
+    body.dark-mode .dashboard-card,
+    body.dark-mode .appointment-card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    body.dark-mode .card-title {
+        font-size: 18px;
+    }
+    
+    body.dark-mode .card-text {
+        font-size: 14px;
+    }
+    
+    body.dark-mode .action-button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+/* Ensure proper spacing for dark mode containers on mobile */
+@media (max-width: 768px) {
+    body.dark-mode .container,
+    body.dark-mode .dashboard-content,
+    body.dark-mode .doctor-dashboard,
+    body.dark-mode .patient-dashboard,
+    body.dark-mode .admin-dashboard {
+        padding: 10px;
+    }
+}
+
+body.dark-mode #container input,
+body.dark-mode #container textarea,
+body.dark-mode #container select {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: var(--text-primary-dark);
+    border: 1px solid var(--border-color-dark);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #container input:focus,
+body.dark-mode #container textarea:focus,
+body.dark-mode #container select:focus {
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+    outline: none;
+}
+
+body.dark-mode #container button {
+    background-color: var(--primary-color-dark);
+    color: white;
+    border-color: var(--border-color-dark);
+}
+
+body.dark-mode #container button:hover {
+    background-color: var(--hover-color-dark);
+    border-color: var(--hover-color-dark);
+}
+
+/* Enhanced styling for auth-form-container */
+.auth-form-container {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .auth-form-container {
+    background-color: rgba(40, 40, 50, 0.95);
+    border: 1px solid var(--primary-color-dark);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 
+                0 0 40px rgba(66, 133, 244, 0.1);
+    color: var(--text-primary-dark);
+}
+
+body.dark-mode .auth-form-container h1,
+body.dark-mode .auth-form-container h2 {
+    color: var(--primary-color-dark) !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+body.dark-mode .auth-form-container input,
+body.dark-mode .auth-form-container textarea,
+body.dark-mode .auth-form-container select {
+    background-color: rgba(25, 25, 35, 0.8);
+    border: 1px solid var(--border-color-dark);
+    color: var(--text-primary-dark);
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+body.dark-mode .auth-form-container input:focus,
+body.dark-mode .auth-form-container textarea:focus,
+body.dark-mode .auth-form-container select:focus {
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.25);
+    outline: none;
+}
+
+body.dark-mode .auth-form-container button {
+    background: linear-gradient(135deg, var(--primary-color-dark), #2b65d3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 600;
+    margin-top: 1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .auth-form-container button:hover {
+    background: linear-gradient(135deg, #3b78e7, #1a56c4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .auth-form-container label {
+    color: #a4cdf4 !important;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+body.dark-mode .auth-form-container a {
+    color: var(--primary-color-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .auth-form-container a:hover {
+    color: var(--hover-color-dark);
+    text-decoration: underline;
+}
+
+/* Enhanced styling for specialization-card in dark mode */
+.specialization-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.specialization-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .specialization-card {
+    background: linear-gradient(145deg, rgba(40, 40, 50, 0.95), rgba(30, 30, 40, 0.95));
+    border: 1px solid rgba(66, 133, 244, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .specialization-card:hover {
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 
+               0 0 15px rgba(66, 133, 244, 0.2);
+    transform: translateY(-5px);
+}
+
+body.dark-mode .specialization-card h3 {
+    color: var(--primary-color-dark) !important;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+body.dark-mode .specialization-card p {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .specialization-card img,
+body.dark-mode .specialization-card svg {
+    filter: drop-shadow(0 0 8px rgba(66, 133, 244, 0.3));
+}
+
+/* Cool header navbar buttons in dark mode */
+body.dark-mode header .nav-button,
+body.dark-mode header .nav-link,
+body.dark-mode header button,
+body.dark-mode .navbar-nav .nav-link,
+body.dark-mode .navbar .btn {
+    background-color: rgba(40, 40, 50, 0.4);
+    color: #ffffff !important;
+    border: 1px solid rgba(66, 133, 244, 0.2);
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    backdrop-filter: blur(5px);
+}
+
+body.dark-mode header .nav-button:hover,
+body.dark-mode header .nav-link:hover,
+body.dark-mode header button:hover,
+body.dark-mode .navbar-nav .nav-link:hover,
+body.dark-mode .navbar .btn:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--hover-color-dark);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 
+                0 0 5px rgba(66, 133, 244, 0.3);
+}
+
+body.dark-mode header .active,
+body.dark-mode .navbar-nav .nav-link.active,
+body.dark-mode .navbar .btn.active {
+    background-color: var(--primary-color-dark);
+    color: white !important;
+    border-color: var(--hover-color-dark);
+}
+
+/* Dark mode styling for 404 page */
+.not-found-container,
+.error-container,
+.page-not-found {
+    background-color: var(--container-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .not-found-container,
+body.dark-mode .error-container,
+body.dark-mode .page-not-found {
+    background-color: var(--background-primary-dark);
+    color: var(--text-primary-dark);
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1;
+    background: linear-gradient(45deg, #42c986, #1a73e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .error-code {
+    background: linear-gradient(45deg, #5c9eff, #4285f4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 15px rgba(66, 133, 244, 0.3);
+}
+
+.error-message-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+body.dark-mode .error-message-title {
+    color: var(--text-primary-dark);
+}
+
+.error-message-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+body.dark-mode .error-message-text {
+    color: var(--text-secondary-dark);
+}
+
+.back-home-button {
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-home-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .back-home-button {
+    background-color: var(--primary-color-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .back-home-button:hover {
+    background-color: var(--hover-color-dark);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(66, 133, 244, 0.2);
+}
+
+.error-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+body.dark-mode .error-image {
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3)) 
+            brightness(0.9) contrast(1.1);
+}
+
+/* Media queries for responsive 404 page */
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 6rem;
+    }
+    
+    .error-message-title {
+        font-size: 1.5rem;
+    }
+    
+    .error-message-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-code {
+        font-size: 4rem;
+    }
+    
+    .error-message-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Ensure proper spacing for dark mode containers on mobile */
+@media (max-width: 768px) {
+    body.dark-mode .container,
+    body.dark-mode .dashboard-content,
+    body.dark-mode .doctor-dashboard,
+    body.dark-mode .patient-dashboard,
+    body.dark-mode .admin-dashboard {
+        padding: 10px;
+    }
+}
+
+/* Add specific styling for not-found-content class */
+.not-found-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: var(--card-bg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .not-found-content {
+    background-color: #1a1a2e;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid #4285f4;
+    color: #e0e0e0;
+}
+
+body.dark-mode .not-found-content h1,
+body.dark-mode .not-found-content h2,
+body.dark-mode .not-found-content h3 {
+    color: #5c9eff !important;
+    text-shadow: 0 0 10px rgba(92, 158, 255, 0.2);
+}
+
+body.dark-mode .not-found-content p {
+    color: #d0d0d0;
+}
+
+body.dark-mode .not-found-content a {
+    color: #5c9eff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .not-found-content a:hover {
+    color: #80b4ff;
+    text-decoration: underline;
+}
+
+/* Media queries for responsive 404 page */
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 6rem;
+    }
+    
+    .error-message-title {
+        font-size: 1.5rem;
+    }
+    
+    .error-message-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-code {
+        font-size: 4rem;
+    }
+    
+    .error-message-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Ensure proper spacing for dark mode containers on mobile */
+@media (max-width: 768px) {
+    body.dark-mode .container,
+    body.dark-mode .dashboard-content,
+    body.dark-mode .doctor-dashboard,
+    body.dark-mode .patient-dashboard,
+    body.dark-mode .admin-dashboard {
+        padding: 10px;
+    }
+}
+
+/* Enhanced styling for home-button */
+.home-button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .home-button {
+    background: linear-gradient(135deg, #4285f4, #2b65d3);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 
+                0 0 5px rgba(66, 133, 244, 0.2);
+    letter-spacing: 0.5px;
+}
+
+body.dark-mode .home-button:hover {
+    background: linear-gradient(135deg, #5c9eff, #3b78e7);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(92, 158, 255, 0.3);
+}
+
+body.dark-mode .home-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add theme toggle to all headers */
+header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: 20px;
+    z-index: 100;
+}
+
+/* Ensure theme toggle appears in all headers */
+header .theme-toggle-container {
+    display: flex !important;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    
+    .theme-toggle-container {
+        margin: 10px 0;
+        order: 2;
+    }
+}
+
+/* Style for toggle button when it's in the navigation menu */
+.nav-toggle {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 0 0 0 10px;
+}
+
+body.dark-mode .nav-toggle {
+  background-color: transparent;
+}
+
+.nav-menu .theme-toggle-container {
+  margin: 0;
+  padding: 0;
+}
+
+/* Make the toggle button smaller in navigation */
+.nav-toggle .switch {
+  width: 42px;
+  height: 22px;
+}
+
+.nav-toggle .slider:before {
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  font-size: 12px;
+}
+
+.nav-toggle input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Responsive styling for toggle in navigation */
+@media (max-width: 768px) {
+  .nav-toggle {
+    margin: 10px auto;
   }
+}
