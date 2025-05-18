@@ -82,15 +82,18 @@ function PatientDashboard() {
           <p>Your journey to better health starts here</p>
         </section>
 
-        <section className="search-section">
-          <input
-            type="text"
-            placeholder="Search specialization..."
-            value={searchQuery}
-            onChange={handleSearch}
-            className="search-input"
-          />
-        </section>
+        {/* Only show search bar if no specialization is selected */}
+        {!selectedSpecialization && (
+          <section className="search-section">
+            <input
+              type="text"
+              placeholder="Search specialization..."
+              value={searchQuery}
+              onChange={handleSearch}
+              className="search-input"
+            />
+          </section>
+        )}
 
         {!selectedSpecialization ? (
           <section className="specializations-section">
