@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ToggleMode from '../../ToggleMode';
 import './AdminLogin.css';
 
 function AdminLogin() {
@@ -41,6 +42,15 @@ function AdminLogin() {
 
   return (
     <div className="auth-container">
+      <div className="theme-toggle-wrapper auth-header-toggle">
+        <ToggleMode />
+      </div>
+      <button 
+        className="back-button"
+        onClick={() => navigate('/')}
+      >
+        ← Back to Home
+      </button>
       <div className="auth-form-container">
         <h2>Admin Login</h2>
         

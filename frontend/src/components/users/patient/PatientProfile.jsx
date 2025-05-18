@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ToggleMode from '../../ToggleMode';
 import './PatientProfile.css';
 
 function PatientProfile() {
@@ -119,12 +120,15 @@ function PatientProfile() {
     <div className="profile-container">
       <div className="profile-header">
         <h1>Patient Profile</h1>
-        <button 
-          className="back-button"
-          onClick={() => navigate('/patient-dashboard')}
-        >
-          Back to Dashboard
-        </button>
+        <div className="header-actions">
+          <ToggleMode />
+          <button 
+            className="back-button"
+            onClick={() => navigate('/patient-dashboard')}
+          >
+            Back to Dashboard
+          </button>
+        </div>
       </div>
       
       {loading ? (

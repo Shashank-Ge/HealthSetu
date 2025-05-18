@@ -139,3 +139,36 @@
 .text-link:hover {
   color: #0056b3;
 }
+
+.auth-header-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: translateX(-5px);
+}
+
+body.dark-mode .back-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

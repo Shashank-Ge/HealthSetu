@@ -16,7 +16,6 @@ import DoctorMeetings from './components/users/doctor/DoctorMeetings';
 import PatientMeetings from './components/users/patient/PatientMeetings';
 import NotFound404 from './components/NotFound404';
 import { ThemeProvider } from './components/ThemeContext';
-import ToggleMode from './components/ToggleMode';
 
  
 function App() {
@@ -119,7 +118,6 @@ function App() {
         <Route path='*' element={<NotFound404/>} />
       </Routes>
     </Router>
-    <ToggleMode/>
     </div>
     </ThemeProvider>
   );

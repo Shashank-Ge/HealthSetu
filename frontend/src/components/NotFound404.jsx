@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NotFound404.css';
+import ToggleMode from './ToggleMode';
 
 const NotFound404 = () => {
   return (
     <div className="not-found-container">
+      <div className="not-found-toggle">
+        <ToggleMode />
+      </div>
       <div className="dna-helix"></div>
       <div className="not-found-content">
         <div className="error-code">404</div>

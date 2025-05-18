@@ -5,6 +5,15 @@
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  /* Dark mode for profile container */
+  body.dark-mode .profile-container {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333333;
   }
   
   .profile-header {
@@ -16,9 +25,31 @@
     border-bottom: 1px solid #eee;
   }
   
+  /* Dark mode for profile header */
+  body.dark-mode .profile-header {
+    border-bottom: 1px solid #333333;
+  }
+  
   .profile-header h1 {
     margin: 0;
     color: #333;
+  }
+  
+  /* Dark mode for header text */
+  body.dark-mode .profile-header h1 {
+    color: #ffffff;
+  }
+  
+  /* Container for toggle and back button */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* Style the toggle in header */
+  .header-actions .theme-toggle-container {
+    margin-right: 0;
   }
   
   .back-button {
@@ -33,6 +64,17 @@
   
   .back-button:hover {
     background-color: #e9ecef;
+  }
+  
+  /* Dark mode for back button */
+  body.dark-mode .back-button {
+    background-color: #333333;
+    border-color: #444444;
+    color: #ffffff;
+  }
+  
+  body.dark-mode .back-button:hover {
+    background-color: #444444;
   }
   
   .profile-content {
@@ -207,6 +249,72 @@
     font-size: 1.2rem;
   }
   
+  /* Dark mode for form fields and labels */
+  body.dark-mode .form-group label {
+    color: #e0e0e0;
+  }
+  
+  body.dark-mode .form-group input,
+  body.dark-mode .form-group select {
+    background-color: #333333;
+    border-color: #444444;
+    color: #e0e0e0;
+  }
+  
+  body.dark-mode .form-group input:focus,
+  body.dark-mode .form-group select:focus {
+    border-color: #4285f4;
+  }
+  
+  body.dark-mode .disabled-input {
+    background-color: #222222;
+  }
+  
+  body.dark-mode small {
+    color: #b0b0b0;
+  }
+  
+  /* Dark mode for update button */
+  body.dark-mode .update-btn {
+    background-color: #4285f4;
+  }
+  
+  body.dark-mode .update-btn:hover {
+    background-color: #5c9eff;
+  }
+  
+  /* Dark mode for status badges */
+  body.dark-mode .status-approved {
+    background-color: rgba(21, 87, 36, 0.3);
+    color: #4ade80;
+  }
+  
+  body.dark-mode .status-pending {
+    background-color: rgba(133, 100, 4, 0.3);
+    color: #fbbf24;
+  }
+  
+  body.dark-mode .status-rejected,
+  body.dark-mode .status-blocked {
+    background-color: rgba(114, 28, 36, 0.3);
+    color: #f87171;
+  }
+  
+  /* Dark mode for success and error messages */
+  body.dark-mode .success-message {
+    background-color: rgba(21, 87, 36, 0.3);
+    color: #4ade80;
+  }
+  
+  body.dark-mode .error-message {
+    background-color: rgba(114, 28, 36, 0.3);
+    color: #f87171;
+  }
+  
+  body.dark-mode .loading {
+    color: #b0b0b0;
+  }
+  
   @media (max-width: 768px) {
     .profile-content {
       flex-direction: column;
@@ -214,5 +322,11 @@
     
     .profile-image-section {
       margin-bottom: 2rem;
+    }
+    
+    .header-actions {
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
     }
   }

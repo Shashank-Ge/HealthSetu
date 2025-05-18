@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import ToggleMode from '../../ToggleMode';
 import './BookAppointment.css';
 
 const BookAppointment = () => {
@@ -76,6 +77,9 @@ const BookAppointment = () => {
 
   return (
     <div className={`appointment-container ${isPageVisible ? 'animate' : ''}`}>
+      <div className="theme-toggle-wrapper">
+        <ToggleMode />
+      </div>
       <div className="appointment-form-container">
         <h2>Book an Appointment</h2>
         <form onSubmit={handleSubmit}>

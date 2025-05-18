@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import ToggleMode from '../../ToggleMode';
 import './DoctorDashboard.css';
 
 function DoctorDashboard() {
@@ -106,6 +107,7 @@ function DoctorDashboard() {
           <button onClick={()=> navigate('/doctor-dashboard/doctor-Meetings')}>Meetings</button>
           <button onClick={() => navigate('/doctor-dashboard/doctor-profile')}>Profile</button>
           <button onClick={handleLogout}>Logout</button>
+          <ToggleMode />
         </nav>
       </header>
 
