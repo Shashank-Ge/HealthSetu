@@ -18,9 +18,9 @@ function Home() {
             <span className="logo-tagline" >Your Health, Our Priority</span>
           </div>
           <div className="nav-menu">
-            <Link to="find-doctors" smooth={true} offset={-100} duration={500} className="nav-link">Doctors</Link>
-            <Link to="health-tips" smooth={true} offset={-100} duration={500} className="nav-link">Health Tips</Link>
-            <Link to="feedback" smooth={true} offset={-100} duration={500} className="nav-link">Feedback</Link>
+            <Link to="find-doctors" smooth={true} offset={-100} duration={60} className="nav-link">Doctors</Link>
+            <Link to="health-tips" smooth={true} offset={-100} duration={60} className="nav-link">Health Tips</Link>
+            <Link to="feedback" smooth={true} offset={-100} duration={60} className="nav-link">Feedback</Link>
           </div>
         </div>
         <div className="theme-toggle-wrapper">
@@ -170,6 +170,7 @@ function Home() {
         <section className="feedback-section" id="feedback">
           <h2>What Our Users Say</h2>
           <div className="reviews-container">
+            {/* Original cards */}
             <div className="review-card">
               <div className="reviewer-profile">
                 <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Mitchell" />
@@ -223,6 +224,39 @@ function Home() {
                 </div>
               </div>
               <p className="review-text">"The appointment reminders and easy rescheduling options have made managing my healthcare so much more convenient. Highly recommended!"</p>
+            </div>
+            
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Mitchell" />
+                <div className="reviewer-info">
+                  <h4>Sarah Mitchell</h4>
+                  <div className="star-rating">★★★★★</div>
+                </div>
+              </div>
+              <p className="review-text">"HealthSetu made it so easy to find the right doctor and book appointments. The health tips section is a bonus that helps me maintain a healthy lifestyle!"</p>
+            </div>
+
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Anderson" />
+                <div className="reviewer-info">
+                  <h4>John Anderson</h4>
+                  <div className="star-rating">★★★★★</div>
+                </div>
+              </div>
+              <p className="review-text">"Great platform! I was able to quickly find a specialist and get an appointment. The interface is user-friendly and the process is seamless."</p>
+            </div>
+
+            <div className="review-card">
+              <div className="reviewer-profile">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria Garcia" />
+                <div className="reviewer-info">
+                  <h4>Maria Garcia</h4>
+                  <div className="star-rating">★★★★½</div>
+                </div>
+              </div>
+              <p className="review-text">"The health tips are really helpful and practical. I appreciate how the platform focuses on overall wellness, not just medical appointments."</p>
             </div>
           </div>
         </section>
