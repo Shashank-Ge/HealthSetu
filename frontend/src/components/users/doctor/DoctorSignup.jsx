@@ -65,32 +65,26 @@ function DoctorSignup() {
 
   return (
     <div className="auth-container">
-      <div className="theme-toggle-wrapper auth-header-toggle">
-        <ToggleMode />
-      </div>
-      <button 
-        className="back-button"
-        onClick={() => navigate('/')}
-      >
-        ← Back to Home
-      </button>
-      {/* Responsive Header */}
-      <header className="auth-header">
-        <div className="logo" onClick={() => navigate('/')}>
-          HealthSetu
+      <div className="auth-top-bar">
+        <div className="theme-toggle-wrapper auth-header-toggle">
+          <ToggleMode />
         </div>
-        <nav className="auth-nav">
-          <button onClick={() => navigate('/loginDoctor')}>Login</button>
-          <button onClick={() => navigate('/signupPatient')}>Signup as Patient</button>
-        </nav>
-      </header>
-
-      {/* Signup Form */}
+        <button 
+          className="back-button"
+          onClick={() => navigate('/')}
+        >
+          ← Back to Home
+        </button>
+      </div>
       <div className="auth-form-container">
         <h2>Doctor Registration</h2>
-        
+        <button 
+          className="switch-role-btn"
+          onClick={() => navigate('/signupPatient')}
+        >
+          Are you Patient? Register here
+        </button>
         {error && <div className="error-message">{error}</div>}
-        
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -103,7 +97,6 @@ function DoctorSignup() {
               required
             />
           </div>
-          
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -115,7 +108,6 @@ function DoctorSignup() {
               required
             />
           </div>
-          
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -127,7 +119,6 @@ function DoctorSignup() {
               required
             />
           </div>
-          
           <div className="form-group">
             <label htmlFor="specialization">Specialization</label>
             <select
@@ -145,7 +136,6 @@ function DoctorSignup() {
               ))}
             </select>
           </div>
-          
           <div className="form-group">
             <label htmlFor="collegeName">College Name</label>
             <input
@@ -157,7 +147,6 @@ function DoctorSignup() {
               required
             />
           </div>
-          
           <button 
             type="submit" 
             className="submit-btn" 
@@ -166,7 +155,6 @@ function DoctorSignup() {
             {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
-        
         <div className="auth-links">
           <button 
             className="text-link"
