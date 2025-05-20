@@ -273,13 +273,13 @@ function Home() {
             <h3>Quick Links</h3>
             <ul>
               <li>
-                <a href="/about">About Us</a>
+                <a href="/about" onClick={(e) => {e.preventDefault(); navigate('/about');}}>About Us</a>
               </li>
               <li>
-                <a href="/services">Services</a>
+                <a href="/services" onClick={(e) => {e.preventDefault(); navigate('/services');}}>Services</a>
               </li>
               <li>
-                <a href="/privacy">Privacy Policy</a>
+                <a href="/privacy" onClick={(e) => {e.preventDefault(); navigate('/privacy');}}>Privacy Policy</a>
               </li>
             </ul>
           </div>

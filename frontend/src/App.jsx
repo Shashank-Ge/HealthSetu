@@ -16,6 +16,9 @@ import DoctorMeetings from './components/users/doctor/DoctorMeetings';
 import PatientMeetings from './components/users/patient/PatientMeetings';
 import NotFound404 from './components/NotFound404';
 import { ThemeProvider } from './components/ThemeContext';
+import AboutUs from './components/pages/AboutUs';
+import Services from './components/pages/Services';
+import Privacy from './components/pages/Privacy';
 
  
 function App() {
@@ -114,6 +117,10 @@ function App() {
             </ProtectedRoute>
           }
         />
+        
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/privacy" element={<Privacy />} />
         
         <Route path='*' element={<NotFound404/>} />
       </Routes>
