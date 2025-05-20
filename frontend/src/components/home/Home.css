@@ -73,14 +73,84 @@ body.dark-mode .feedback-section{
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
 .nav-link:hover {
   color: #059669;
   transform: translateY(-2px);
+  border-color: currentColor;
 }
 
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 1.1rem;
+    padding: 0.75rem 0;
+    width: 100%;
+    background: #e6f7ef;
+  }
+  
+  .nav-link:hover {
+    background: #d1f5e4;
+    color: #059669;
+    transform: translateY(-2px);
+  }
+}
+
+body.dark-mode .nav-menu .nav-link {
+  color: #4285f4;
+  background: none;
+  border: 1px solid transparent;
+  transition: color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .nav-menu .nav-link:hover {
+  color: #5c9eff;
+  transform: translateY(-2px);
+  border-color: currentColor;
+}
+
+@media (max-width: 768px) {
+  body.dark-mode .nav-menu .nav-link {
+    background: none;
+    padding: 0.75rem 0;
+    width: 100%;
+    color: #4285f4;
+  }
+  
+  body.dark-mode .nav-menu .nav-link:hover {
+    background: none;
+    color: #5c9eff;
+    transform: translateY(-2px);
+    border-color: currentColor;
+  }
+}
+
+
+
+.nav-link:hover {
+  color: #059669;
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 1.1rem;
+    padding: 0.75rem 0;
+    width: 100%;
+    background: none;
+    border: none;
+  }
+  
+  .nav-link:hover {
+    background: none;
+  }
+}
 /* Adjust the main content to account for fixed header */
 .home-content {
   padding-top: 120px;
@@ -750,14 +820,34 @@ body.dark-mode .logo-text {
   color: #4285f4;
 }
 
-body.dark-mode .nav-link {
+body.dark-mode .nav-menu .nav-link {
   color: #4285f4;
+  background: none;
+  border: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-body.dark-mode .nav-link:hover {
+body.dark-mode .nav-menu .nav-link:hover {
   color: #5c9eff;
+  transform: translateY(-2px);
+  background: none;
 }
 
+@media (max-width: 768px) {
+  body.dark-mode .nav-menu .nav-link {
+    background: none;
+    border: none;
+    padding: 0.75rem 0;
+    width: 100%;
+    color: #4285f4;
+  }
+  
+  body.dark-mode .nav-menu .nav-link:hover {
+    background: none;
+    color: #5c9eff;
+    transform: translateY(-2px);
+  }
+}
 body.dark-mode .hero-title {
   color: #ffffff;
 }
