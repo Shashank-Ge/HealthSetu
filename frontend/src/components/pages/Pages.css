@@ -23,7 +23,6 @@
 .back-button {
   position: absolute;
   left: 20px;
-  top: 50%;
   transform: translateY(-15%);
   background-color: transparent;
   border: none;

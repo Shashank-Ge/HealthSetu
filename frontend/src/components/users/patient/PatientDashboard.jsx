@@ -120,21 +120,18 @@ function PatientDashboard() {
           </section>
         ) : (
           <section className="doctors-section">
-            
             <div className="section-header">
-              
               <h2>{selectedSpecialization} Doctors</h2>
-            </div>
-            <div className="doctors-grid">
-            <div className="back-button-wrapper">
               <button 
                 className="back-button"
                 onClick={() => navigate('/patient-dashboard')} 
-                style={{color: '#007bff'}}
+                style={{color : '#007bff'}}
               >
                 Back to Specializations
               </button>
             </div>
+            
+            <div className="doctors-grid">
               {filteredDoctors.length > 0 ? (
                 filteredDoctors.map((doctor) => (
                   <div key={doctor._id} className="doctor-card">
