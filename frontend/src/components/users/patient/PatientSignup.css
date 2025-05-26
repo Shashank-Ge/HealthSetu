@@ -1,4 +1,25 @@
-.auth-container {
+.back-button-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    color: #28a745;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+    z-index: 9999;
+  }
+  
+  .back-button-wrapper:hover {
+    transform: translateX(-5px);
+  }
+  
+  .auth-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;

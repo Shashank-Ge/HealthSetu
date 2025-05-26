@@ -169,6 +169,6 @@
   transform: translateX(-5px);
 }
 
-body.dark-mode .back-button:hover {
+body.dark-mode .back-button-wrapper:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }

@@ -147,16 +147,18 @@ function DoctorProfile() {
 
   return (
     <div className="profile-container">
+      <div className="back-button-wrapper">
+      <button 
+            className="back-button"
+            onClick={() => navigate('/doctor-dashboard')} style={{color:'#007bff'}}
+          >
+            Back to Dashboard
+          </button>
+      </div>
       <div className="profile-header">
         <h1>Doctor Profile</h1>
         <div className="header-actions">
           <ToggleMode />
-          <button 
-            className="back-button"
-            onClick={() => navigate('/doctor-dashboard')}
-          >
-            Back to Dashboard
-          </button>
         </div>
       </div>
       

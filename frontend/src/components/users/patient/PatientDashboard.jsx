@@ -64,6 +64,7 @@ function PatientDashboard() {
 
   return (
     <div className="dashboard-container">
+      
       <header className="dashboard-header">
         <Link to="/" className="logo-link">
           <div className="logo">HealthSetu</div>
@@ -77,11 +78,13 @@ function PatientDashboard() {
       </header>
 
       <main className="dashboard-content">
-        <section className="welcome-section">
-          <h1>Welcome to HealthSetu, {name}!</h1>
-          <p>Your journey to better health starts here</p>
-        </section>
-
+        <div className="welcome-container">
+          <section className="welcome-section">
+            <h1>Welcome to HealthSetu, {name}!</h1>
+            <p>Your journey to better health starts here</p>
+          </section>
+        </div>
+        
         {/* Only show search bar if no specialization is selected */}
         {!selectedSpecialization && (
           <section className="search-section">
@@ -117,16 +120,21 @@ function PatientDashboard() {
           </section>
         ) : (
           <section className="doctors-section">
+            
             <div className="section-header">
+              
               <h2>{selectedSpecialization} Doctors</h2>
+            </div>
+            <div className="doctors-grid">
+            <div className="back-button-wrapper">
               <button 
                 className="back-button"
-                onClick={() => navigate('/patient-dashboard')}
+                onClick={() => navigate('/patient-dashboard')} 
+                style={{color: '#007bff'}}
               >
                 Back to Specializations
               </button>
             </div>
-            <div className="doctors-grid">
               {filteredDoctors.length > 0 ? (
                 filteredDoctors.map((doctor) => (
                   <div key={doctor._id} className="doctor-card">
