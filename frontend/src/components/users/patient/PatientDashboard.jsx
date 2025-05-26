@@ -64,6 +64,7 @@ function PatientDashboard() {
 
   return (
     <div className="dashboard-container">
+      
       <header className="dashboard-header">
         <Link to="/" className="logo-link">
           <div className="logo">HealthSetu</div>
@@ -77,8 +78,17 @@ function PatientDashboard() {
       </header>
 
       <main className="dashboard-content">
+      <div className='back-button-wrapper'>
+        <button 
+                className="back-button"
+                onClick={() => navigate('/patient-dashboard')}
+              >
+                Back to Specializations
+              </button>
+        </div>
         <section className="welcome-section">
           <h1>Welcome to HealthSetu, {name}!</h1>
+          
           <p>Your journey to better health starts here</p>
         </section>
 
@@ -119,12 +129,7 @@ function PatientDashboard() {
           <section className="doctors-section">
             <div className="section-header">
               <h2>{selectedSpecialization} Doctors</h2>
-              <button 
-                className="back-button"
-                onClick={() => navigate('/patient-dashboard')}
-              >
-                Back to Specializations
-              </button>
+            
             </div>
             <div className="doctors-grid">
               {filteredDoctors.length > 0 ? (

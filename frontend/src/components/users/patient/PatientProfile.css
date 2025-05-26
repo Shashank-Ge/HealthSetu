@@ -24,7 +24,7 @@
   .back-button {
     background-color: #f8f9fa;
     border: 1px solid #ddd;
-    color: #333;
+    color:#007bff; 
     padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
