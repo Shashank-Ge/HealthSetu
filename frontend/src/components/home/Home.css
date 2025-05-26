@@ -20,7 +20,20 @@
   position: fixed;
   width: 100%;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+}
+
+/* Add this to ensure content doesn't hide behind fixed header */
+body {
+  padding-top: 80px; /* Adjust this value based on your header height */
+}
+
+/* Update dark mode styles */
+body.dark-mode .main-header {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {

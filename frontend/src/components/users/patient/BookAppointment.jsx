@@ -43,7 +43,7 @@ const BookAppointment = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post('http://localhost:8080/api/auth/patient-dashboard/bookAppointment', {
+      const response = await axios.post('http://localhost:8080/api/auth/patient-dashboard/book', {
         doctorId,
         reason,
       }, {
