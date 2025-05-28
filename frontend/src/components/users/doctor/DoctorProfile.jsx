@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ToggleMode from '../../ToggleMode';
 import './DoctorProfile.css';
+import Footer from '../../common/Footer';
 
 function DoctorProfile() {
   const navigate = useNavigate();
@@ -146,14 +147,15 @@ function DoctorProfile() {
   };
 
   return (
+    <div className='app-container'>
     <div className="profile-container">
       <div className="back-button-wrapper">
-      <button 
-            className="back-button"
-            onClick={() => navigate('/doctor-dashboard')} style={{color:'#007bff'}}
-          >
-            Back to Dashboard
-          </button>
+        <button 
+          className="back-button"
+          onClick={() => navigate('/doctor-dashboard')} style={{color:'#007bff'}}
+        >
+          Back to Dashboard
+        </button>
       </div>
       <div className="profile-header">
         <h1>Doctor Profile</h1>
@@ -262,13 +264,16 @@ function DoctorProfile() {
                 </div>
               </div>
               
-              <button type="submit" className="update-btn">
+              <button type="submit" className="update-button">
                 Update Profile
               </button>
             </form>
           </div>
         </div>
       )}
+      
+    </div>
+    <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import ToggleMode from '../../ToggleMode';
 import './DoctorDashboard.css';
+import Footer from '../../common/Footer';
 
 function DoctorDashboard() {
   const navigate = useNavigate();
@@ -183,9 +184,7 @@ function DoctorDashboard() {
         </section>
       </main>
 
-      <footer className="dashboard-footer">
-        <p>© 2025 HealthSetu. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

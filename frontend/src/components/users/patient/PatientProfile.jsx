@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ToggleMode from '../../ToggleMode';
 import './PatientProfile.css';
+import Footer from '../../common/Footer';
+
 
 function PatientProfile() {
   const navigate = useNavigate();
@@ -117,6 +119,7 @@ function PatientProfile() {
   };
 
   return (
+    <div className='app-container'>
     <div className="profile-container">
       <div className='back-button-wrapper'>
       <button
@@ -205,6 +208,9 @@ function PatientProfile() {
           </div>
         </div>
       )}
+      
+    </div>
+    <Footer />
     </div>
   );
 }
