@@ -119,6 +119,7 @@ function PatientProfile() {
   };
 
   return (
+    <div className='app-container'>
     <div className="profile-container">
       <div className='back-button-wrapper'>
       <button
@@ -207,7 +208,9 @@ function PatientProfile() {
           </div>
         </div>
       )}
-       <Footer />
+      
+    </div>
+    <Footer />
     </div>
   );
 }
