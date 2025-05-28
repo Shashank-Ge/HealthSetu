@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './DoctorProfile.css';
 import Footer from '../../common/Footer';
@@ -54,11 +54,7 @@ function DoctorProfile() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/api/auth/doctor-profile', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await API.get('/auth/doctor-profile');
       
       setProfile(response.data.doctor);
       setFormData({
@@ -70,7 +66,10 @@ function DoctorProfile() {
       if (response.data.doctor.profileImage) {
         // Use timestamp instead of random string for cache busting
         const timestamp = new Date().getTime();
-        setImagePreview(`http://localhost:8080/uploads/doctors/${response.data.doctor.profileImage}?t=${timestamp}`);
+        const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+        // Remove '/api' from the end if it exists to construct the base URL
+        const baseUrl = apiBaseUrl.endsWith('/api') ? apiBaseUrl.slice(0, -4) : apiBaseUrl;
+        setImagePreview(`${baseUrl}/uploads/doctors/${response.data.doctor.profileImage}?t=${timestamp}`);
       } else {
         setImagePreview(null);
       }
@@ -121,12 +120,11 @@ function DoctorProfile() {
         formDataToSend.append('profileImage', selectedImage);
       }
       
-      const response = await axios.put(
-        'http://localhost:8080/api/auth/doctor-profile',
+      const response = await API.put(
+        '/auth/doctor-profile',
         formDataToSend,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
           }
         }

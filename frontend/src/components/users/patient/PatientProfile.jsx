@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './PatientProfile.css';
 import Footer from '../../common/Footer';
@@ -34,11 +34,7 @@ function PatientProfile() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/api/auth/patient-profile', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await API.get('/auth/patient-profile');
       
       setProfile(response.data.patient);
       setFormData({
@@ -46,7 +42,10 @@ function PatientProfile() {
       });
       
       if (response.data.patient.profileImage) {
-        setImagePreview(`http://localhost:8080/uploads/patients/${response.data.patient.profileImage}`);
+        const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+        // Remove '/api' from the end if it exists to construct the base URL
+        const baseUrl = apiBaseUrl.endsWith('/api') ? apiBaseUrl.slice(0, -4) : apiBaseUrl;
+        setImagePreview(`${baseUrl}/uploads/patients/${response.data.patient.profileImage}`);
       }
       
       setLoading(false);
@@ -93,8 +92,8 @@ function PatientProfile() {
         formDataToSend.append('profileImage', selectedImage);
       }
       
-      const response = await axios.put(
-        'http://localhost:8080/api/auth/patient-profile',
+      const response = await API.put(
+        '/auth/patient-profile',
         formDataToSend,
         {
           headers: {

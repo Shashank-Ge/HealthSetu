@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../../../api';
 import { useNavigate, Link } from 'react-router-dom';
 import './DoctorDashboard.css';
 import Footer from '../../common/Footer';
@@ -16,25 +16,15 @@ const DoctorMeetings = () => {
   const fetchAppointments = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(
-        'http://localhost:8080/api/auth/doctor-dashboard/doctor-meetings',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await API.get(
+        '/auth/doctor-dashboard/doctor-meetings'
       );
       setAppointments(response.data.appointments);
       setLoading(false);
 
       // Fetch feedbacks for all completed appointments
-      const feedbacksResponse = await axios.get(
-        'http://localhost:8080/api/auth/doctor-dashboard/patient-feedbacks',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const feedbacksResponse = await API.get(
+        '/auth/doctor-dashboard/patient-feedbacks'
       );
       setFeedbacks(feedbacksResponse.data.feedbacks || []);
     } catch (err) {
@@ -61,10 +51,9 @@ const DoctorMeetings = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/auth/doctor-dashboard/cancelAppointment',
-        { appointmentId, reason },
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await API.post(
+        '/auth/doctor-dashboard/cancelAppointment',
+        { appointmentId, reason }
       );
       alert(response.data.message);
       fetchAppointments(); // Refresh list

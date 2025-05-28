@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './DoctorDashboard.css';
 import Footer from '../../common/Footer';
@@ -27,11 +27,8 @@ function DoctorDashboard() {
   const fetchAppointments = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(
-        'http://localhost:8080/api/auth/doctor-dashboard/appointments',
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
+      const response = await API.get(
+        '/auth/doctor-dashboard/appointments'
       );
       // Filter only pending appointments
       const pendingAppointments = response.data.appointments
@@ -57,10 +54,9 @@ function DoctorDashboard() {
     const scheduledDateTime = new Date(`${date}T${time}:00`).toISOString();
 
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/auth/doctor-dashboard/scheduleAppointments',
-        { doctorName, patientId, appointmentId, scheduledDateTime },
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await API.post(
+        '/auth/doctor-dashboard/scheduleAppointments',
+        { doctorName, patientId, appointmentId, scheduledDateTime }
       );
       alert(response.data.message);
       fetchAppointments(); // Refresh after scheduling
@@ -80,10 +76,9 @@ function DoctorDashboard() {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/auth/doctor-dashboard/cancelAppointment',
-        { appointmentId, reason },
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await API.post(
+        '/auth/doctor-dashboard/cancelAppointment',
+        { appointmentId, reason }
       );
       alert(response.data.message);
       fetchAppointments(); // Refresh after cancelling

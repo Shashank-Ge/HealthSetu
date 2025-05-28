@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './PatientDashboard.css';
 import Footer from '../../common/Footer';
@@ -32,11 +32,7 @@ function PatientDashboard() {
   const fetchDoctors = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/api/auth/patient-dashboard/doctors', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await API.get('/auth/patient-dashboard/doctors');
       setDoctors(response.data);
     } catch (error) {
       console.error("Error fetching doctors:", error);

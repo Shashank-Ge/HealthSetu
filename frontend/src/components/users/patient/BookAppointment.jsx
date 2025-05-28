@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './BookAppointment.css';
 import Footer from '../../common/Footer';
@@ -45,13 +45,9 @@ const BookAppointment = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post('http://localhost:8080/api/auth/patient-dashboard/bookAppointment', {
+      const response = await API.post('/auth/patient-dashboard/bookAppointment', {
         doctorId,
         reason,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       showMessage(response.data.message, true, false); // Keep success visible

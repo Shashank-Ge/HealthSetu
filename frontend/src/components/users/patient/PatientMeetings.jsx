@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../../../api';
 import { useNavigate, Link } from 'react-router-dom';
 import './PatientDashboard.css';
 import Footer from '../../common/Footer';
@@ -18,13 +18,8 @@ const PatientMeetings = () => {
   const fetchAppointments = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(
-        'http://localhost:8080/api/auth/patient-dashboard/patient-meetings',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await API.get(
+        '/auth/patient-dashboard/patient-meetings'
       );
       setAppointments(response.data.appointments);
       setLoading(false);
@@ -47,10 +42,9 @@ const PatientMeetings = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/auth/patient-dashboard/cancelAppointment',
-        { appointmentId, reason },
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await API.post(
+        '/auth/patient-dashboard/cancelAppointment',
+        { appointmentId, reason }
       );
       alert(response.data.message);
       fetchAppointments(); // Refresh list
@@ -71,10 +65,9 @@ const PatientMeetings = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/auth/patient-dashboard/giveFeedback',
-        { appointmentId, message },
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await API.post(
+        '/auth/patient-dashboard/giveFeedback',
+        { appointmentId, message }
       );
       alert('Feedback submitted successfully!');
       fetchAppointments(); // Refresh list

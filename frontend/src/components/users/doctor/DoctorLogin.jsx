@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './DoctorLogin.css';
 import Footer from '../../common/Footer';
@@ -29,7 +29,7 @@ function DoctorLogin() {
     setPendingStatus(false);
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/loginDoctor', formData);
+      const response = await API.post('/auth/loginDoctor', formData);
       
       // Check doctor status
       if (response.data.doctor.status === 'pending') {

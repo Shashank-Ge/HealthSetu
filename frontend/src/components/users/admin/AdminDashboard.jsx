@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate , Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './AdminDashboard.css';
 
@@ -29,11 +29,7 @@ function AdminDashboard() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/api/auth/admin-dashboard/doctors', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await API.get('/auth/admin-dashboard/doctors');
       setDoctors(response.data);
       setLoading(false);
     } catch (error) {
@@ -47,14 +43,9 @@ function AdminDashboard() {
     try {
       setActionLoading(prev => ({ ...prev, [doctorId]: true }));
       const token = localStorage.getItem('token');
-      await axios.patch(
-        `http://localhost:8080/api/auth/admin-dashboard/doctor-status/${doctorId}`,
-        { status: newStatus },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
+      await API.patch(
+        `/auth/admin-dashboard/doctor-status/${doctorId}`,
+        { status: newStatus }
       );
       
       // Update the local state to reflect the change

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './DoctorSignup.css';
 import Footer from '../../common/Footer';
@@ -49,7 +49,7 @@ function DoctorSignup() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/signupDoctor', formData);
+      const response = await API.post('/auth/signupDoctor', formData);
       
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', 'doctor');
