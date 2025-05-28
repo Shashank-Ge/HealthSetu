@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ToggleMode from '../../ToggleMode';
 import './PatientSignup.css';
+import Footer from '../../common/Footer';
+
 
 function PatientSignup() {
   const [formData, setFormData] = useState({
@@ -121,6 +123,7 @@ function PatientSignup() {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

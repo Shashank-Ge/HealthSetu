@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import ToggleMode from '../../ToggleMode';
 import './BookAppointment.css';
+import Footer from '../../common/Footer';
+
 
 const BookAppointment = () => {
   const { doctorId } = useParams();
@@ -124,6 +126,7 @@ const BookAppointment = () => {
           Back to Dashboard
         </Link>
       </div>
+      <Footer />
     </div>
   );
 };

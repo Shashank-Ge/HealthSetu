@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './PatientDashboard.css';
+import Footer from '../../common/Footer';
+
 
 const PatientMeetings = () => {
   const [appointments, setAppointments] = useState([]);
@@ -178,10 +180,7 @@ const PatientMeetings = () => {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="dashboard-footer">
-        <p>© 2025 HealthSetu. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
