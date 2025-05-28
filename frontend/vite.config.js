@@ -5,7 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-  port: 5173,
-  historyApiFallback:true,
+    port: 5173,
+    historyApiFallback: true,
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+  }
 })
