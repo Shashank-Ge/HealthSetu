@@ -27,7 +27,7 @@ function PatientLogin() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/loginPatient', formData);
+      const response = await axios.post('https://healthsetu.onrender.com/api/auth/loginPatient', formData);
       
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.role);
