@@ -63,20 +63,26 @@ function PatientDashboard() {
   return (
     <div className="app-container">
     <div className="dashboard-container">
-      
-      <header className="dashboard-header">
-        <Link to="/" className="logo-link">
-          <div className="logo">HealthSetu</div>
-        </Link>
-        <nav className="nav-menu">
-          <button onClick={() => navigate('/patient-dashboard/patient-meetings')}>My Meetings</button>
-          <button onClick={() => navigate('/patient-dashboard/patient-profile')}>Profile</button>
-          <button onClick={handleLogout}>Logout</button>
-          <ToggleMode />
-        </nav>
-      </header>
+      <header className="main-header">
+          <div className="header-content">
+            <div className="logo-container">
+              <h1 className="logo-text">HealthSetu</h1>
+            </div>
+            <div className="tagline-container">
+              <span className="logo-tagline">Your Health, Our Priority</span>
+            </div>
+            <div className="nav-menu">
+              <button onClick={() => navigate('/patient-dashboard/patient-meetings')}>My Meetings</button>
+              <button onClick={() => navigate('/patient-dashboard/patient-profile')}>Profile</button>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          </div>
+          <div className="theme-toggle-wrapper">
+            <ToggleMode />
+          </div>
+        </header>
 
-      <main className="dashboard-content">
+      <main className="dashboard-content" style={{marginTop: "90px"}}>
         <div className="welcome-container">
           <section className="welcome-section">
             <h1>Welcome to HealthSetu, {name}!</h1>

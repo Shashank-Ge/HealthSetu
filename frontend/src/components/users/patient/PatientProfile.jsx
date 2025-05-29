@@ -118,99 +118,118 @@ function PatientProfile() {
   };
 
   return (
-    <div className='app-container'>
-    <div className="profile-container">
-      <div className='back-button-wrapper'>
-      <button
-            className="back-button"
-            onClick={() => navigate('/patient-dashboard')} style={{color:'#007bff'}}
-          >
-            Back to Dashboard
-          </button>
-      </div>
-      <div className="profile-header">
-        <h1>Patient Profile</h1>
-        <div className="header-actions">
+    <>
+    
+      <div className='app-container'>
+      <header className="main-header">
+        <div className="header-content">
+          <div className="logo-container">
+            <h1 className="logo-text">HealthSetu</h1>
+          </div>
+          <div className="tagline-container">
+            <span className="logo-tagline" >Your Health, Our Priority</span>
+          </div>
+          <div className="nav-menu">
+            {/* <Link to="find-doctors" smooth={true} offset={-100} duration={60} className="nav-link">Doctors</Link>
+            <Link to="health-tips" smooth={true} offset={-100} duration={60} className="nav-link">Health Tips</Link>
+            <Link to="feedback" smooth={true} offset={-100} duration={60} className="nav-link">Feedback</Link> */}
+          </div>
+        </div>
+        <div className="theme-toggle-wrapper">
           <ToggleMode />
-          
         </div>
+      </header>
+
+<div className="profile-container" style={{marginTop:'90px'}}>
+  <div className='back-button-wrapper'>
+  <button
+        className="back-button"
+        onClick={() => navigate('/patient-dashboard')} style={{color:'#007bff'}}
+      >
+        Back to Dashboard
+      </button>
+  </div>
+  <div className="profile-header">
+    <h1>Patient Profile</h1>
+  
+  </div>
+  
+  {loading ? (
+    <div className="loading">Loading profile...</div>
+  ) : error ? (
+    <div className="error-message">{error}</div>
+  ) : (
+    <div className="profile-content">
+      <div className="profile-image-section">
+        <div className="profile-image-container">
+        {imagePreview ? (
+          <img 
+            key={new Date().getTime()} 
+            src={imagePreview} 
+            alt="Profile" 
+            className="profile-image"
+            crossOrigin="anonymous"
+          />
+        ) : (
+          <div className="profile-image-placeholder">
+            <span>{profile.name.charAt(0)}</span>
+          </div>
+        )}
+        </div>
+        <input
+          type="file"
+          id="profileImage"
+          accept="image/jpeg, image/png, image/jpg"
+          onChange={handleImageChange}
+          className="image-input"
+        />
+        <label htmlFor="profileImage" className="image-input-label">
+          Change Profile Picture
+        </label>
       </div>
       
-      {loading ? (
-        <div className="loading">Loading profile...</div>
-      ) : error ? (
-        <div className="error-message">{error}</div>
-      ) : (
-        <div className="profile-content">
-          <div className="profile-image-section">
-            <div className="profile-image-container">
-            {imagePreview ? (
-              <img 
-                key={new Date().getTime()} 
-                src={imagePreview} 
-                alt="Profile" 
-                className="profile-image"
-                crossOrigin="anonymous"
-              />
-            ) : (
-              <div className="profile-image-placeholder">
-                <span>{profile.name.charAt(0)}</span>
-              </div>
-            )}
-            </div>
+      <div className="profile-details">
+        {updateSuccess && (
+          <div className="success-message">Profile updated successfully!</div>
+        )}
+        
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
             <input
-              type="file"
-              id="profileImage"
-              accept="image/jpeg, image/png, image/jpg"
-              onChange={handleImageChange}
-              className="image-input"
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
             />
-            <label htmlFor="profileImage" className="image-input-label">
-              Change Profile Picture
-            </label>
           </div>
           
-          <div className="profile-details">
-            {updateSuccess && (
-              <div className="success-message">Profile updated successfully!</div>
-            )}
-            
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={profile.email}
-                  disabled
-                  className="disabled-input"
-                />
-                <small>Email cannot be changed</small>
-              </div>
-              
-              <button type="submit" className="update-btn">
-                Update Profile
-              </button>
-            </form>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={profile.email}
+              disabled
+              className="disabled-input"
+            />
+            <small>Email cannot be changed</small>
           </div>
-        </div>
-      )}
-      
+          
+          <button type="submit" className="update-btn">
+            Update Profile
+          </button>
+        </form>
+      </div>
     </div>
-    <Footer />
-    </div>
+  )}
+  
+</div>
+<Footer />
+</div>
+    </>
   );
 }
 

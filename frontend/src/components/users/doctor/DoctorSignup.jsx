@@ -66,11 +66,21 @@ function DoctorSignup() {
 
   return (
     <div className='app-container'>
-    <div className="auth-container">
-      <div className="auth-top-bar">
-        <div className="theme-toggle-wrapper auth-header-toggle">
+      <header className="main-header">
+        <div className="header-content">
+          <div className="logo-container">
+            <h1 className="logo-text">HealthSetu</h1>
+          </div>
+          <div className="tagline-container">
+            <span className="logo-tagline" >Your Health, Our Priority</span>
+          </div>
+        </div>
+        <div className="theme-toggle-wrapper">
           <ToggleMode />
         </div>
+      </header>
+    <div className="auth-container">
+      <div className="auth-top-bar">
         <div className='back-button-wrapper'>
         <button 
           className="back-button"

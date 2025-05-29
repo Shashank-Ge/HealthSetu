@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate , Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './AdminDashboard.css';
@@ -68,15 +68,28 @@ function AdminDashboard() {
   return (
     <div className="dashboard-container">
       {/* Header */}
-      <header className="dashboard-header">
-        <Link to="/" className="logo-link">
-          <div className="logo">HealthSetu</div>
-        </Link>        
-        <nav className="nav-menu">
-          <button onClick={handleLogout}>Logout</button>
+
+
+
+
+ <header className="main-header">
+        <div className="header-content">
+          <div className="logo-container">
+            <h1 className="logo-text">HealthSetu</h1>
+          </div>
+          <div className="tagline-container">
+            <span className="logo-tagline" >Your Health, Our Priority</span>
+          </div>
+          <div className="nav-menu">
+           <button onClick={handleLogout}>Logout</button>
+          </div>
+        </div>
+        <div className="theme-toggle-wrapper">
           <ToggleMode />
-        </nav>
+        </div>
       </header>
+
+
 
       {/* Main Content */}
       <main className="dashboard-content">

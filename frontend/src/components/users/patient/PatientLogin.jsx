@@ -29,6 +29,7 @@ function PatientLogin() {
     try {
       const response = await axios.post('https://healthsetu.onrender.com/api/auth/loginPatient', formData);
       
+      
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.role);
       localStorage.setItem('name', response.data.name);
@@ -42,11 +43,22 @@ function PatientLogin() {
   };
 
   return (
-    <div classname='app-container'>
+    <div className='app-container'>
+    <header className="main-header">
+        <div className="header-content">
+          <div className="logo-container">
+            <h1 className="logo-text">HealthSetu</h1>
+          </div>
+          <div className="tagline-container">
+            <span className="logo-tagline" >Your Health, Our Priority</span>
+          </div>
+        </div>
+        <div className="theme-toggle-wrapper">
+          <ToggleMode />
+        </div>
+      </header>
     <div className="auth-container">
-      <div className="theme-toggle-wrapper auth-header-toggle">
-        <ToggleMode />
-      </div>
+      
       <div className="back-button-wrapper">
       <button 
         className="back-button"

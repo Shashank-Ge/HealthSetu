@@ -42,12 +42,23 @@ function AdminLogin() {
 
   return (
     <div className="auth-container">
-      <div className="theme-toggle-wrapper auth-header-toggle">
-        <ToggleMode />
-      </div>
+      <header className="main-header">
+        <div className="header-content">
+          <div className="logo-container">
+            <h1 className="logo-text">HealthSetu</h1>
+          </div>
+          <div className="tagline-container">
+            <span className="logo-tagline" >Your Health, Our Priority</span>
+          </div>
+        </div>
+        <div className="theme-toggle-wrapper">
+          <ToggleMode />
+        </div>
+      </header>
       <button 
         className="back-button"
         onClick={() => navigate('/')}
+        style={{zIndex: 1000, position: 'fixed', top: '20px', left: '10px'}}
       >
         ← Back to Home
       </button>
