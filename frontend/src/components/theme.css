@@ -47,6 +47,20 @@ body.dark-mode {
     color: var(--text-primary-dark);
 }
 
+/* App container styles */
+.app-container {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    min-height: 100vh;
+    width: 100%;
+}
+
+body.dark-mode .app-container {
+    background-color: var(--background-primary-dark);
+    color: var(--text-primary-dark);
+}
+
 /* Header and Footer styles with fixed z-index */
 header, footer {
     background-color: var(--background-secondary);
