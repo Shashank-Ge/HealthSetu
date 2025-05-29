@@ -146,7 +146,22 @@ function DoctorProfile() {
 
   return (
     <div className='app-container'>
-    <div className="profile-container">
+
+    <header className="main-header">
+          <div className="header-content">
+            <div className="logo-container">
+              <h1 className="logo-text">HealthSetu</h1>
+            </div>
+            <div className="tagline-container">
+              <span className="logo-tagline">Your Health, Our Priority</span>
+            </div>
+          </div>
+          <div className="theme-toggle-wrapper">
+            <ToggleMode />
+          </div>
+        </header>
+
+    <div className="profile-container" style={{marginTop: "90px"}}>
       <div className="back-button-wrapper">
         <button 
           className="back-button"
@@ -157,9 +172,6 @@ function DoctorProfile() {
       </div>
       <div className="profile-header">
         <h1>Doctor Profile</h1>
-        <div className="header-actions">
-          <ToggleMode />
-        </div>
       </div>
       
       {loading ? (

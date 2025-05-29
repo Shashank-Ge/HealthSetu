@@ -74,7 +74,30 @@ const BookAppointment = () => {
   };
 
   return (
+    
     <div className='app-container'>
+
+      <header className="main-header">
+        <div className="header-content">
+          <div className="logo-container">
+            <h1 className="logo-text">HealthSetu</h1>
+          </div>
+          <div className="tagline-container">
+            <span className="logo-tagline" >Your Health, Our Priority</span>
+          </div>
+          <div className="nav-menu">
+            <Link to="find-doctors" smooth={true} offset={-100} duration={60} className="nav-link">Doctors</Link>
+            <Link to="health-tips" smooth={true} offset={-100} duration={60} className="nav-link">Health Tips</Link>
+            <Link to="feedback" smooth={true} offset={-100} duration={60} className="nav-link">Feedback</Link>
+          </div>
+        </div>
+        <div className="theme-toggle-wrapper">
+          <ToggleMode />
+        </div>
+      </header> 
+
+
+      
     <div className={`appointment-container ${isPageVisible ? 'animate' : ''}`}>
       <div className="theme-toggle-wrapper">
         <ToggleMode />

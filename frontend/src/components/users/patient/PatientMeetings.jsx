@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../../api';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import './PatientDashboard.css';
 import Footer from '../../common/Footer';
+import ToggleMode from '../../ToggleMode';
 
 
 const PatientMeetings = () => {
@@ -88,16 +89,35 @@ const PatientMeetings = () => {
     <div className="app-container">
     <div className="dashboard-container">
       {/* Header */}
-      <header className="dashboard-header">
-        <Link to="/" className="logo-link">
-          <div className="logo">HealthSetu</div>
-        </Link>
-        <nav className="nav-menu">
+   
+
+
+
+
+      <header className="main-header">
+        <div className="header-content">
+          <div className="logo-container">
+            <h1 className="logo-text">HealthSetu</h1>
+          </div>
+          <div className="tagline-container">
+            <span className="logo-tagline" >Your Health, Our Priority</span>
+          </div>
+          <div className="nav-menu">
           <button onClick={() => navigate('/patient-dashboard')}>Dashboard</button>
           <button onClick={() => navigate('/patient-dashboard/patient-profile')}>Profile</button>
           <button onClick={handleLogout}>Logout</button>
-        </nav>
+          </div>
+        </div>
+        <div className="theme-toggle-wrapper">
+          <ToggleMode />
+        </div>
       </header>
+
+
+
+
+
+
 
       {/* Content */}
       <main className="dashboard-content">

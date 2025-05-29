@@ -17,8 +17,8 @@ connectDB();
 // Apply CORS with more secure configuration for production
 // const corsOptions = {
 //   origin: process.env.NODE_ENV === 'production' 
-//     ? process.env.FRONTEND_URL || 'https://healthsetuweb.onrender.com' 
-//     : 'http://localhost:5173',
+//     ? process.env.FRONTEND_URL || 'https://healthsetulife.netlify.app' 
+//     : ['http://localhost:5173', 'http://localhost:5174'],
 //   credentials: true
 // };
 app.use(cors());
@@ -45,8 +45,3 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
-
-
-
