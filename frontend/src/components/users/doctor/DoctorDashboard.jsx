@@ -96,6 +96,7 @@ function DoctorDashboard() {
   };
 
   return (
+    <div className='app-container'>
     <div className="dashboard-container">
       <header className="dashboard-header">
         <Link to="/" className="logo-link"><div className="logo">HealthSetu</div></Link>
@@ -179,7 +180,9 @@ function DoctorDashboard() {
         </section>
       </main>
 
-      <Footer />
+     
+    </div>
+   <Footer />
     </div>
   );
 }

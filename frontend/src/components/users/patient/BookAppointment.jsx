@@ -74,6 +74,7 @@ const BookAppointment = () => {
   };
 
   return (
+    <div className='app-container'>
     <div className={`appointment-container ${isPageVisible ? 'animate' : ''}`}>
       <div className="theme-toggle-wrapper">
         <ToggleMode />
@@ -122,7 +123,9 @@ const BookAppointment = () => {
           Back to Dashboard
         </Link>
       </div>
-      <Footer />
+      
+    </div>
+    <Footer />
     </div>
   );
 };
