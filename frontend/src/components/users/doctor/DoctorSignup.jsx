@@ -65,7 +65,6 @@ function DoctorSignup() {
   };
 
   return (
-    <div className='app-container'>
     <div className="auth-container">
       <div className="auth-top-bar">
         <div className="theme-toggle-wrapper auth-header-toggle">
@@ -168,8 +167,6 @@ function DoctorSignup() {
           </button>
         </div>
       </div>
-     
-    </div>
       <Footer />
     </div>
   );

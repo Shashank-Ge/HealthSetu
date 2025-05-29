@@ -71,7 +71,6 @@ const DoctorMeetings = () => {
   };
 
   return (
-    <div className="app-container">
     <div className="dashboard-container">
       {/* Header */}
       <header className="dashboard-header">
@@ -164,9 +163,7 @@ const DoctorMeetings = () => {
       </main>
 
       {/* Footer */}
-      
-    </div>
-     <Footer />
+      <Footer />
     </div>
   );
 };

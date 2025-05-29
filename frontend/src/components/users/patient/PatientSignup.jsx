@@ -44,7 +44,6 @@ function PatientSignup() {
   };
 
   return (
-    <div className='app-container'>
     <div className="auth-container">
       <div className="theme-toggle-wrapper auth-header-toggle">
         <ToggleMode />
@@ -124,9 +123,7 @@ function PatientSignup() {
           </button>
         </div>
       </div>
-      
-    </div>
-     <Footer />
+      <Footer />
     </div>
   );
 }
