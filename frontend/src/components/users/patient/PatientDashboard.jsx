@@ -65,6 +65,7 @@ function PatientDashboard() {
     : [];
 
   return (
+    <div className="app-container">
     <div className="dashboard-container">
       
       <header className="dashboard-header">
@@ -153,7 +154,9 @@ function PatientDashboard() {
           </section>
         )}
       </main>
-      <Footer />
+      
+    </div>
+    <Footer />
     </div>
   );
 }

@@ -92,6 +92,7 @@ const PatientMeetings = () => {
   };
 
   return (
+    <div className="app-container">
     <div className="dashboard-container">
       {/* Header */}
       <header className="dashboard-header">
@@ -180,7 +181,9 @@ const PatientMeetings = () => {
         </section>
       </main>
 
-      <Footer />
+    
+    </div>
+     <Footer />
     </div>
   );
 };
