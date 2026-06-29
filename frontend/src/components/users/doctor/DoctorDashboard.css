@@ -1,0 +1,162 @@
+/* General styles */
+.dashboard-container {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  position: relative; /* For absolute positioning of child elements */
+}
+
+.logo-link .logo {
+  font-size: 1.5rem;
+  color: #4285f4;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-menu button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.nav-menu button:hover {
+  text-decoration: underline;
+}
+
+.dashboard-content {
+  margin-top: 1rem;
+}
+
+.appointments-section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.appointments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.appointment-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-button:hover {
+  background-color: #ff3333;
+}
+
+.feedback-section {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #e6f7ff;
+  border-left: 4px solid #007bff;
+}
+
+.no-feedback-message {
+  color: #999;
+  font-style: italic;
+}
+
+/* Footer styles */
+.dashboard-footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f1f1f1;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 20px; /* Reduced padding since we don't need space for absolute positioning */
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-right: 0; /* Reset padding for vertical layout */
+  }
+  
+  .appointments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 0.5rem;
+  }
+
+  .logo-link .logo {
+    font-size: 1.2rem;
+  }
+
+  .nav-menu button {
+    font-size: 0.9rem;
+  }
+
+  .appointments-grid {
+    gap: 0.5rem;
+  }
+
+  .appointment-card {
+    padding: 0.75rem;
+  }
+
+  .action-button {
+    font-size: 0.9rem;
+  }
+}
+
+/* Add styling for ToggleMode when it's inside the nav menu */
+.nav-menu .toggle-switch {
+  margin-left: 1rem;
+  cursor: pointer;
+}

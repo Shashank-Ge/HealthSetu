@@ -1,0 +1,456 @@
+/* Search Section Styles */
+.search-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  outline: none;
+}
+
+/* Specializations Section Styles */
+.specializations-section {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.specializations-section h2 {
+  margin-bottom: 2rem;
+  color: #2d3748;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.specializations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.specialization-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.specialization-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #38a169, #68d391);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.specialization-card:hover::before {
+  transform: scaleX(1);
+}
+
+.specialization-card:hover {
+  transform: translateY(-15px) scale(1.04);
+  box-shadow: 0 12px 32px rgba(56, 161, 105, 0.15);
+  border-color: #38a169;
+}
+
+.specialization-card:hover h3 {
+  color: #38a169;
+}
+
+.specialization-content {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.specialization-card h3 {
+  color: #2d3748;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.doctor-count {
+  color: #718096;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.doctor-count::before {
+  content: '👨‍⚕️';
+  font-size: 1.2rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 20px; /* Reduced padding since we don't need space for absolute positioning */
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-right: 0; /* Reset padding for vertical layout */
+  }
+  
+  .specializations-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .specialization-card {
+    padding: 1.5rem;
+  }
+
+  .specialization-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .doctor-count {
+    font-size: 1rem;
+  }
+}
+
+/* Section Header and Back Button */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+.section-header h2 {
+  margin: 0;
+  flex: 1;
+}
+
+.back-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+
+/* Dark mode styles for back button */
+body.dark-mode .back-button {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.dark-mode .back-button:hover {
+  background-color: #444444;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+  }
+  
+  .section-header h2 {
+    margin-bottom: 0;
+    font-size: 1.4rem;
+  }
+  
+  .back-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .doctors-section {
+    padding: 1rem;
+  }
+  
+  .doctors-grid {
+    padding: 0.5rem;
+  }
+}
+
+/* Doctors Section Styles */
+.doctors-section {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.doctor-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.doctor-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.doctor-card p {
+  margin: 0 0 1rem 0;
+  color: #666;
+}
+
+.doctor-card button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.doctor-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Appointments Section Styles */
+.appointments-section {
+  padding: 2rem;
+}
+
+.appointments-section h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.appointments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.appointment-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.appointment-card p {
+  margin: 0.5rem 0;
+}
+
+.action-button, .feedback-button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+.feedback-button {
+  background-color: #28a745;
+}
+
+.feedback-button:hover {
+  background-color: #218838;
+}
+
+.feedback-section {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #28a745;
+}
+
+.feedback-message {
+  font-style: italic;
+  color: #495057;
+}
+
+.feedback-date {
+  color: #6c757d;
+}
+
+.feedback-given {
+  margin-top: 1rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.no-feedback-message {
+  margin-top: 1rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.dashboard-toggle {
+  display: none; /* This class is no longer needed */
+}
+
+.dashboard-container {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  position: relative; /* For absolute positioning of child elements */
+}
+
+.logo-link .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-menu button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.nav-menu button:hover {
+  text-decoration: underline;
+}
+
+/* Add styling for ToggleMode when it's inside the nav menu */
+.nav-menu .toggle-switch {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  padding-top: 20px;
+  min-height: calc(100vh - 60px);
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 20px 2rem;
+  position: relative;
+}
+
+.back-button {
+  position: static;
+  padding: 8px 16px;
+  border: 1px solid #007bff;
+  background: transparent;
+  color: #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.welcome-section h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.welcome-section p {
+  margin: 0;
+  color: #666;
+}
+
+.welcome-section {
+  flex-grow: 1;
+}
