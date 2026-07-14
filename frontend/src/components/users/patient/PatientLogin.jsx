@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../../api';
 import ToggleMode from '../../ToggleMode';
 import './PatientLogin.css';
 import Footer from '../../common/Footer';
@@ -27,7 +27,7 @@ function PatientLogin() {
     setError('');
 
     try {
-      const response = await axios.post('https://healthsetu.onrender.com/api/auth/loginPatient', formData);
+      const response = await API.post('/auth/loginPatient', formData);
       
       
       localStorage.setItem('token', response.data.token);
