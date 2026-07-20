@@ -1,5 +1,4 @@
 const Appointment = require('../../models/Appointment');
-const { scheduleGoogleMeet, deleteGoogleCalendarEvent } = require('../../googleMeetService');
 const sendEmail = require('../../sendEmail');
 const Patient = require('../../models/Patient');
 const Doctor = require('../../models/Doctor');
@@ -37,9 +36,12 @@ const scheduleAppointment = async (req, res) => {
     const appointment = await Appointment.findById(appointmentId);
     if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
 
-    const { meetLink, eventId } = await scheduleGoogleMeet(doctorName, patient.email, scheduledDateTime);
+    // Generate instant, zero-setup Jitsi Meet link
+    const roomName = `HealthSetu-${appointmentId}`;
+    const meetLink = `https://meet.jit.si/${roomName}`;
+
     appointment.meetLink = meetLink;
-    appointment.googleEventId = eventId;
+    appointment.googleEventId = roomName;
     appointment.scheduledAt = date;
     appointment.status = 'confirmed';
     await appointment.save();
@@ -47,8 +49,8 @@ const scheduleAppointment = async (req, res) => {
     try {
       await sendEmail(
         patient.email,
-        `Google Meet with Dr. ${doctorName}`,
-        `<p>Your appointment is scheduled for ${date.toLocaleString()}<br/>Join here: <a href="${meetLink}">${meetLink}</a></p>`
+        `Video Consultation with Dr. ${doctorName}`,
+        `<p>Your appointment is scheduled for ${date.toLocaleString()}<br/>Join Video Call: <a href="${meetLink}">${meetLink}</a></p>`
       );
     } catch (err) {
       console.error('Failed to send patient email:', err.message);
@@ -59,15 +61,15 @@ const scheduleAppointment = async (req, res) => {
       try {
         await sendEmail(
           doctor.email,
-          `Google Meet with Patient: ${patient.name}`,
-          `<p>Your appointment with ${patient.name} is scheduled for ${date.toLocaleString()}<br/>Join here: <a href="${meetLink}">${meetLink}</a></p>`
+          `Video Consultation with Patient: ${patient.name}`,
+          `<p>Your appointment with ${patient.name} is scheduled for ${date.toLocaleString()}<br/>Join Video Call: <a href="${meetLink}">${meetLink}</a></p>`
         );
       } catch (err) {
         console.error('Failed to send doctor email:', err.message);
       }
     }
 
-    return res.status(200).json({ message: 'Meet scheduled and emails sent', meetLink });
+    return res.status(200).json({ message: 'Meeting scheduled successfully', meetLink });
   } catch (err) {
     console.error('scheduleAppointment error:', err);
     return res.status(500).json({ message: 'Internal server error', error: err.message });
@@ -99,11 +101,6 @@ const cancelAppointment = async (req, res) => {
     const doctorName = doctor?.name || 'Doctor';
 
     console.log(`Doctor ${doctorId} cancelled appointment ${appointmentId}. Reason: ${reason}`);
-
-    // Delete the Google Calendar event if it exists
-    if (appointment.googleEventId) {
-      await deleteGoogleCalendarEvent(appointment.googleEventId);
-    }
 
     // Send cancellation email to patient
     await sendEmail(
