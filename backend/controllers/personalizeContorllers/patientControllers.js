@@ -50,12 +50,16 @@ const bookAppointment = async (req, res) => {
       <p>Best regards,<br/>DocMeet Team</p>
     `;
 
-    // Send emails
-    await sendEmail(doctor.email, 'New Appointment Request', doctorEmailHTML);
-    await sendEmail(patient.email, 'Appointment Request Submitted', patientEmailHTML);
+    // Send emails safely without failing appointment creation if email service fails
+    try {
+      await sendEmail(doctor.email, 'New Appointment Request', doctorEmailHTML);
+      await sendEmail(patient.email, 'Appointment Request Submitted', patientEmailHTML);
+    } catch (emailErr) {
+      console.error("Failed to send confirmation emails:", emailErr.message);
+    }
 
     res.status(201).json({
-      message: "Appointment booked and confirmation emails sent.",
+      message: "Appointment booked successfully.",
       appointment,
     });
   } catch (error) {
